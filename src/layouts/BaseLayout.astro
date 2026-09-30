@@ -1,0 +1,40 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Navbar from '../components/Navbar.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+// Full SEO (Open Graph, canonical, structured data) is added in step 5.
+const { title = site.name, description = site.description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body class="bg-white text-ink antialiased">
+    <a
+      href="#contenido"
+      class="sr-only rounded-md bg-brand px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]"
+    >
+      Saltar al contenido
+    </a>
+    <Navbar />
+    <main id="contenido" class="pt-nav outline-none" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

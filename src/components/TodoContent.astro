@@ -1,0 +1,22 @@
+---
+// Dev-only placeholder for pending content. Renders nothing in production builds.
+interface Props {
+  tone?: 'light' | 'dark';
+}
+
+const { tone = 'light' } = Astro.props;
+const isDev = import.meta.env.DEV;
+---
+
+{
+  isDev && (
+    <p
+      class:list={[
+        'rounded border border-dashed px-4 py-3 text-sm',
+        tone === 'dark' ? 'border-muted-dark text-muted-dark' : 'border-muted text-muted',
+      ]}
+    >
+      <strong class="font-semibold">Pendiente:</strong> <slot />
+    </p>
+  )
+}

@@ -1,0 +1,77 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import TodoContent from './TodoContent.astro';
+import { privacyAnchor, site, socialLinks } from '../data/site';
+
+const year = new Date().getFullYear();
+const isDev = import.meta.env.DEV;
+const pendingSocials = socialLinks.filter((social) => social.href === null);
+---
+
+<footer data-tone="dark" class="border-t border-line-dark bg-ink text-white">
+  <div
+    class="mx-auto flex max-w-content flex-col gap-8 px-gutter py-12 md:flex-row md:items-start md:justify-between"
+  >
+    <div class="flex flex-col gap-3">
+      <Logo />
+      {
+        site.email ? (
+          <a href={`mailto:${site.email}`} class="text-sm text-muted-dark hover:text-brand-light">
+            {site.email}
+          </a>
+        ) : (
+          <TodoContent tone="dark">email de contacto.</TodoContent>
+        )
+      }
+    </div>
+
+    <div class="flex flex-col gap-4 md:items-end">
+      {
+        (isDev || socialLinks.some((social) => social.href)) && (
+      <ul class="flex items-center gap-2" aria-label="Redes sociales">
+        {
+          socialLinks.map((social) =>
+            social.href ? (
+              <li>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${social.label} (se abre en una pestaña nueva)`}
+                  class="inline-flex size-11 items-center justify-center rounded-md text-muted-dark hover:text-brand-light"
+                >
+                  <Icon name={social.name} />
+                </a>
+              </li>
+            ) : (
+              isDev && (
+                <li
+                  class="inline-flex size-11 items-center justify-center rounded-md border border-dashed border-muted-dark text-muted-dark"
+                  title={`${social.label}: enlace pendiente`}
+                >
+                  <Icon name={social.name} />
+                </li>
+              )
+            ),
+          )
+        }
+      </ul>
+        )
+      }
+      {
+        pendingSocials.length > 0 && (
+          <TodoContent tone="dark">
+            enlaces de {pendingSocials.map((social) => social.label).join(', ')}.
+          </TodoContent>
+        )
+      }
+      <p class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-dark">
+        <a href={privacyAnchor} class="underline underline-offset-4 hover:text-brand-light">
+          Aviso de privacidad
+        </a>
+        <span>&copy; {year} {site.name}</span>
+      </p>
+    </div>
+  </div>
+</footer>

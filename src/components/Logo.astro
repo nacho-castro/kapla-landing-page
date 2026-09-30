@@ -1,0 +1,10 @@
+---
+// TODO-CONTENIDO: temporary text logotype. Replace this component's markup with the final logo.
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<span class:list={['text-xl font-extrabold tracking-[0.18em]', className]}>KAPLA</span>

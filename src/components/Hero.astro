@@ -1,0 +1,20 @@
+---
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { sections } from '../data/site';
+
+const { id, title } = sections.hero;
+---
+
+<Section id={id} tone="light" labelledBy={`${id}-title`}>
+  <!-- TODO-CONTENIDO: hero title, subtitle and the two buttons (step 2). -->
+  <h1 id={`${id}-title`} class="text-4xl font-bold tracking-tight text-brand md:text-6xl">
+    {title}
+  </h1>
+  <div class="mt-6 max-w-2xl">
+    <TodoContent>
+      título que describa el negocio, subtítulo de una o dos líneas y botones "Quiero una
+      auditoría" y "Ver trabajo".
+    </TodoContent>
+  </div>
+</Section>

@@ -1,0 +1,18 @@
+---
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { sections } from '../data/site';
+
+const { id, title } = sections.work;
+---
+
+<Section id={id} tone="dark" labelledBy={`${id}-title`}>
+  <!-- TODO-CONTENIDO: featured case MiClase (step 2): what it is, who it is for, screenshots, link and real status. -->
+  <h2 id={`${id}-title`} class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
+  <div class="mt-6 max-w-2xl">
+    <TodoContent tone="dark">
+      caso MiClase: qué es, para quién, capturas, enlace y estado real ("En desarrollo" o
+      "Próximamente").
+    </TodoContent>
+  </div>
+</Section>

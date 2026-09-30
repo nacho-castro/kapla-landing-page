@@ -1,0 +1,18 @@
+---
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { privacyAnchor, sections } from '../data/site';
+
+const { id, title } = sections.contact;
+---
+
+<Section id={id} tone="light" labelledBy={`${id}-title`}>
+  <!-- TODO-CONTENIDO: short form, WhatsApp button and privacy notice (step 4, form service to be agreed first). -->
+  <h2 id={`${id}-title`} class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
+  <div class="mt-6 flex max-w-2xl flex-col gap-4">
+    <TodoContent>formulario corto (nombre, email, mensaje opcional) y botón de WhatsApp.</TodoContent>
+    <div id={privacyAnchor.slice(1)}>
+      <TodoContent>aviso de privacidad (Ley 25.326): para qué se usan los datos.</TodoContent>
+    </div>
+  </div>
+</Section>

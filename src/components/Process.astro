@@ -1,0 +1,15 @@
+---
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { sections } from '../data/site';
+
+const { id, title } = sections.process;
+---
+
+<Section id={id} tone="dark" labelledBy={`${id}-title`}>
+  <!-- TODO-CONTENIDO: 3 or 4 numbered steps (step 3). -->
+  <h2 id={`${id}-title`} class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
+  <div class="mt-6 max-w-2xl">
+    <TodoContent tone="dark">3 o 4 pasos numerados del proceso de trabajo.</TodoContent>
+  </div>
+</Section>

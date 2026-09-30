@@ -1,0 +1,26 @@
+---
+// Shared wrapper: anchor id, alternating light/dark background and content width.
+interface Props {
+  id: string;
+  tone: 'light' | 'dark';
+  labelledBy?: string;
+  class?: string;
+}
+
+const { id, tone, labelledBy, class: className = '' } = Astro.props;
+---
+
+<section
+  id={id}
+  data-tone={tone}
+  aria-labelledby={labelledBy}
+  class:list={[
+    'py-section',
+    tone === 'dark' ? 'bg-ink text-white' : 'bg-white text-ink',
+    className,
+  ]}
+>
+  <div class="mx-auto max-w-content px-gutter">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,15 @@
+---
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { sections } from '../data/site';
+
+const { id, title } = sections.why;
+---
+
+<Section id={id} tone="light" labelledBy={`${id}-title`}>
+  <!-- TODO-CONTENIDO: 3 or 4 client problems and how KAPLA solves them (step 3, optional section). -->
+  <h2 id={`${id}-title`} class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
+  <div class="mt-6 max-w-2xl">
+    <TodoContent>3 o 4 problemas del cliente y cómo se resuelven. Sección opcional.</TodoContent>
+  </div>
+</Section>
