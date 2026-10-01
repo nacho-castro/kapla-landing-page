@@ -42,20 +42,36 @@
 - Para el paso 5: cargar solo el subset latin de Inter y precargarlo (hoy el CSS declara 7 subsets; el navegador descarga solo el latin).
 - Aceptado: el menú móvil necesita JavaScript (sin JS se sigue navegando con el hero y el footer).
 
+## Dominio y SEO base — HECHO (2026-10-01)
+
+### Hecho
+- Dominio definitivo: **https://kaplatech.com.ar** (sin www). Definido una sola vez en `astro.config.mjs` (`SITE_URL`, usado como `site`).
+- URL canónica (`<link rel="canonical">`) generada a partir del dominio.
+- `sitemap.xml` y `robots.txt` generados en el build desde el dominio (`src/pages/sitemap.xml.ts`, `src/pages/robots.txt.ts`), sin dependencias nuevas. `robots.txt` permite todo y apunta al sitemap.
+- Open Graph (`og:type`, `og:site_name`, `og:locale es_AR`, `og:url`, `og:title`, `og:description`) y `twitter:card`.
+- La imagen para compartir queda preparada en `site.ts` (`ogImage`): mientras sea `null` no se emite `og:image` y la tarjeta es `summary`; al cargarla pasa a `summary_large_image` con su URL absoluta.
+
+### Verificado
+- `npx astro check`: 0 errores. `npm run build`: OK; `dist/` contiene `robots.txt` y `sitemap.xml` con `https://kaplatech.com.ar/`.
+
+### Decisiones
+- Sitemap y robots como endpoints estáticos propios en vez de `@astrojs/sitemap` (evita una dependencia; el sitio es de una sola página).
+- Sin deploy todavía. Al publicar: configurar en el hosting la redirección permanente de `www.kaplatech.com.ar` al dominio sin www, para que coincida con la canónica.
+
 ## Pendiente (próximos pasos)
 - Paso 2: Hero final y sección Trabajo con MiClase.
 - Paso 3: Por qué KAPLA (opcional) y Proceso.
 - Paso 4: Contacto con formulario seguro (definir el servicio antes).
-- Paso 5: SEO completo (Open Graph, sitemap, robots, canonical, datos estructurados), headers de seguridad, Lighthouse.
+- Paso 5: datos estructurados `Organization`, imagen Open Graph, headers de seguridad, redirección www, Lighthouse.
 
 ## TODO-CONTENIDO (datos que faltan)
 | Dónde | Qué falta |
 |---|---|
-| `astro.config.mjs` | Dominio final (`site`) |
 | `src/data/site.ts` | Email de contacto |
 | `src/data/site.ts` | Número de WhatsApp |
 | `src/data/site.ts` | URLs de Instagram, LinkedIn y TikTok |
 | `src/data/site.ts` | Meta description final |
+| `src/data/site.ts` + `public/` | Imagen para compartir (Open Graph, 1200x630) |
 | `src/components/Logo.astro` | Logo definitivo (hoy es texto "KAPLA") |
 | `public/favicon.svg` | Favicon definitivo |
 | `src/components/Hero.astro` | Título, subtítulo y botones |

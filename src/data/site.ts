@@ -28,6 +28,10 @@ export const site = {
   email: null as string | null,
   // TODO-CONTENIDO: WhatsApp number in international format, e.g. 5491100000000.
   whatsapp: null as string | null,
+  // TODO-CONTENIDO: own share image (1200x630 PNG/JPG in public/, e.g. '/og-image.png'). Until then no og:image is emitted.
+  ogImage: null as string | null,
+  ogImageAlt: 'KAPLA: automatización de procesos e inteligencia artificial para PyMEs',
+  locale: 'es_AR',
 };
 
 export const navLinks: NavLink[] = [
