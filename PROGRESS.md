@@ -84,7 +84,6 @@
 ## TODO-CONTENIDO (datos que faltan)
 | Dónde | Qué falta |
 |---|---|
-| `src/data/site.ts` | URL de TikTok |
 | `src/data/site.ts` | Meta description final |
 | `src/data/site.ts` + `public/` | Imagen para compartir (Open Graph, 1200x630) |
 | `src/components/Logo.astro` | Logo definitivo (hoy es texto "KAPLA") |

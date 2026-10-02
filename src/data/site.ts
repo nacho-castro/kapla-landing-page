@@ -57,11 +57,10 @@ export const heroCtas = {
   secondary: { label: 'Ver trabajo', href: '#trabajo' },
 } satisfies Record<string, CtaLink>;
 
-// TODO-CONTENIDO: TikTok profile URL.
 export const socialLinks: SocialLink[] = [
   { name: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/kapla.tech/' },
   { name: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/kaplatech' },
-  { name: 'tiktok', label: 'TikTok', href: null },
+  { name: 'tiktok', label: 'TikTok', href: 'https://www.tiktok.com/@kapla.tech' },
 ];
 
 export const sections = {
