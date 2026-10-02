@@ -1,18 +1,65 @@
 ---
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { sections } from '../data/site';
+import { sections, featuredCase, otherCases } from '../data/site';
 
 const { id, title } = sections.work;
+const c = featuredCase;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`}>
-  <!-- TODO-CONTENIDO: featured case MiClase (step 2): what it is, who it is for, screenshots, link and real status. -->
   <h2 id={`${id}-title`} class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
-  <div class="mt-6 max-w-2xl">
-    <TodoContent tone="dark">
-      caso MiClase: qué es, para quién, capturas, enlace y estado real ("En desarrollo" o
-      "Próximamente").
-    </TodoContent>
-  </div>
+
+  <article class="mt-10 grid gap-8 md:grid-cols-2 md:items-center">
+    <div>
+      <div class="flex flex-wrap items-center gap-3">
+        <h3 class="text-2xl font-bold">{c.name}</h3>
+        {c.status && (
+          <span class="rounded-full border border-brand-light px-3 py-0.5 text-xs font-semibold text-brand-light">
+            {c.status}
+          </span>
+        )}
+      </div>
+      <p class="mt-3 text-lg font-semibold">{c.tagline}</p>
+      {c.description && <p class="mt-2 text-muted-dark">{c.description}</p>}
+      <ul class="mt-5 space-y-2 text-muted-dark">
+        {c.features.map((f) => (
+          <li class="flex gap-2">
+            <span aria-hidden="true" class="text-brand-light">-</span>
+            {f}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <!-- TODO-CONTENIDO: MiClase screenshot or short GIF/video (WebP/AVIF, use Astro Image with width/height). -->
+    <div
+      class="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-muted-dark text-sm text-muted-dark"
+      role="img"
+      aria-label={`Captura de ${c.name} (próximamente)`}
+    >
+      Captura de {c.name}
+    </div>
+  </article>
+
+  {otherCases.length > 0 && (
+    <ul class="mt-14 grid gap-6 md:grid-cols-2">
+      {otherCases.map((o) => (
+        <li class="rounded-lg border border-white/15 p-6">
+          <h3 class="text-xl font-bold">{o.name}</h3>
+          <p class="mt-2 text-muted-dark">{o.tagline}</p>
+          {!o.description && <TodoContent tone="dark">descripción breve del proyecto {o.name}.</TodoContent>}
+          {o.link && (
+            <a
+              href={o.link.href}
+              class="mt-4 inline-block font-semibold text-brand-light underline underline-offset-4"
+              {...(o.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {o.link.label}
+              {o.link.external && <span class="sr-only"> (se abre en una pestaña nueva)</span>}
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
 </Section>

@@ -79,7 +79,10 @@ export const sections = {
 export const privacyUrl = '/privacidad';
 
 /** Formspree form id: public by design (set PUBLIC_FORMSPREE_ID, see .env.example). */
-export const formspreeId: string | null = import.meta.env.PUBLIC_FORMSPREE_ID || null;
+// Accepts the bare id or the full endpoint URL (https://formspree.io/f/<id>).
+const rawFormspree = (import.meta.env.PUBLIC_FORMSPREE_ID ?? '').trim();
+export const formspreeId: string | null =
+  rawFormspree.split('/').filter(Boolean).pop()?.replace(/[^A-Za-z0-9]/g, '') || null;
 
 export const contact = {
   intro: 'Contanos en pocas líneas qué querés mejorar en tu negocio. Te respondemos por email.',
@@ -132,5 +135,40 @@ export const processSteps: ProcessStep[] = [
     title: 'Mantenimiento',
     // TODO-CONTENIDO: confirm maintenance scope (included period, paid plan, etc.).
     text: 'Revisamos que todo siga funcionando bien y hacemos los ajustes que hagan falta.',
+  },
+];
+
+export interface WorkCase {
+  name: string;
+  /** Honest status label, e.g. 'En desarrollo'. */
+  status?: string;
+  tagline: string;
+  description?: string;
+  features: string[];
+  link?: CtaLink;
+}
+
+export const featuredCase: WorkCase = {
+  name: 'MiClase',
+  status: 'En desarrollo',
+  tagline: 'Gestor completo para profesores particulares.',
+  description:
+    'Alumnos, calendario, asistencia y cobros en un solo lugar. Para profesores de idiomas, música, arte, matemática y más.',
+  features: [
+    'Alumnos organizados por grupo',
+    'Clases únicas o recurrentes, en vista semanal o mensual',
+    'Asistencia y pagos: sabé quién te debe',
+    'Funciona desde el celular, con acceso por Google o email',
+  ],
+  // TODO-CONTENIDO: MiClase public URL when available.
+};
+
+export const otherCases: WorkCase[] = [
+  {
+    name: 'Jorgelina PMP',
+    tagline: 'Sitio web profesional.',
+    // TODO-CONTENIDO: one-line description of the Jorgelina PMP project (who it is for, what was done).
+    features: [],
+    link: { label: 'Ver sitio', href: 'https://jorgelinapmp.com.ar/', external: true },
   },
 ];
