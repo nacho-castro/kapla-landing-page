@@ -63,16 +63,17 @@
 ### Hecho
 - Título del hero: "Automatizamos los procesos de tu PyME e implementamos inteligencia artificial a medida".
 - `Why.astro`: texto del dueño (en `site.ts` > `why`) con un único botón "Quiero una auditoría".
-- `Process.astro`: 5 pasos numerados con ícono (Auditoría, Diseño, Implementación, Capacitación, Optimización continua), en `site.ts` > `processSteps`.
+- `Process.astro`: 4 pasos numerados con ícono (Auditoría, Diseño, Implementación, Mantenimiento), en `site.ts` > `processSteps`.
 - Footer: enlaces reales de Instagram y LinkedIn.
 
 ### Verificado
 - `npx astro check`: 0 errores. `npm run build`: OK, sin textos "Pendiente" en `dist/`.
-- Pendiente: revisión visual en 360/768/1280 px.
+- Capturas en 768 y 1280 px: OK. 360 px sin confirmar (la captura sin interfaz salió recortada).
 
 ### Decisiones
 - Íconos como SVG inline en `Icon.astro` (estilo de trazo uniforme, inspirados en Lucide) en lugar de `lucide-react`: el proyecto no usa React y no se suman dependencias.
-- Se suavizó "un negocio que crece sin límites" a "más tiempo para hacer crecer tu negocio" (regla de no prometer de más).
+- Revisión web-reviewer aplicada: el cierre de Why pasa a lenguaje de objetivo, se quitan "Consultá sin compromiso..." y el paso Capacitación, y "Optimización continua" pasa a "Mantenimiento". Nuevo ícono de TikTok con estilo de línea.
+- Sin resolver (dueño): "nuestros clientes", "Trabajamos con PyMEs de todos los rubros..." y "Latinoamérica" en `site.ts` > `why` afirman clientes o alcance no confirmados. Bloquea la publicación.
 
 ## Pendiente (próximos pasos)
 - Paso 2: Hero final y sección Trabajo con MiClase.
@@ -91,4 +92,5 @@
 | `public/favicon.svg` | Favicon definitivo |
 | `src/components/Hero.astro` | Subtítulo y botones |
 | `src/components/Work.astro` | Caso MiClase: descripción, capturas, enlace, estado |
+| `src/data/site.ts` | Alcance del paso Mantenimiento |
 | `src/components/Contact.astro` | Formulario, WhatsApp y aviso de privacidad |

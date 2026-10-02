@@ -68,14 +68,12 @@ export const why = {
     'Diseñamos e implementamos sistemas de automatización de procesos e inteligencia artificial a medida para pequeñas y medianas empresas de Latinoamérica.',
     'Transformamos la forma en que trabajan nuestros clientes: automatizamos lo repetitivo, optimizamos lo complejo y liberamos tiempo valioso para que se enfoquen en crecer.',
     'Trabajamos con PyMEs de todos los rubros: comercio, servicios, manufactura, consultoría. Cada solución es única, diseñada para los desafíos específicos de tu negocio.',
-    // Original text said "un negocio que crece sin límites"; softened to avoid overpromising.
-    '¿Resultado? Procesos más rápidos, menos errores, equipos más motivados y más tiempo para hacer crecer tu negocio.',
+    'El objetivo: menos tareas repetitivas, menos errores y más tiempo para tu negocio.',
   ],
-  closing: 'Consultá sin compromiso. Automaticemos juntos.',
   cta: { label: 'Quiero una auditoría', href: '#contacto' } satisfies NavLink,
 };
 
-export type ProcessIcon = 'audit' | 'design' | 'build' | 'training' | 'optimize';
+export type ProcessIcon = 'audit' | 'design' | 'build' | 'maintain';
 
 export interface ProcessStep {
   icon: ProcessIcon;
@@ -100,13 +98,9 @@ export const processSteps: ProcessStep[] = [
     text: 'Ponemos el sistema en marcha y lo conectamos con lo que ya usás, sin frenar tu operación.',
   },
   {
-    icon: 'training',
-    title: 'Capacitación',
-    text: 'Tu equipo aprende a usar el sistema en el día a día, con material simple y acompañamiento.',
-  },
-  {
-    icon: 'optimize',
-    title: 'Optimización continua',
-    text: 'Medimos cómo funciona y lo ajustamos según los resultados y las nuevas necesidades.',
+    icon: 'maintain',
+    title: 'Mantenimiento',
+    // TODO-CONTENIDO: confirm maintenance scope (included period, paid plan, etc.).
+    text: 'Revisamos que todo siga funcionando bien y hacemos los ajustes que hagan falta.',
   },
 ];

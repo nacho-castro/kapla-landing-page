@@ -51,6 +51,7 @@ const pendingSocials = socialLinks.filter((social) => social.href === null);
                   title={`${social.label}: enlace pendiente`}
                 >
                   <Icon name={social.name} />
+                  <span class="sr-only">{social.label}: enlace pendiente</span>
                 </li>
               )
             ),

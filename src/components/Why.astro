@@ -13,7 +13,6 @@ const { id, title } = sections.why;
     </div>
     <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-muted">
       {why.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-      <p class="font-semibold text-ink">{why.closing}</p>
       <a
         href={why.cta.href}
         class="inline-flex min-h-11 items-center rounded-md bg-brand px-5 font-semibold text-white hover:bg-ink"
