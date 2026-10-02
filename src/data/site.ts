@@ -73,6 +73,7 @@ export const sections = {
   work: { id: 'trabajo', title: 'Trabajo' },
   why: { id: 'por-que', title: 'Por qué KAPLA' },
   process: { id: 'proceso', title: 'Proceso' },
+  testimonials: { id: 'opiniones', title: 'Lo que dicen nuestros clientes' },
   contact: { id: 'contacto', title: 'Contacto' },
 } satisfies Record<string, SectionInfo>;
 
@@ -171,4 +172,25 @@ export const otherCases: WorkCase[] = [
     features: [],
     link: { label: 'Ver sitio', href: 'https://jorgelinapmp.com.ar/', external: true },
   },
+];
+
+export interface Testimonial {
+  /** Person's name, and company if any (e.g. 'Ana López, Estudio López'). */
+  name: string;
+  /** Industry or profession (e.g. 'Contadora'). */
+  role: string;
+  quote: string;
+}
+
+// Only real testimonials, published with the person's permission.
+// While this list is empty the section is not shown in production.
+// TODO-CONTENIDO: add real testimonials (name/company, industry/profession, comment).
+export const testimonials: Testimonial[] = [];
+
+/** Dev-only placeholders to preview the layout. Never rendered in production. */
+export const sampleTestimonials: Testimonial[] = [
+  { name: 'Nombre Apellido, Empresa', role: 'Rubro o profesión', quote: 'Comentario de ejemplo. Acá va la opinión real del cliente, en dos o tres líneas.' },
+  { name: 'Nombre Apellido, Empresa', role: 'Rubro o profesión', quote: 'Comentario de ejemplo un poco más largo, para ver cómo se acomoda la tarjeta cuando el texto ocupa varias líneas en el celular.' },
+  { name: 'Nombre Apellido', role: 'Rubro o profesión', quote: 'Comentario de ejemplo corto.' },
+  { name: 'Nombre Apellido, Empresa', role: 'Rubro o profesión', quote: 'Comentario de ejemplo. Con cuatro o más opiniones la fila se desliza hacia el costado.' },
 ];

@@ -1,8 +1,8 @@
 ---
-// Shared wrapper: anchor id, alternating light/dark background and content width.
+// Shared wrapper: anchor id, background tone (white, light gray or dark) and content width.
 interface Props {
   id: string;
-  tone: 'light' | 'dark';
+  tone: 'light' | 'surface' | 'dark';
   labelledBy?: string;
   class?: string;
 }
@@ -16,7 +16,7 @@ const { id, tone, labelledBy, class: className = '' } = Astro.props;
   aria-labelledby={labelledBy}
   class:list={[
     'py-section',
-    tone === 'dark' ? 'bg-ink text-white' : 'bg-white text-ink',
+    tone === 'dark' ? 'bg-ink text-white' : tone === 'surface' ? 'bg-surface text-ink' : 'bg-white text-ink',
     className,
   ]}
 >

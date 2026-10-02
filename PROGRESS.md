@@ -97,6 +97,12 @@
 - Paso 4: Contacto con formulario seguro (definir el servicio antes).
 - Paso 5: datos estructurados `Organization`, imagen Open Graph, headers de seguridad, redirección www, Lighthouse.
 
+## Sección Opiniones — HECHO (2026-10-02)
+- `Testimonials.astro` (`#opiniones`), entre Proceso y Contacto, fondo gris claro (`tone="surface"`) para no juntar dos secciones blancas.
+- Fila deslizable con CSS (scroll-snap), sin JavaScript: 1 tarjeta y la siguiente asomando en móvil, 2 en tablet, 3 en escritorio. Navegable con teclado (región con foco).
+- Datos en `testimonials` de `site.ts`. Mientras esté vacío, la sección **no aparece en producción**; en desarrollo muestra tarjetas de ejemplo marcadas como pendientes.
+- Verificado: `astro check` 0 errores, build OK sin la sección, capturas en 360 y 1280 px.
+
 ## TODO-CONTENIDO (datos que faltan)
 | Dónde | Qué falta |
 |---|---|
@@ -108,3 +114,4 @@
 | `src/data/site.ts` | Alcance del paso Mantenimiento |
 | `.env` / Vercel | `PUBLIC_FORMSPREE_ID` (id del formulario de Formspree) |
 | `src/pages/privacidad.astro` | Revisión legal del aviso de privacidad |
+| `src/data/site.ts` (`testimonials`) | Opiniones reales de clientes (nombre/empresa, rubro/profesión, comentario), con permiso |

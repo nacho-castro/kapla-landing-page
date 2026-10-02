@@ -1,0 +1,58 @@
+---
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { sampleTestimonials, sections, testimonials } from '../data/site';
+
+const { id, title } = sections.testimonials;
+const isDev = import.meta.env.DEV;
+// Real testimonials only; dev shows placeholders so the layout can be reviewed.
+const items = testimonials.length > 0 ? testimonials : isDev ? sampleTestimonials : [];
+---
+
+{
+  items.length > 0 && (
+    <Section id={id} tone="surface" labelledBy={`${id}-title`}>
+      <h2 id={`${id}-title`} class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
+      {testimonials.length === 0 && (
+        <div class="mt-6">
+          <TodoContent>opiniones reales de clientes, con su permiso. Las tarjetas de abajo son de ejemplo.</TodoContent>
+        </div>
+      )}
+      <div
+        class="-mx-gutter mt-10 overflow-x-auto px-gutter pb-4 [scrollbar-width:thin]"
+        role="region"
+        aria-label="Opiniones de clientes (deslizá para ver más)"
+        tabindex="0"
+      >
+        <ul class="flex snap-x snap-mandatory gap-6">
+          {items.map((t) => (
+            <li class="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+              <figure class="flex h-full flex-col rounded-lg border border-line bg-white p-6">
+                <svg
+                  aria-hidden="true"
+                  class="h-6 w-6 text-brand"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M10 7H6a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v1a3 3 0 0 1-3 3" />
+                  <path d="M20 7h-4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v1a3 3 0 0 1-3 3" />
+                </svg>
+                <blockquote class="mt-4 flex-1 text-lg leading-relaxed">
+                  <p>{t.quote}</p>
+                </blockquote>
+                <figcaption class="mt-6 border-t border-line pt-4">
+                  <p class="font-semibold">{t.name}</p>
+                  <p class="text-sm text-muted">{t.role}</p>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
+  )
+}
