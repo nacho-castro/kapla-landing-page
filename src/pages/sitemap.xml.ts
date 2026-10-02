@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 
-// Single-page site: only the home page is listed.
-const paths = ['/'];
+const paths = ['/', '/privacidad'];
 
 export const GET: APIRoute = ({ site }) => {
   const urls = paths

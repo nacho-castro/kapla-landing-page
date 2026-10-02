@@ -76,6 +76,22 @@
 - Por pedido del dueño se suavizaron "nuestros clientes", "todos los rubros" y "Latinoamérica" (no confirmados).
 - Hero: subtítulo "Tu negocio, completamente ordenado.". Email y WhatsApp cargados; botón flotante chico de WhatsApp (`WhatsAppButton.astro`, abre wa.me).
 
+## Paso 4: Contacto y privacidad — EN CURSO (2026-10-02)
+
+### Hecho
+- Servicio de formulario: **Formspree** (elegido por el dueño). El id va en `PUBLIC_FORMSPREE_ID` (`.env.example`); es público por diseño, no es un secreto.
+- `Contact.astro`: nombre, email y mensaje opcional, con etiquetas visibles, `maxlength`, campo trampa `_gotcha`, nota de privacidad y enlace a WhatsApp. Envío con `fetch` y mensajes fijos (no se muestra texto del usuario ni detalles del servidor). Sin JS el formulario igual se envía. Sin id configurado, el formulario no se muestra.
+- Página aparte `/privacidad` (Ley 25.326), enlazada desde el footer y el formulario, incluida en el sitemap.
+- Enlaces del menú pasan a `/#seccion` para que funcionen desde `/privacidad`.
+
+### Verificado
+- `astro check` 0 errores, build OK. Con un id de prueba el formulario se genera con `action` de Formspree, honeypot y zona `role="status"`.
+- Falta: probar un envío real (con el id), vista en móvil y web-reviewer.
+
+### Para el paso 5
+- CSP: permitir `form-action` y `connect-src` hacia `https://formspree.io`.
+- En Formspree: activar la protección anti-spam y validación del email del lado del servicio.
+
 ## Pendiente (próximos pasos)
 - Paso 2: subtítulo del hero y sección Trabajo con MiClase. Botones del hero hechos: "Quiero una auditoría" (Calendly, pestaña nueva) y "Ver trabajo" (#trabajo). Todos los botones de auditoría van a Calendly.
 - Paso 4: Contacto con formulario seguro (definir el servicio antes).
@@ -90,4 +106,5 @@
 | `public/favicon.svg` | Favicon definitivo |
 | `src/components/Work.astro` | Caso MiClase: descripción, capturas, enlace, estado |
 | `src/data/site.ts` | Alcance del paso Mantenimiento |
-| `src/components/Contact.astro` | Formulario, WhatsApp y aviso de privacidad |
+| `.env` / Vercel | `PUBLIC_FORMSPREE_ID` (id del formulario de Formspree) |
+| `src/pages/privacidad.astro` | Revisión legal del aviso de privacidad |

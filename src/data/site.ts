@@ -2,7 +2,8 @@
 
 export interface NavLink {
   label: string;
-  href: `#${string}`;
+  /** Starts with '/#' so it also works from other pages (e.g. /privacidad). */
+  href: `/#${string}`;
 }
 
 /** Call to action; external links open in a new tab. */
@@ -45,16 +46,16 @@ export const site = {
 };
 
 export const navLinks: NavLink[] = [
-  { label: 'Trabajo', href: '#trabajo' },
-  { label: 'Proceso', href: '#proceso' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Trabajo', href: '/#trabajo' },
+  { label: 'Proceso', href: '/#proceso' },
+  { label: 'Contacto', href: '/#contacto' },
 ];
 
 export const navCta: CtaLink = { label: 'Auditoría gratis', href: auditUrl, external: true };
 
 export const heroCtas = {
   primary: { label: 'Quiero una auditoría', href: auditUrl, external: true },
-  secondary: { label: 'Ver trabajo', href: '#trabajo' },
+  secondary: { label: 'Ver trabajo', href: '/#trabajo' },
 } satisfies Record<string, CtaLink>;
 
 export const socialLinks: SocialLink[] = [
@@ -75,7 +76,20 @@ export const sections = {
   contact: { id: 'contacto', title: 'Contacto' },
 } satisfies Record<string, SectionInfo>;
 
-export const privacyAnchor = '#privacidad';
+export const privacyUrl = '/privacidad';
+
+/** Formspree form id: public by design (set PUBLIC_FORMSPREE_ID, see .env.example). */
+export const formspreeId: string | null = import.meta.env.PUBLIC_FORMSPREE_ID || null;
+
+export const contact = {
+  intro: 'Contanos en pocas líneas qué querés mejorar en tu negocio. Te respondemos por email.',
+  whatsappLabel: 'Escribinos por WhatsApp',
+  submitLabel: 'Enviar',
+  sendingLabel: 'Enviando...',
+  successMessage: 'Gracias, recibimos tu mensaje. Te respondemos pronto.',
+  errorMessage: 'No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.',
+  privacyNote: 'Usamos tus datos solo para responder tu consulta.',
+};
 
 export const why = {
   lead: 'Somos KAPLA.',

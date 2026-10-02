@@ -2,7 +2,7 @@
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import TodoContent from './TodoContent.astro';
-import { privacyAnchor, site, socialLinks } from '../data/site';
+import { privacyUrl, site, socialLinks } from '../data/site';
 
 const year = new Date().getFullYear();
 const isDev = import.meta.env.DEV;
@@ -68,7 +68,7 @@ const pendingSocials = socialLinks.filter((social) => social.href === null);
         )
       }
       <p class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-dark">
-        <a href={privacyAnchor} class="underline underline-offset-4 hover:text-brand-light">
+        <a href={privacyUrl} class="underline underline-offset-4 hover:text-brand-light">
           Aviso de privacidad
         </a>
         <span>&copy; {year} {site.name}</span>
