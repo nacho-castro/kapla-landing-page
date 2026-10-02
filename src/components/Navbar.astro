@@ -2,6 +2,7 @@
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import { navCta, navLinks, sections, site } from '../data/site';
+import { externalAttrs } from '../utils/links';
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-white">
@@ -27,6 +28,7 @@ import { navCta, navLinks, sections, site } from '../data/site';
       </ul>
       <a
         href={navCta.href}
+        {...externalAttrs(navCta)}
         class="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-ink"
       >
         {navCta.label}
@@ -60,6 +62,7 @@ import { navCta, navLinks, sections, site } from '../data/site';
       <li class="pt-3">
         <a
           href={navCta.href}
+        {...externalAttrs(navCta)}
           class="block rounded-md bg-brand px-4 py-3 text-center text-base font-semibold text-white"
         >
           {navCta.label}

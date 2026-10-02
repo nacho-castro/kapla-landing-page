@@ -1,6 +1,7 @@
 ---
 import Section from './Section.astro';
 import { sections, why } from '../data/site';
+import { externalAttrs } from '../utils/links';
 
 const { id, title } = sections.why;
 ---
@@ -15,6 +16,7 @@ const { id, title } = sections.why;
       {why.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       <a
         href={why.cta.href}
+        {...externalAttrs(why.cta)}
         class="inline-flex min-h-11 items-center rounded-md bg-brand px-5 font-semibold text-white hover:bg-ink"
       >
         {why.cta.label}

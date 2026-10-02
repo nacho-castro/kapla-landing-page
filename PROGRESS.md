@@ -76,7 +76,7 @@
 - Sin resolver (dueño): "nuestros clientes", "Trabajamos con PyMEs de todos los rubros..." y "Latinoamérica" en `site.ts` > `why` afirman clientes o alcance no confirmados. Bloquea la publicación.
 
 ## Pendiente (próximos pasos)
-- Paso 2: Hero final y sección Trabajo con MiClase.
+- Paso 2: subtítulo del hero y sección Trabajo con MiClase. Botones del hero hechos: "Quiero una auditoría" (Calendly, pestaña nueva) y "Ver trabajo" (#trabajo). Todos los botones de auditoría van a Calendly.
 - Paso 4: Contacto con formulario seguro (definir el servicio antes).
 - Paso 5: datos estructurados `Organization`, imagen Open Graph, headers de seguridad, redirección www, Lighthouse.
 
@@ -90,7 +90,7 @@
 | `src/data/site.ts` + `public/` | Imagen para compartir (Open Graph, 1200x630) |
 | `src/components/Logo.astro` | Logo definitivo (hoy es texto "KAPLA") |
 | `public/favicon.svg` | Favicon definitivo |
-| `src/components/Hero.astro` | Subtítulo y botones |
+| `src/components/Hero.astro` | Subtítulo |
 | `src/components/Work.astro` | Caso MiClase: descripción, capturas, enlace, estado |
 | `src/data/site.ts` | Alcance del paso Mantenimiento |
 | `src/components/Contact.astro` | Formulario, WhatsApp y aviso de privacidad |

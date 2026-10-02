@@ -5,6 +5,16 @@ export interface NavLink {
   href: `#${string}`;
 }
 
+/** Call to action; external links open in a new tab. */
+export interface CtaLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+/** Booking page for the free audit. */
+const auditUrl = 'https://calendly.com/ignaciocastroplanas';
+
 export type SocialName = 'instagram' | 'linkedin' | 'tiktok';
 
 export interface SocialLink {
@@ -40,7 +50,12 @@ export const navLinks: NavLink[] = [
   { label: 'Contacto', href: '#contacto' },
 ];
 
-export const navCta: NavLink = { label: 'Auditoría gratis', href: '#contacto' };
+export const navCta: CtaLink = { label: 'Auditoría gratis', href: auditUrl, external: true };
+
+export const heroCtas = {
+  primary: { label: 'Quiero una auditoría', href: auditUrl, external: true },
+  secondary: { label: 'Ver trabajo', href: '#trabajo' },
+} satisfies Record<string, CtaLink>;
 
 // TODO-CONTENIDO: TikTok profile URL.
 export const socialLinks: SocialLink[] = [
@@ -70,7 +85,7 @@ export const why = {
     'Trabajamos con PyMEs de todos los rubros: comercio, servicios, manufactura, consultoría. Cada solución es única, diseñada para los desafíos específicos de tu negocio.',
     'El objetivo: menos tareas repetitivas, menos errores y más tiempo para tu negocio.',
   ],
-  cta: { label: 'Quiero una auditoría', href: '#contacto' } satisfies NavLink,
+  cta: heroCtas.primary satisfies CtaLink,
 };
 
 export type ProcessIcon = 'audit' | 'design' | 'build' | 'maintain';
