@@ -27,6 +27,7 @@ export interface SocialLink {
 export interface SectionInfo {
   id: string;
   title: string;
+  subtitle?: string;
 }
 
 export const site = {
@@ -34,10 +35,9 @@ export const site = {
   // TODO-CONTENIDO: final meta description (step 5, SEO).
   description:
     'KAPLA diseña e implementa automatización de procesos e inteligencia artificial a medida para PyMEs.',
-  // TODO-CONTENIDO: contact email.
-  email: null as string | null,
-  // TODO-CONTENIDO: WhatsApp number in international format, e.g. 5491100000000.
-  whatsapp: null as string | null,
+  email: 'ignaciocastroplanas@gmail.com' as string | null,
+  // International format, digits only (used in https://wa.me/<number>).
+  whatsapp: '5491126944636' as string | null,
   // TODO-CONTENIDO: own share image (1200x630 PNG/JPG in public/, e.g. '/og-image.png'). Until then no og:image is emitted.
   ogImage: null as string | null,
   ogImageAlt: 'KAPLA: automatización de procesos e inteligencia artificial para PyMEs',
@@ -68,6 +68,7 @@ export const sections = {
   hero: {
     id: 'inicio',
     title: 'Automatizamos los procesos de tu PyME e implementamos inteligencia artificial a medida',
+    subtitle: 'Tu negocio, completamente ordenado.',
   },
   work: { id: 'trabajo', title: 'Trabajo' },
   why: { id: 'por-que', title: 'Por qué KAPLA' },
@@ -80,9 +81,9 @@ export const privacyAnchor = '#privacidad';
 export const why = {
   lead: 'Somos KAPLA.',
   paragraphs: [
-    'Diseñamos e implementamos sistemas de automatización de procesos e inteligencia artificial a medida para pequeñas y medianas empresas de Latinoamérica.',
-    'Transformamos la forma en que trabajan nuestros clientes: automatizamos lo repetitivo, optimizamos lo complejo y liberamos tiempo valioso para que se enfoquen en crecer.',
-    'Trabajamos con PyMEs de todos los rubros: comercio, servicios, manufactura, consultoría. Cada solución es única, diseñada para los desafíos específicos de tu negocio.',
+    'Diseñamos e implementamos sistemas de automatización de procesos e inteligencia artificial a medida para pequeñas y medianas empresas.',
+    'Te ayudamos a cambiar la forma en que trabaja tu equipo: automatizamos lo repetitivo, ordenamos lo complejo y liberamos tiempo para que te enfoques en crecer.',
+    'Trabajamos con PyMEs de cualquier rubro. Cada solución se diseña para los desafíos específicos de tu negocio.',
     'El objetivo: menos tareas repetitivas, menos errores y más tiempo para tu negocio.',
   ],
   cta: heroCtas.primary satisfies CtaLink,
@@ -93,6 +94,7 @@ export type ProcessIcon = 'audit' | 'design' | 'build' | 'maintain';
 export interface ProcessStep {
   icon: ProcessIcon;
   title: string;
+  subtitle?: string;
   text: string;
 }
 

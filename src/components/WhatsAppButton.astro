@@ -1,0 +1,19 @@
+---
+// Small floating WhatsApp link. Hidden when no number is configured.
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+
+{
+  site.whatsapp && (
+    <a
+      href={`https://wa.me/${site.whatsapp}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escribinos por WhatsApp (se abre en una pestaña nueva)"
+      class="fixed right-4 bottom-4 z-40 inline-flex size-12 items-center justify-center rounded-full bg-brand text-white shadow-md ring-1 ring-white/20 hover:bg-ink md:right-6 md:bottom-6"
+    >
+      <Icon name="whatsapp" />
+    </a>
+  )
+}

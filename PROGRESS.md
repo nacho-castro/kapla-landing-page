@@ -73,7 +73,8 @@
 ### Decisiones
 - Íconos como SVG inline en `Icon.astro` (estilo de trazo uniforme, inspirados en Lucide) en lugar de `lucide-react`: el proyecto no usa React y no se suman dependencias.
 - Revisión web-reviewer aplicada: el cierre de Why pasa a lenguaje de objetivo, se quitan "Consultá sin compromiso..." y el paso Capacitación, y "Optimización continua" pasa a "Mantenimiento". Nuevo ícono de TikTok con estilo de línea.
-- Sin resolver (dueño): "nuestros clientes", "Trabajamos con PyMEs de todos los rubros..." y "Latinoamérica" en `site.ts` > `why` afirman clientes o alcance no confirmados. Bloquea la publicación.
+- Por pedido del dueño se suavizaron "nuestros clientes", "todos los rubros" y "Latinoamérica" (no confirmados).
+- Hero: subtítulo "Tu negocio, completamente ordenado.". Email y WhatsApp cargados; botón flotante chico de WhatsApp (`WhatsAppButton.astro`, abre wa.me).
 
 ## Pendiente (próximos pasos)
 - Paso 2: subtítulo del hero y sección Trabajo con MiClase. Botones del hero hechos: "Quiero una auditoría" (Calendly, pestaña nueva) y "Ver trabajo" (#trabajo). Todos los botones de auditoría van a Calendly.
@@ -83,14 +84,11 @@
 ## TODO-CONTENIDO (datos que faltan)
 | Dónde | Qué falta |
 |---|---|
-| `src/data/site.ts` | Email de contacto |
-| `src/data/site.ts` | Número de WhatsApp |
 | `src/data/site.ts` | URL de TikTok |
 | `src/data/site.ts` | Meta description final |
 | `src/data/site.ts` + `public/` | Imagen para compartir (Open Graph, 1200x630) |
 | `src/components/Logo.astro` | Logo definitivo (hoy es texto "KAPLA") |
 | `public/favicon.svg` | Favicon definitivo |
-| `src/components/Hero.astro` | Subtítulo |
 | `src/components/Work.astro` | Caso MiClase: descripción, capturas, enlace, estado |
 | `src/data/site.ts` | Alcance del paso Mantenimiento |
 | `src/components/Contact.astro` | Formulario, WhatsApp y aviso de privacidad |

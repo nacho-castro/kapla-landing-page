@@ -1,10 +1,9 @@
 ---
 import Section from './Section.astro';
-import TodoContent from './TodoContent.astro';
 import { heroCtas, sections } from '../data/site';
 import { externalAttrs } from '../utils/links';
 
-const { id, title } = sections.hero;
+const { id, title, subtitle } = sections.hero;
 const { primary, secondary } = heroCtas;
 ---
 
@@ -12,10 +11,7 @@ const { primary, secondary } = heroCtas;
   <h1 id={`${id}-title`} class="max-w-4xl text-4xl font-bold tracking-tight text-balance text-brand md:text-5xl lg:text-6xl">
     {title}
   </h1>
-  <!-- TODO-CONTENIDO: hero subtitle (one or two lines). -->
-  <div class="mt-6 max-w-2xl">
-    <TodoContent>subtítulo de una o dos líneas.</TodoContent>
-  </div>
+  {subtitle && <p class="mt-6 max-w-2xl text-xl text-muted md:text-2xl">{subtitle}</p>}
   <div class="mt-8 flex flex-col gap-3 sm:flex-row">
     <a
       href={primary.href}
