@@ -42,16 +42,18 @@ export const navLinks: NavLink[] = [
 
 export const navCta: NavLink = { label: 'Auditoría gratis', href: '#contacto' };
 
-// TODO-CONTENIDO: real profile URLs.
+// TODO-CONTENIDO: TikTok profile URL.
 export const socialLinks: SocialLink[] = [
-  { name: 'instagram', label: 'Instagram', href: null },
-  { name: 'linkedin', label: 'LinkedIn', href: null },
+  { name: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/kapla.tech/' },
+  { name: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/kaplatech' },
   { name: 'tiktok', label: 'TikTok', href: null },
 ];
 
 export const sections = {
-  // TODO-CONTENIDO: final hero title (step 2).
-  hero: { id: 'inicio', title: 'KAPLA' },
+  hero: {
+    id: 'inicio',
+    title: 'Automatizamos los procesos de tu PyME e implementamos inteligencia artificial a medida',
+  },
   work: { id: 'trabajo', title: 'Trabajo' },
   why: { id: 'por-que', title: 'Por qué KAPLA' },
   process: { id: 'proceso', title: 'Proceso' },
@@ -59,3 +61,52 @@ export const sections = {
 } satisfies Record<string, SectionInfo>;
 
 export const privacyAnchor = '#privacidad';
+
+export const why = {
+  lead: 'Somos KAPLA.',
+  paragraphs: [
+    'Diseñamos e implementamos sistemas de automatización de procesos e inteligencia artificial a medida para pequeñas y medianas empresas de Latinoamérica.',
+    'Transformamos la forma en que trabajan nuestros clientes: automatizamos lo repetitivo, optimizamos lo complejo y liberamos tiempo valioso para que se enfoquen en crecer.',
+    'Trabajamos con PyMEs de todos los rubros: comercio, servicios, manufactura, consultoría. Cada solución es única, diseñada para los desafíos específicos de tu negocio.',
+    // Original text said "un negocio que crece sin límites"; softened to avoid overpromising.
+    '¿Resultado? Procesos más rápidos, menos errores, equipos más motivados y más tiempo para hacer crecer tu negocio.',
+  ],
+  closing: 'Consultá sin compromiso. Automaticemos juntos.',
+  cta: { label: 'Quiero una auditoría', href: '#contacto' } satisfies NavLink,
+};
+
+export type ProcessIcon = 'audit' | 'design' | 'build' | 'training' | 'optimize';
+
+export interface ProcessStep {
+  icon: ProcessIcon;
+  title: string;
+  text: string;
+}
+
+export const processSteps: ProcessStep[] = [
+  {
+    icon: 'audit',
+    title: 'Auditoría',
+    text: 'Revisamos cómo trabaja hoy tu equipo y detectamos qué tareas consumen más tiempo o generan errores.',
+  },
+  {
+    icon: 'design',
+    title: 'Diseño',
+    text: 'Definimos juntos qué se automatiza, con qué herramientas y dónde suma la inteligencia artificial.',
+  },
+  {
+    icon: 'build',
+    title: 'Implementación',
+    text: 'Ponemos el sistema en marcha y lo conectamos con lo que ya usás, sin frenar tu operación.',
+  },
+  {
+    icon: 'training',
+    title: 'Capacitación',
+    text: 'Tu equipo aprende a usar el sistema en el día a día, con material simple y acompañamiento.',
+  },
+  {
+    icon: 'optimize',
+    title: 'Optimización continua',
+    text: 'Medimos cómo funciona y lo ajustamos según los resultados y las nuevas necesidades.',
+  },
+];

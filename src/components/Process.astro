@@ -1,15 +1,30 @@
 ---
+import Icon from './Icon.astro';
 import Section from './Section.astro';
-import TodoContent from './TodoContent.astro';
-import { sections } from '../data/site';
+import { processSteps, sections } from '../data/site';
 
 const { id, title } = sections.process;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`}>
-  <!-- TODO-CONTENIDO: 3 or 4 numbered steps (step 3). -->
   <h2 id={`${id}-title`} class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
-  <div class="mt-6 max-w-2xl">
-    <TodoContent tone="dark">3 o 4 pasos numerados del proceso de trabajo.</TodoContent>
-  </div>
+  <p class="mt-4 max-w-2xl text-lg text-muted-dark">
+    Cinco pasos claros, desde el primer diagnóstico hasta los ajustes una vez en marcha.
+  </p>
+  <ol class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
+    {
+      processSteps.map((step, index) => (
+        <li class="border-t border-line-dark pt-6">
+          <div class="flex items-center gap-3 text-brand-light">
+            <Icon name={step.icon} />
+            <span class="text-sm font-semibold tabular-nums">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold">{step.title}</h3>
+          <p class="mt-2 text-muted-dark">{step.text}</p>
+        </li>
+      ))
+    }
+  </ol>
 </Section>

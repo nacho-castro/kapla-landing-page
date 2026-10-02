@@ -58,9 +58,24 @@
 - Sitemap y robots como endpoints estáticos propios en vez de `@astrojs/sitemap` (evita una dependencia; el sitio es de una sola página).
 - Sin deploy todavía. Al publicar: configurar en el hosting la redirección permanente de `www.kaplatech.com.ar` al dominio sin www, para que coincida con la canónica.
 
+## Paso 3: Por qué KAPLA y Proceso — HECHO (2026-10-02)
+
+### Hecho
+- Título del hero: "Automatizamos los procesos de tu PyME e implementamos inteligencia artificial a medida".
+- `Why.astro`: texto del dueño (en `site.ts` > `why`) con un único botón "Quiero una auditoría".
+- `Process.astro`: 5 pasos numerados con ícono (Auditoría, Diseño, Implementación, Capacitación, Optimización continua), en `site.ts` > `processSteps`.
+- Footer: enlaces reales de Instagram y LinkedIn.
+
+### Verificado
+- `npx astro check`: 0 errores. `npm run build`: OK, sin textos "Pendiente" en `dist/`.
+- Pendiente: revisión visual en 360/768/1280 px.
+
+### Decisiones
+- Íconos como SVG inline en `Icon.astro` (estilo de trazo uniforme, inspirados en Lucide) en lugar de `lucide-react`: el proyecto no usa React y no se suman dependencias.
+- Se suavizó "un negocio que crece sin límites" a "más tiempo para hacer crecer tu negocio" (regla de no prometer de más).
+
 ## Pendiente (próximos pasos)
 - Paso 2: Hero final y sección Trabajo con MiClase.
-- Paso 3: Por qué KAPLA (opcional) y Proceso.
 - Paso 4: Contacto con formulario seguro (definir el servicio antes).
 - Paso 5: datos estructurados `Organization`, imagen Open Graph, headers de seguridad, redirección www, Lighthouse.
 
@@ -69,13 +84,11 @@
 |---|---|
 | `src/data/site.ts` | Email de contacto |
 | `src/data/site.ts` | Número de WhatsApp |
-| `src/data/site.ts` | URLs de Instagram, LinkedIn y TikTok |
+| `src/data/site.ts` | URL de TikTok |
 | `src/data/site.ts` | Meta description final |
 | `src/data/site.ts` + `public/` | Imagen para compartir (Open Graph, 1200x630) |
 | `src/components/Logo.astro` | Logo definitivo (hoy es texto "KAPLA") |
 | `public/favicon.svg` | Favicon definitivo |
-| `src/components/Hero.astro` | Título, subtítulo y botones |
+| `src/components/Hero.astro` | Subtítulo y botones |
 | `src/components/Work.astro` | Caso MiClase: descripción, capturas, enlace, estado |
-| `src/components/Why.astro` | Problemas y soluciones (sección opcional) |
-| `src/components/Process.astro` | Pasos del proceso |
 | `src/components/Contact.astro` | Formulario, WhatsApp y aviso de privacidad |
