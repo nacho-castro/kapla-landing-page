@@ -36,7 +36,7 @@ export const site = {
   // TODO-CONTENIDO: final meta description (step 5, SEO).
   description:
     'KAPLA diseña e implementa automatización de procesos e inteligencia artificial a medida para PyMEs.',
-  email: 'ignaciocastroplanas@gmail.com' as string | null,
+  email: 'kaplatech.ar@gmail.com' as string | null,
   // International format, digits only (used in https://wa.me/<number>).
   whatsapp: '5491126944636' as string | null,
   // TODO-CONTENIDO: own share image (1200x630 PNG/JPG in public/, e.g. '/og-image.png'). Until then no og:image is emitted.
@@ -151,7 +151,7 @@ export interface WorkCase {
 
 export const featuredCase: WorkCase = {
   name: 'MiClase',
-  status: 'En desarrollo',
+  status: 'En producción',
   tagline: 'Gestor completo para profesores particulares.',
   description:
     'Alumnos, calendario, asistencia y cobros en un solo lugar. Para profesores de idiomas, música, arte, matemática y más.',
@@ -161,14 +161,13 @@ export const featuredCase: WorkCase = {
     'Asistencia y pagos: sabé quién te debe',
     'Funciona desde el celular, con acceso por Google o email',
   ],
-  // TODO-CONTENIDO: MiClase public URL when available.
+  link: { label: 'Ver sitio', href: 'https://miclase.net.ar/', external: true },
 };
 
 export const otherCases: WorkCase[] = [
   {
     name: 'Jorgelina PMP',
-    tagline: 'Sitio web profesional.',
-    // TODO-CONTENIDO: one-line description of the Jorgelina PMP project (who it is for, what was done).
+    tagline: 'Sitio web de artista.',
     features: [],
     link: { label: 'Ver sitio', href: 'https://jorgelinapmp.com.ar/', external: true },
   },
