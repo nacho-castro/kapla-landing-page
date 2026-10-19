@@ -1,6 +1,6 @@
 ---
+import { Image } from 'astro:assets';
 import Section from './Section.astro';
-import TodoContent from './TodoContent.astro';
 import { sections, featuredCase, otherCases } from '../data/site';
 
 const { id, title } = sections.work;
@@ -30,24 +30,49 @@ const c = featuredCase;
           </li>
         ))}
       </ul>
+      {c.link && (
+        <a
+          href={c.link.href}
+          class="mt-6 inline-block font-semibold text-brand-light underline underline-offset-4"
+          {...(c.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {c.link.label}
+          {c.link.external && <span class="sr-only"> (se abre en una pestaña nueva)</span>}
+        </a>
+      )}
     </div>
-    <!-- TODO-CONTENIDO: MiClase screenshot or short GIF/video (WebP/AVIF, use Astro Image with width/height). -->
-    <div
-      class="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-muted-dark text-sm text-muted-dark"
-      role="img"
-      aria-label={`Captura de ${c.name} (próximamente)`}
-    >
-      Captura de {c.name}
-    </div>
+    {c.image && c.link && (
+      <a
+        href={c.link.href}
+        class="mx-auto block w-64 max-w-full md:w-72"
+        {...(c.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        <Image src={c.image.src} alt={c.image.alt} widths={[256, 512]} sizes="288px" class="h-auto w-full" />
+        <span class="sr-only">
+          Abrir {c.name}{c.link.external && ' (se abre en una pestaña nueva)'}
+        </span>
+      </a>
+    )}
   </article>
 
   {otherCases.length > 0 && (
     <ul class="mt-14 grid gap-6 md:grid-cols-2">
       {otherCases.map((o) => (
         <li class="rounded-lg border border-white/15 p-6">
+          {o.image && o.link && (
+            <a
+              href={o.link.href}
+              class="mb-5 block overflow-hidden rounded-md"
+              {...(o.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <Image src={o.image.src} alt={o.image.alt} widths={[480, 960]} sizes="(min-width: 768px) 480px, 100vw" class="h-auto w-full" />
+              <span class="sr-only">
+                Abrir {o.name}{o.link.external && ' (se abre en una pestaña nueva)'}
+              </span>
+            </a>
+          )}
           <h3 class="text-xl font-bold">{o.name}</h3>
           <p class="mt-2 text-muted-dark">{o.tagline}</p>
-          {!o.description && <TodoContent tone="dark">descripción breve del proyecto {o.name}.</TodoContent>}
           {o.link && (
             <a
               href={o.link.href}

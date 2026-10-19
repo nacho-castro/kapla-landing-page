@@ -1,4 +1,7 @@
 // Editable site content. Components read from here; change text and links in this file.
+import type { ImageMetadata } from 'astro';
+import miclaseImage from '../assets/miclase-mockup.png';
+import jorgelinaImage from '../assets/jorgelinapmp-web.png';
 
 export interface NavLink {
   label: string;
@@ -147,6 +150,8 @@ export interface WorkCase {
   description?: string;
   features: string[];
   link?: CtaLink;
+  /** Screenshot shown in the work section; clicking it opens `link`. */
+  image?: { src: ImageMetadata; alt: string };
 }
 
 export const featuredCase: WorkCase = {
@@ -162,6 +167,10 @@ export const featuredCase: WorkCase = {
     'Funciona desde el celular, con acceso por Google o email',
   ],
   link: { label: 'Ver sitio', href: 'https://miclase.net.ar/', external: true },
+  image: {
+    src: miclaseImage,
+    alt: 'Pantalla de inicio de MiClase en el celular: clases del día, cobrado del mes y deudas.',
+  },
 };
 
 export const otherCases: WorkCase[] = [
@@ -170,6 +179,10 @@ export const otherCases: WorkCase[] = [
     tagline: 'Sitio web de artista.',
     features: [],
     link: { label: 'Ver sitio', href: 'https://jorgelinapmp.com.ar/', external: true },
+    image: {
+      src: jorgelinaImage,
+      alt: 'Página de inicio del sitio de Jorgelina PMP: menú, obras en el banner y retrato de la artista.',
+    },
   },
 ];
 
