@@ -56,31 +56,33 @@ const c = featuredCase;
   </article>
 
   {otherCases.length > 0 && (
-    <ul class="mt-14 grid gap-6 md:grid-cols-2">
+    <ul class="mt-14 space-y-6">
       {otherCases.map((o) => (
-        <li class="rounded-lg border border-white/15 p-6">
+        <li class="grid gap-6 rounded-lg border border-white/15 p-6 md:grid-cols-2 md:items-center">
+          <div>
+            <h3 class="text-xl font-bold">{o.name}</h3>
+            <p class="mt-2 text-muted-dark">{o.tagline}</p>
+            {o.link && (
+              <a
+                href={o.link.href}
+                class="mt-4 inline-block font-semibold text-brand-light underline underline-offset-4"
+                {...(o.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {o.link.label}
+                {o.link.external && <span class="sr-only"> (se abre en una pestaña nueva)</span>}
+              </a>
+            )}
+          </div>
           {o.image && o.link && (
             <a
               href={o.link.href}
-              class="mb-5 block overflow-hidden rounded-md"
+              class="block overflow-hidden rounded-md"
               {...(o.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
-              <Image src={o.image.src} alt={o.image.alt} widths={[480, 960]} sizes="(min-width: 768px) 480px, 100vw" class="h-auto w-full" />
+              <Image src={o.image.src} alt={o.image.alt} widths={[480, 960]} sizes="(min-width: 1024px) 480px, (min-width: 768px) 40vw, 100vw" class="h-auto w-full" />
               <span class="sr-only">
                 Abrir {o.name}{o.link.external && ' (se abre en una pestaña nueva)'}
               </span>
-            </a>
-          )}
-          <h3 class="text-xl font-bold">{o.name}</h3>
-          <p class="mt-2 text-muted-dark">{o.tagline}</p>
-          {o.link && (
-            <a
-              href={o.link.href}
-              class="mt-4 inline-block font-semibold text-brand-light underline underline-offset-4"
-              {...(o.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {o.link.label}
-              {o.link.external && <span class="sr-only"> (se abre en una pestaña nueva)</span>}
             </a>
           )}
         </li>
