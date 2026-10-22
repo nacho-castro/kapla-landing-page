@@ -72,9 +72,9 @@ export const sections = {
   hero: {
     id: 'inicio',
     title: 'Automatizamos tus sistemas.',
-    /** Fixed part of the title and the words that rotate after it (the first one must match `title`). */
-    titleLead: 'Automatizamos tus',
-    titleWords: ['sistemas', 'redes', 'consultas', 'procesos', 'tareas'],
+    /** Fixed first line of the title and the phrases that rotate on the second line (the first one must match `title`). */
+    titleLead: 'Automatizamos',
+    titleWords: ['tus sistemas', 'tus redes', 'tus consultas', 'tus procesos', 'tus tareas'],
     subtitle: 'Tu negocio, completamente ordenado.',
     // TODO-CONTENIDO: owner approval of this proposed supporting line.
     support: 'Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas.',

@@ -20,7 +20,7 @@ const { primary, secondary } = heroCtas;
     {/* Screen readers and no-motion visitors get the plain title; the rotating words are decoration. */}
     <span class="sr-only">{title}</span>
     <span aria-hidden="true">
-      {titleLead}{" "}
+      <span class="block">{titleLead}</span>
       <span class="rotator">
         {words.map((word) => <span class="rotator-word">{word}.</span>)}
       </span>
@@ -34,7 +34,7 @@ const { primary, secondary } = heroCtas;
     <a
       href={primary.href}
       {...externalAttrs(primary)}
-      class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-violet px-6 font-semibold text-white hover:bg-violet-deep"
+      class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 bg-violet px-6 font-semibold text-white hover:bg-violet-deep"
     >
       <Icon name="whatsapp" class="size-5" />
       {primary.label}
