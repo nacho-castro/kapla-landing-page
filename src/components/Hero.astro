@@ -19,7 +19,7 @@ const [subtitleBefore = '', subtitleAfter = ''] = subtitle.split(highlight);
     {/* Screen readers and no-motion visitors get the plain title; the rotating words are decoration. */}
     <span class="sr-only">{title}</span>
     <span aria-hidden="true">
-      <span class="block">{titleLead}</span>
+      <span class="block text-sun">{titleLead}</span>
       <span class="rotator">
         {words.map((word) => <span class="rotator-word">{word}.</span>)}
       </span>
