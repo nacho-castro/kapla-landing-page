@@ -60,7 +60,7 @@ Menos secciones y más claras. No agregar nada fuera del alcance.
 - Todo dato pendiente se marca en el código con el comentario `TODO-CONTENIDO:` y un
   texto de ejemplo visible solo en desarrollo. Al final, listar todos los pendientes.
 - Estados honestos: Un proyecto se muestra como **"En desarrollo"** o **"Próximamente"** hasta que
-  esté en producción con usuarios reales. MiClase: el dueño confirmó usuarios reales, por lo que se muestra "En producción".
+  esté en producción con usuarios reales. MiClase: el dueño pidió no mostrar estado.
 - Los testimonios solo se publican si son reales y hay permiso de la persona.
 
 ## Diseño visual

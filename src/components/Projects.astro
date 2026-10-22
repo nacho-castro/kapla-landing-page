@@ -31,8 +31,17 @@ const views = ['desktop', 'mobile'] as const;
               tabindex={i === 0 ? 0 : -1}
               class="flex min-h-14 shrink-0 flex-col items-start justify-center rounded-2xl border border-white/15 px-5 py-2 text-left text-soft transition-colors hover:border-white/40 aria-selected:border-soft aria-selected:bg-soft aria-selected:text-ink"
             >
-              <span class="font-semibold">{p.name}</span>
-              <span class="text-sm opacity-80">{p.sector}</span>
+              <span class="flex items-center gap-3">
+                {p.logo && (
+                  <span class="inline-flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-navy p-0.5 ring-1 ring-white/15">
+                    <Image src={p.logo} alt="" widths={[48, 96]} sizes="36px" class="size-full object-contain" />
+                  </span>
+                )}
+                <span class="flex flex-col">
+                  <span class="font-semibold">{p.name}</span>
+                  <span class="text-sm opacity-80">{p.sector}</span>
+                </span>
+              </span>
             </button>
           ))
         }
@@ -54,6 +63,11 @@ const views = ['desktop', 'mobile'] as const;
             >
               <div>
                 <div class="flex flex-wrap items-center gap-3">
+                  {p.logo && (
+                    <span class="inline-flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-navy p-1 ring-1 ring-white/15">
+                      <Image src={p.logo} alt="" widths={[48, 96]} sizes="40px" class="size-full object-contain" />
+                    </span>
+                  )}
                   <h3 class="text-2xl font-semibold">{p.name}</h3>
                   {p.status && (
                     <span class="rounded-full border border-accent-light px-3 py-0.5 text-xs font-semibold text-accent-light">

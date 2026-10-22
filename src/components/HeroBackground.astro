@@ -1,43 +1,146 @@
 ---
 import Glow from './Glow.astro';
-// Decorative hero background: moving glows, a faded dot grid and a small "automation network" whose
-// links flow and whose hub pulses. Static when the visitor prefers reduced motion.
+
+// Decorative hero background: moving glows, a faded dot grid and a small "automation network".
+// The network flies into place on load and its nodes are pulled toward the pointer (see the script).
+// Static when the visitor prefers reduced motion.
+const nodes = [
+  { x: 70, y: 70 },
+  { x: 210, y: 40 },
+  { x: 350, y: 100 },
+  { x: 110, y: 200 },
+  { x: 250, y: 220, hub: true },
+  { x: 410, y: 240 },
+  { x: 190, y: 340 },
+  { x: 330, y: 360 },
+  { x: 60, y: 320 },
+];
+const edges: [number, number][] = [
+  [0, 1], [1, 2], [0, 3], [1, 4], [2, 4], [2, 5], [3, 4],
+  [4, 5], [3, 8], [4, 6], [6, 7], [5, 7], [8, 6], [3, 6],
+];
+// Full class strings so Tailwind can see them.
+const delays = ['', '[animation-delay:1s]', '[animation-delay:2s]', '[animation-delay:3s]', '', '[animation-delay:1.5s]', '[animation-delay:2.5s]', '[animation-delay:0.5s]', '[animation-delay:3.5s]'];
+const line = (a: number, b: number) => {
+  const p = nodes[a];
+  const q = nodes[b];
+  return p && q ? `M${p.x} ${p.y}L${q.x} ${q.y}` : '';
+};
 ---
 
 <Glow variant="a" />
 <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
   <div class="dot-grid absolute inset-0"></div>
   <div class="absolute right-[-9rem] bottom-0 w-[30rem] opacity-40 sm:right-[-4rem] lg:top-1/2 lg:right-0 lg:bottom-auto lg:w-[40rem] lg:-translate-y-1/2 lg:opacity-100">
-    <svg class="net-float h-auto w-full" viewBox="0 0 480 420" fill="none" focusable="false">
+    <svg data-graph class="net-float h-auto w-full" viewBox="0 0 480 420" fill="none" focusable="false">
       <g>
-        <path class="net-line" d="M70 70L210 40" />
-        <path class="net-line net-line-r" d="M210 40L350 100" />
-        <path class="net-line" d="M70 70L110 200" />
-        <path class="net-line net-line-r" d="M210 40L250 220" />
-        <path class="net-line" d="M350 100L250 220" />
-        <path class="net-line net-line-r" d="M350 100L410 240" />
-        <path class="net-line" d="M110 200L250 220" />
-        <path class="net-line net-line-r" d="M250 220L410 240" />
-        <path class="net-line" d="M110 200L60 320" />
-        <path class="net-line net-line-r" d="M250 220L190 340" />
-        <path class="net-line" d="M190 340L330 360" />
-        <path class="net-line net-line-r" d="M410 240L330 360" />
-        <path class="net-line" d="M60 320L190 340" />
-        <path class="net-line net-line-r" d="M110 200L190 340" />
+        {edges.map(([a, b], i) => <path data-edge={`${a}-${b}`} class:list={['net-line', i % 2 === 1 && 'net-line-r']} d={line(a, b)} />)}
       </g>
       <g>
-        <circle class="net-node" cx="70" cy="70" r="8" />
-        <circle class="net-node [animation-delay:1s]" cx="210" cy="40" r="8" />
-        <circle class="net-node [animation-delay:2s]" cx="350" cy="100" r="8" />
-        <circle class="net-node [animation-delay:3s]" cx="110" cy="200" r="8" />
-        <circle class="net-node [animation-delay:1.5s]" cx="410" cy="240" r="8" />
-        <circle class="net-node [animation-delay:2.5s]" cx="190" cy="340" r="8" />
-        <circle class="net-node [animation-delay:0.5s]" cx="330" cy="360" r="8" />
-        <circle class="net-node [animation-delay:3.5s]" cx="60" cy="320" r="8" />
-        <circle class="net-pulse" cx="250" cy="220" r="16" />
-        <circle class="net-pulse [animation-delay:1.7s]" cx="250" cy="220" r="16" />
-        <circle class="net-hub" cx="250" cy="220" r="16" />
+        {
+          nodes.map((n, i) => (
+            <g data-node={`${n.x},${n.y}`} transform={`translate(${n.x} ${n.y})`}>
+              {n.hub ? (
+                <>
+                  <circle class="net-pulse" r="16" />
+                  <circle class="net-pulse [animation-delay:1.7s]" r="16" />
+                  <circle class="net-hub" r="16" />
+                </>
+              ) : (
+                <circle class:list={['net-node', delays[i]]} r="8" />
+              )}
+            </g>
+          ))
+        }
       </g>
     </svg>
   </div>
 </div>
+
+<script>
+  const svg = document.querySelector<SVGSVGElement>('[data-graph]');
+  const hero = svg?.closest('section');
+  if (svg && hero && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    type Node = { el: SVGGElement; hx: number; hy: number; x: number; y: number; vx: number; vy: number };
+    const nodes: Node[] = Array.from(svg.querySelectorAll<SVGGElement>('[data-node]')).map((el) => {
+      const [hx = 0, hy = 0] = (el.dataset['node'] ?? '').split(',').map(Number);
+      // Start scattered so the network "assembles" itself on load.
+      return { el, hx, hy, x: hx + (Math.random() - 0.5) * 320, y: hy + (Math.random() - 0.5) * 320, vx: 0, vy: 0 };
+    });
+    const edges = Array.from(svg.querySelectorAll<SVGPathElement>('[data-edge]')).map((el) => {
+      const [a = 0, b = 0] = (el.dataset['edge'] ?? '').split('-').map(Number);
+      return { el, a, b };
+    });
+
+    const RADIUS = 160;
+    const MAX_OFFSET = 70;
+    let pointer: { x: number; y: number } | null = null;
+    let frame = 0;
+
+    const draw = () => {
+      for (const n of nodes) n.el.setAttribute('transform', `translate(${n.x.toFixed(1)} ${n.y.toFixed(1)})`);
+      for (const e of edges) {
+        const p = nodes[e.a];
+        const q = nodes[e.b];
+        if (p && q) e.el.setAttribute('d', `M${p.x.toFixed(1)} ${p.y.toFixed(1)}L${q.x.toFixed(1)} ${q.y.toFixed(1)}`);
+      }
+    };
+
+    const tick = () => {
+      let moving = false;
+      for (const n of nodes) {
+        // Spring back to the home position...
+        let fx = (n.hx - n.x) * 0.04;
+        let fy = (n.hy - n.y) * 0.04;
+        // ...and get pulled toward the pointer when it is close.
+        if (pointer) {
+          const dx = pointer.x - n.x;
+          const dy = pointer.y - n.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < RADIUS && dist > 0.001) {
+            const pull = (1 - dist / RADIUS) * 0.09;
+            fx += dx * pull;
+            fy += dy * pull;
+          }
+        }
+        n.vx = (n.vx + fx) * 0.82;
+        n.vy = (n.vy + fy) * 0.82;
+        n.x += n.vx;
+        n.y += n.vy;
+        const ox = n.x - n.hx;
+        const oy = n.y - n.hy;
+        const off = Math.hypot(ox, oy);
+        if (off > MAX_OFFSET && pointer) {
+          n.x = n.hx + (ox / off) * MAX_OFFSET;
+          n.y = n.hy + (oy / off) * MAX_OFFSET;
+        }
+        if (Math.abs(n.vx) > 0.02 || Math.abs(n.vy) > 0.02 || off > 0.1) moving = true;
+      }
+      draw();
+      frame = moving || pointer ? requestAnimationFrame(tick) : 0;
+    };
+    const start = () => {
+      if (!frame) frame = requestAnimationFrame(tick);
+    };
+
+    const track = (event: PointerEvent) => {
+      const rect = svg.getBoundingClientRect();
+      pointer = {
+        x: ((event.clientX - rect.left) / rect.width) * 480,
+        y: ((event.clientY - rect.top) / rect.height) * 420,
+      };
+      start();
+    };
+    hero.addEventListener('pointermove', track);
+    hero.addEventListener('pointerdown', track);
+    for (const type of ['pointerleave', 'pointerup', 'pointercancel']) {
+      hero.addEventListener(type, () => {
+        pointer = null;
+        start();
+      });
+    }
+
+    draw();
+    start();
+  }
+</script>

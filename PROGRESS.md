@@ -221,3 +221,9 @@
 - Fondos con movimiento (solo CSS, sin librerías): hero con luces que se desplazan lento, grilla de puntos y una red de "automatización" (líneas que fluyen y nodo central que pulsa); luces suaves en Proyectos, Proceso y Contacto. Animación de entrada del hero y aparición suave al hacer scroll (JS mínimo con IntersectionObserver). Tarjetas de Servicios se elevan al pasar el mouse. Todo se desactiva con `prefers-reduced-motion`.
 - Verificado: `astro check` 0 errores, build OK, capturas en 360 y 1280 px sin scroll horizontal. Lighthouse móvil 100/100/100/100, LCP 1,6 s, CLS 0, peso 161 KiB.
 - Quitar de TODO-CONTENIDO: capturas de proyectos (ya cargadas; si querés páginas completas, reemplazarlas).
+
+## Logos de proyectos y grafo interactivo (2026-10-22)
+- MiClase: se quitó la etiqueta de estado (ya no muestra "En producción"). El campo `status` sigue disponible en `site.ts` por si se quiere marcar otro proyecto.
+- Logos de proyectos junto al nombre (pestaña y título del panel), dentro de un cuadro oscuro para que funcione el logo blanco de Jorgelina. Se usan `miclase-logo-512.png` y `logo_jpmp_blanco.png` (`logo` en `site.ts`). `miclase-logo-120.png` queda sin usar.
+- Grafo del hero: los nodos "vuelan" a su lugar al cargar y son atraídos por el mouse (o el dedo al tocar); las líneas los siguen y vuelven con efecto resorte. Un solo `requestAnimationFrame` que se detiene cuando todo está quieto. Sin movimiento con `prefers-reduced-motion`.
+- Verificado: `astro check` 0 errores, build OK, Lighthouse móvil 100/100/100/100 (LCP 1,7 s, CLS 0). Prueba del grafo con Edge y movimiento emulado: los nodos se desplazan hacia el puntero y vuelven.

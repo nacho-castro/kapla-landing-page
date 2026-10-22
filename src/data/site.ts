@@ -1,5 +1,7 @@
 // Editable site content. Components read from here; change text and links in this file.
 import type { ImageMetadata } from 'astro';
+import miclaseLogo from '../assets/projects/miclase-logo-512.png';
+import jorgelinaLogo from '../assets/projects/logo_jpmp_blanco.png';
 
 export interface NavLink {
   label: string;
@@ -184,8 +186,10 @@ export interface Project {
   name: string;
   /** Industry or kind of project, shown in the tab. */
   sector: string;
-  /** Honest status label, e.g. 'En producción'. */
+  /** Honest status label (e.g. 'En desarrollo'). Leave out when there is nothing to flag. */
   status?: string;
+  /** Small logo shown next to the name (shown on a dark chip, so white logos work). */
+  logo?: ImageMetadata;
   description: string;
   features: string[];
   url: string;
@@ -233,7 +237,7 @@ export const projects: Project[] = [
     id: 'miclase',
     name: 'MiClase',
     sector: 'Gestor para profesores particulares',
-    status: 'En producción',
+    logo: miclaseLogo,
     description:
       'Alumnos, calendario, asistencia y cobros en un solo lugar. Para profesores de idiomas, música, arte, matemática y más.',
     features: [
@@ -251,6 +255,7 @@ export const projects: Project[] = [
     id: 'jorgelinapmp',
     name: 'Jorgelina PMP',
     sector: 'Sitio web de artista',
+    logo: jorgelinaLogo,
     description: 'Sitio web para mostrar obras y presentar a la artista.',
     features: [],
     url: 'https://jorgelinapmp.com.ar/',
