@@ -240,3 +240,9 @@
 - Proyectos: contador "Proyecto 1 de 2" con flechas anterior/siguiente (dan la vuelta), swipe horizontal en pantallas táctiles y transición de deslizamiento entre proyectos. Se muestran solo si hay más de un proyecto y con JS.
 - Para videos en el futuro: cada captura vive dentro de un marco (navegador o teléfono); reemplazar la imagen por un `<video muted loop playsinline>` local es compatible con la CSP actual (`default-src 'self'`). Cuando estén listos hay que sumar un campo `video` en `site.ts` y mantener el peso bajo.
 - Verificado: `astro check` 0 errores, build OK. Lighthouse móvil: ver mensaje final.
+
+## Logo real en navbar y footer, hero centrado (2026-10-22)
+- `Logo.astro` ahora usa el logo provisto (versión blanca, recortada: `src/assets/kapla-logo-white.png`, generado desde `kapla-dark-bg.png`). Navbar: alto 36 px (antes texto de 20 px); footer: 40 px. Se dimensiona con una clase de alto.
+- Hero centrado horizontal y verticalmente (alto mínimo de pantalla). El grafo pasa a ser fondo centrado, con el nodo central grande abajo para que no tape el texto.
+- Corregido un error mío: al cargar, la página saltaba hasta Proyectos (`scrollIntoView` de la pestaña activa). Ahora solo se desplaza la fila de pestañas, y no al iniciar.
+- Quitado de TODO-CONTENIDO: logo definitivo. Falta aún el favicon con el logo completo si se prefiere (hoy usa el isotipo).

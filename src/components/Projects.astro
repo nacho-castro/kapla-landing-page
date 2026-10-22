@@ -227,6 +227,7 @@ const views = ['desktop', 'mobile'] as const;
 
     const counter = root.querySelector<HTMLElement>('[data-counter]');
     let current = 0;
+    let started = false;
     const select = (index: number, focus = false) => {
       const direction = index >= current ? 'next' : 'prev';
       current = index;
@@ -239,10 +240,13 @@ const views = ['desktop', 'mobile'] as const;
         if (i === index) panel.dataset['enter'] = direction;
       });
       if (counter) counter.textContent = String(index + 1);
-      tabs[index]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      // Keep the selected tab visible inside its row (horizontal only: never move the page).
+      const tab = tabs[index];
+      if (tab && tab.parentElement && started) tab.parentElement.scrollTo({ left: tab.offsetLeft - 16, behavior: 'smooth' });
       if (focus) tabs[index]?.focus();
     };
     select(0);
+    started = true;
 
     // Arrows (wrap around) and swipe on touch screens.
     const step = (delta: number) => select((current + delta + tabs.length) % tabs.length);

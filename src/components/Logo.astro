@@ -1,10 +1,20 @@
 ---
-// TODO-CONTENIDO: temporary text logotype. Replace this component's markup with the final logo.
+// KAPLA logo (white version, for the dark navbar and footer). Size it with a height class, e.g. "h-8".
+import { Image } from 'astro:assets';
+import logo from '../assets/kapla-logo-white.png';
+
 interface Props {
   class?: string;
 }
 
-const { class: className = '' } = Astro.props;
+const { class: className = 'h-8' } = Astro.props;
 ---
 
-<span class:list={['text-xl font-semibold tracking-[0.18em]', className]}>KAPLA</span>
+<Image
+  src={logo}
+  alt=""
+  widths={[160, 320, 480]}
+  sizes="160px"
+  loading="eager"
+  class:list={['w-auto', className]}
+/>

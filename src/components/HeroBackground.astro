@@ -9,10 +9,10 @@ const nodes = [
   { x: 210, y: 40 },
   { x: 350, y: 100 },
   { x: 110, y: 200 },
-  { x: 250, y: 220, hub: true },
+  { x: 330, y: 360, hub: true },
   { x: 410, y: 240 },
   { x: 190, y: 340 },
-  { x: 330, y: 360 },
+  { x: 250, y: 220 },
   { x: 60, y: 320 },
 ];
 const edges: [number, number][] = [
@@ -31,7 +31,7 @@ const line = (a: number, b: number) => {
 <Glow variant="a" />
 <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
   <div class="dot-grid absolute inset-0"></div>
-  <div class="absolute right-[-9rem] bottom-0 w-[30rem] opacity-40 sm:right-[-4rem] lg:top-1/2 lg:right-0 lg:bottom-auto lg:w-[40rem] lg:-translate-y-1/2 lg:opacity-100">
+  <div class="absolute top-1/2 left-1/2 w-[34rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-45 sm:w-[46rem] lg:w-[62rem]">
     <svg data-graph class="net-float h-auto w-full" viewBox="0 0 480 420" fill="none" focusable="false">
       <g>
         {edges.map(([a, b], i) => <path data-edge={`${a}-${b}`} class:list={['net-line', i % 2 === 1 && 'net-line-r']} d={line(a, b)} />)}
