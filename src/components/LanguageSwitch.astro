@@ -8,9 +8,11 @@ interface Props {
   alternates: Record<Lang, string>;
   label: string;
   class?: string;
+  /** Breakpoint from which the short code (ES/EN) is shown next to the flag. */
+  codeFrom?: 'sm' | 'xl';
 }
 
-const { lang, alternates, label, class: className = '' } = Astro.props;
+const { lang, alternates, label, class: className = '', codeFrom = 'sm' } = Astro.props;
 const order: Lang[] = ['es', 'en'];
 ---
 
@@ -26,7 +28,7 @@ const order: Lang[] = ['es', 'en'];
         class="inline-flex min-h-10 items-center gap-1.5 rounded-full px-2.5 text-xs font-semibold text-soft transition-colors hover:text-white aria-[current=true]:bg-soft aria-[current=true]:text-ink motion-reduce:transition-none"
       >
         <Flag code={code} class="h-3.5 w-5 shrink-0" />
-        <span class="hidden sm:inline">{languages[code].code}</span>
+        <span class:list={['hidden', codeFrom === 'sm' ? 'sm:inline' : 'xl:inline']}>{languages[code].code}</span>
         <span class="sr-only">{languages[code].name}</span>
       </a>
     ))
