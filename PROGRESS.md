@@ -269,3 +269,4 @@
 - Los textos que solo se ven en desarrollo (marcas de pendiente) siguen en español.
 - Verificado: `astro check` 0 errores, build OK (4 páginas), Lighthouse móvil 100/100/100/100 en las 4 páginas, capturas en 360 y 1280 px.
 - Frase rotativa del hero ("tus sistemas", "tus redes"…) en `lilac #AF70EB` (token nuevo; brillo violeta detrás). Contraste sobre `ink` 5,9:1 y sobre `navy` 5,1:1.
+- Todos los botones de WhatsApp (navbar, hero, Servicios, Por qué, Contacto) en `violet` con borde fino claro; solo el botón flotante conserva el verde de WhatsApp. El footer gana espacio inferior para que el botón flotante no tape el © ni el aviso de privacidad.
