@@ -71,7 +71,7 @@ Estilo: **minimalista, ordenado y profesional.**
   - `soft #DDE1F5` (lavanda claro: fondos claros y texto sobre oscuro)
   - `accent #2A3FFF` (azul vivo, sobre fondo claro) y `accent-light #8F9BFF` (texto y enlaces sobre fondo oscuro)
   - `muted` y `muted-dark`: grises azulados para texto secundario
-  - `whatsapp`: verde de WhatsApp, **solo** en los botones de WhatsApp (con texto `ink`, no blanco)
+  - `whatsapp`: verde de WhatsApp, **solo** en los botones de WhatsApp (con texto `ink`, no blanco). Excepción pedida por el dueño: los botones de auditoría del navbar y del hero van en `violet #9D00FF` (hover `violet-deep #7A00C8`) con texto blanco.
 - **Contraste**: verificar WCAG AA en todos los pares texto/fondo y documentarlos en `PROGRESS.md`. `brand` no se usa como texto sobre `ink` (1,85:1).
 - Un solo botón primario por bloque. Sin gradientes llamativos (se permite un degradé sutil en header y hero), sombras fuertes ni animaciones
   que distraigan. Respetar `prefers-reduced-motion`.

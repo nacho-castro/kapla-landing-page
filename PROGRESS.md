@@ -252,3 +252,6 @@
 - Textos y tarjetas adaptados (`muted-dark`, `accent-light`, tarjetas translúcidas con borde fino). Contraste dentro de la tabla ya documentada.
 - `/privacidad` conserva su fondo claro (es una página de lectura aparte).
 - Lighthouse móvil 100/100/100/100.
+
+## Botones de auditoría en violeta (2026-10-22)
+- "Auditoría gratis" (navbar, escritorio y menú móvil) y "Quiero una auditoría" (hero) pasan a `violet #9D00FF`, hover `violet-deep #7A00C8`, texto blanco. Contraste: blanco sobre `violet` 5,4:1; sobre `violet-deep` 7,9:1. Los demás botones de WhatsApp (Servicios, Por qué, Contacto, flotante) siguen en verde.

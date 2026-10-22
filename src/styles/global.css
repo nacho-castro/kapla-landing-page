@@ -13,6 +13,7 @@
  *   soft        on ink      15.1:1   on navy     13.1:1
  *   accent-light on ink      7.8:1   on navy      6.7:1
  *   muted-dark  on ink       9.2:1   on navy      8.0:1
+ *   white       on violet    5.4:1   white on violet-deep 7.9:1 (audit buttons in navbar and hero)
  *   ink         on whatsapp  9.9:1   (white on whatsapp is 2.0:1 -> never)
  *   brand       on ink       1.9:1   -> never use brand as text on dark
  */
@@ -24,6 +25,8 @@
   --color-brand: #123499;
   --color-accent: #2a3fff;
   --color-accent-light: #8f9bff;
+  --color-violet: #9d00ff;
+  --color-violet-deep: #7a00c8;
   --color-soft: #dde1f5;
   --color-white: #ffffff;
   --color-surface: #f2f4fc;
