@@ -1,4 +1,5 @@
 ---
+import Glow from './Glow.astro';
 import Icon from './Icon.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
@@ -10,7 +11,8 @@ const cta = { ...heroCtas.primary, label: contact.whatsappLabel };
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`} class="bg-linear-to-b from-navy to-ink">
-  <div class="max-w-2xl">
+  <Glow slot="background" variant="b" />
+  <div data-reveal class="max-w-2xl">
     <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-balance md:text-5xl">{title}</h2>
     <p class="mt-4 text-lg text-muted-dark">{contact.intro}</p>
     <a

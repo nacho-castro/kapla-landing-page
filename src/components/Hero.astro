@@ -1,4 +1,5 @@
 ---
+import HeroBackground from './HeroBackground.astro';
 import Icon from './Icon.astro';
 import Section from './Section.astro';
 import { heroCtas, sections } from '../data/site';
@@ -9,12 +10,13 @@ const { primary, secondary } = heroCtas;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`} class="bg-linear-to-b from-ink to-navy pt-36! pb-20! md:pt-44! md:pb-28!">
-  <h1 id={`${id}-title`} class="max-w-4xl text-4xl font-semibold tracking-tight text-balance text-white md:text-6xl lg:text-7xl">
+  <HeroBackground slot="background" />
+  <h1 id={`${id}-title`} class="hero-in max-w-4xl text-4xl font-semibold tracking-tight text-balance text-white md:text-6xl lg:text-7xl">
     {title}
   </h1>
-  <p class="mt-4 max-w-2xl text-2xl font-medium text-accent-light md:text-3xl">{subtitle}</p>
-  <p class="mt-6 max-w-xl text-lg text-muted-dark">{support}</p>
-  <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+  <p class="hero-in hero-in-2 mt-4 max-w-2xl text-2xl font-medium text-accent-light md:text-3xl">{subtitle}</p>
+  <p class="hero-in hero-in-3 mt-6 max-w-xl text-lg text-muted-dark">{support}</p>
+  <div class="hero-in hero-in-4 mt-10 flex flex-col gap-3 sm:flex-row">
     <a
       href={primary.href}
       {...externalAttrs(primary)}

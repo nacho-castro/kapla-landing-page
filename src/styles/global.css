@@ -132,3 +132,161 @@
     --focus-ring: var(--color-accent-light);
   }
 }
+
+/* Project screenshots: all screens share one grid cell; only the active one is visible. */
+.no-js [data-chips] {
+  display: none;
+}
+[data-shot] {
+  transition: opacity 400ms ease;
+}
+[data-shot]:not([data-active]) {
+  opacity: 0;
+  visibility: hidden;
+}
+.no-js [data-shot]:not([data-active]) {
+  display: none;
+}
+
+/* Background decoration for dark sections: soft glows, a dot grid and an "automation network". */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+.blob-accent {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-accent) 42%, transparent), transparent);
+}
+.blob-deep {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-blue-deep) 90%, transparent), transparent);
+}
+.blob-light {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-accent-light) 22%, transparent), transparent);
+}
+.dot-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-soft) 18%, transparent) 1px, transparent 1.3px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 75% 65% at 65% 45%, #000, transparent 78%);
+}
+.net-line {
+  stroke: var(--color-accent-light);
+  stroke-opacity: 0.4;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 2 8;
+}
+.net-node {
+  fill: var(--color-navy);
+  stroke: var(--color-accent-light);
+  stroke-width: 1.5;
+}
+.net-hub {
+  fill: var(--color-accent);
+  stroke: var(--color-soft);
+  stroke-opacity: 0.6;
+  stroke-width: 1.5;
+}
+.net-pulse {
+  fill: none;
+  stroke: var(--color-accent-light);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+
+@keyframes blob-a {
+  to {
+    transform: translate3d(5rem, 3rem, 0) scale(1.15);
+  }
+}
+@keyframes blob-b {
+  to {
+    transform: translate3d(-4rem, -4rem, 0) scale(0.9);
+  }
+}
+@keyframes net-flow {
+  to {
+    stroke-dashoffset: -80;
+  }
+}
+@keyframes net-pulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+@keyframes net-float {
+  50% {
+    transform: translateY(-0.75rem);
+  }
+}
+@keyframes twinkle {
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .blob-a {
+    animation: blob-a 22s ease-in-out infinite alternate;
+  }
+  .blob-b {
+    animation: blob-b 28s ease-in-out infinite alternate;
+  }
+  .net-line {
+    animation: net-flow 6s linear infinite;
+  }
+  .net-line-r {
+    animation-direction: reverse;
+    animation-duration: 8s;
+  }
+  .net-pulse {
+    animation: net-pulse 3.4s ease-out infinite;
+  }
+  .net-float {
+    animation: net-float 9s ease-in-out infinite;
+  }
+  .net-node {
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  .hero-in {
+    animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-in-2 {
+    animation-delay: 120ms;
+  }
+  .hero-in-3 {
+    animation-delay: 240ms;
+  }
+  .hero-in-4 {
+    animation-delay: 360ms;
+  }
+}
+
+/* Scroll reveal: content fades up once when it enters the viewport (only with JS and motion allowed). */
+@layer components {
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translateY(1.5rem);
+      transition:
+        opacity 700ms ease,
+        transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .js [data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

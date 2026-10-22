@@ -1,0 +1,25 @@
+---
+// Decorative moving glows behind a dark section. Purely visual, hidden from assistive tech.
+interface Props {
+  variant?: 'a' | 'b';
+}
+
+const { variant = 'a' } = Astro.props;
+---
+
+<div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+  {
+    variant === 'a' ? (
+      <>
+        <span class="blob blob-accent blob-a -top-40 -left-32 size-[34rem] md:size-[44rem]" />
+        <span class="blob blob-deep blob-b -right-40 -bottom-48 size-[38rem] md:size-[52rem]" />
+        <span class="blob blob-light blob-b top-1/3 left-1/2 size-[22rem]" />
+      </>
+    ) : (
+      <>
+        <span class="blob blob-deep blob-a -top-32 -right-32 size-[34rem] md:size-[46rem]" />
+        <span class="blob blob-accent blob-b -bottom-48 -left-40 size-[30rem] opacity-70 md:size-[40rem]" />
+      </>
+    )
+  }
+</div>

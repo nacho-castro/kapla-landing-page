@@ -15,11 +15,12 @@ const { id, tone, labelledBy, class: className = '' } = Astro.props;
   data-tone={tone}
   aria-labelledby={labelledBy}
   class:list={[
-    'py-section',
+    'relative isolate overflow-hidden py-section',
     tone === 'dark' ? 'bg-ink text-white' : tone === 'surface' ? 'bg-surface text-ink' : 'bg-white text-ink',
     className,
   ]}
 >
+  <slot name="background" />
   <div class="mx-auto max-w-content px-gutter">
     <slot />
   </div>

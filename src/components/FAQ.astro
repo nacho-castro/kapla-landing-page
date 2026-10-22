@@ -24,7 +24,7 @@ const structuredData = {
   showFaq && (
     <Section id={id} tone="surface" labelledBy={`${id}-title`}>
       <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
-      <div class="mt-10 max-w-3xl divide-y divide-line border-y border-line">
+      <div data-reveal class="mt-10 max-w-3xl divide-y divide-line border-y border-line">
         {items.map((item) => (
           <details class="group py-1">
             <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 text-lg font-semibold marker:content-none [&::-webkit-details-marker]:hidden">

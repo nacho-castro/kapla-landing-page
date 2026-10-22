@@ -1,0 +1,43 @@
+---
+import Glow from './Glow.astro';
+// Decorative hero background: moving glows, a faded dot grid and a small "automation network" whose
+// links flow and whose hub pulses. Static when the visitor prefers reduced motion.
+---
+
+<Glow variant="a" />
+<div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+  <div class="dot-grid absolute inset-0"></div>
+  <div class="absolute right-[-9rem] bottom-0 w-[30rem] opacity-40 sm:right-[-4rem] lg:top-1/2 lg:right-0 lg:bottom-auto lg:w-[40rem] lg:-translate-y-1/2 lg:opacity-100">
+    <svg class="net-float h-auto w-full" viewBox="0 0 480 420" fill="none" focusable="false">
+      <g>
+        <path class="net-line" d="M70 70L210 40" />
+        <path class="net-line net-line-r" d="M210 40L350 100" />
+        <path class="net-line" d="M70 70L110 200" />
+        <path class="net-line net-line-r" d="M210 40L250 220" />
+        <path class="net-line" d="M350 100L250 220" />
+        <path class="net-line net-line-r" d="M350 100L410 240" />
+        <path class="net-line" d="M110 200L250 220" />
+        <path class="net-line net-line-r" d="M250 220L410 240" />
+        <path class="net-line" d="M110 200L60 320" />
+        <path class="net-line net-line-r" d="M250 220L190 340" />
+        <path class="net-line" d="M190 340L330 360" />
+        <path class="net-line net-line-r" d="M410 240L330 360" />
+        <path class="net-line" d="M60 320L190 340" />
+        <path class="net-line net-line-r" d="M110 200L190 340" />
+      </g>
+      <g>
+        <circle class="net-node" cx="70" cy="70" r="8" />
+        <circle class="net-node [animation-delay:1s]" cx="210" cy="40" r="8" />
+        <circle class="net-node [animation-delay:2s]" cx="350" cy="100" r="8" />
+        <circle class="net-node [animation-delay:3s]" cx="110" cy="200" r="8" />
+        <circle class="net-node [animation-delay:1.5s]" cx="410" cy="240" r="8" />
+        <circle class="net-node [animation-delay:2.5s]" cx="190" cy="340" r="8" />
+        <circle class="net-node [animation-delay:0.5s]" cx="330" cy="360" r="8" />
+        <circle class="net-node [animation-delay:3.5s]" cx="60" cy="320" r="8" />
+        <circle class="net-pulse" cx="250" cy="220" r="16" />
+        <circle class="net-pulse [animation-delay:1.7s]" cx="250" cy="220" r="16" />
+        <circle class="net-hub" cx="250" cy="220" r="16" />
+      </g>
+    </svg>
+  </div>
+</div>

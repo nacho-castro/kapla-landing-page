@@ -174,6 +174,8 @@ export const processSteps: ProcessStep[] = [
 
 export interface ProjectShot {
   src: ImageMetadata;
+  /** Short name of the screen, shown in the selector (e.g. 'Funciones'). */
+  label: string;
   alt: string;
 }
 
@@ -189,24 +191,43 @@ export interface Project {
   url: string;
   /** Domain shown in the browser frame. */
   domain: string;
-  /** Full-page screenshots. Drop files named `<id>-desktop` / `<id>-mobile` in src/assets/projects/. */
-  desktop?: ProjectShot | undefined;
-  mobile?: ProjectShot | undefined;
+  /** Screenshots by device. Files: src/assets/projects/<id>-desktop-<screen>.jpg and <id>-celular-<screen>.jpg. */
+  desktop: ProjectShot[];
+  mobile: ProjectShot[];
 }
 
 const shotFiles = import.meta.glob<{ default: ImageMetadata }>('../assets/projects/*.{png,jpg,jpeg,webp}', {
   eager: true,
 });
 
-function shot(id: string, kind: 'desktop' | 'mobile', alt: string): ProjectShot | undefined {
-  const pattern = new RegExp(`/${id}-${kind}\\.(png|jpe?g|webp)$`);
-  const match = Object.entries(shotFiles).find(([path]) => pattern.test(path));
-  return match ? { src: match[1].default, alt } : undefined;
+// Screen name (the last part of the file name) -> label, in the order they are shown.
+const screenLabels: Record<string, string> = {
+  hero: 'Inicio',
+  funciones: 'Funciones',
+  'como-funciona': 'Cómo funciona',
+  pantallas: 'Pantallas',
+  obras: 'Obras',
+};
+const screenOrder = Object.keys(screenLabels);
+
+function shots(id: string, name: string, device: 'desktop' | 'celular'): ProjectShot[] {
+  const pattern = new RegExp(`/${id}-${device}-([a-z-]+)\\.(png|jpe?g|webp)$`);
+  const found: { screen: string; shot: ProjectShot }[] = [];
+  for (const [path, file] of Object.entries(shotFiles)) {
+    const screen = pattern.exec(path)?.[1];
+    if (!screen) continue;
+    const label = screenLabels[screen] ?? screen;
+    const where = device === 'desktop' ? 'en computadora' : 'en el celular';
+    found.push({ screen, shot: { src: file.default, label, alt: `${name} ${where}: ${label}.` } });
+  }
+  const rank = (screen: string) => {
+    const index = screenOrder.indexOf(screen);
+    return index === -1 ? screenOrder.length : index;
+  };
+  return found.sort((a, b) => rank(a.screen) - rank(b.screen)).map((item) => item.shot);
 }
 
-// TODO-CONTENIDO: replace the files in src/assets/projects/ with full-page screenshots
-// (desktop, and optionally `-mobile`). The current desktop files are provisional, not full-page.
-// To add a project, add an entry here: no component changes needed.
+// To add a project, add an entry here and drop its screenshots in src/assets/projects/.
 export const projects: Project[] = [
   {
     id: 'miclase',
@@ -223,19 +244,19 @@ export const projects: Project[] = [
     ],
     url: 'https://miclase.net.ar/',
     domain: 'miclase.net.ar',
-    desktop: shot('miclase', 'desktop', 'Página de MiClase: qué es, para quién y cómo se usa.'),
-    mobile: shot('miclase', 'mobile', 'Página de MiClase en el celular.'),
+    desktop: shots('miclase', 'MiClase', 'desktop'),
+    mobile: shots('miclase', 'MiClase', 'celular'),
   },
   {
-    id: 'jorgelina-pmp',
+    id: 'jorgelinapmp',
     name: 'Jorgelina PMP',
     sector: 'Sitio web de artista',
     description: 'Sitio web para mostrar obras y presentar a la artista.',
     features: [],
     url: 'https://jorgelinapmp.com.ar/',
     domain: 'jorgelinapmp.com.ar',
-    desktop: shot('jorgelina-pmp', 'desktop', 'Página de Jorgelina PMP: obras y retrato de la artista.'),
-    mobile: shot('jorgelina-pmp', 'mobile', 'Sitio de Jorgelina PMP en el celular.'),
+    desktop: shots('jorgelinapmp', 'Jorgelina PMP', 'desktop'),
+    mobile: shots('jorgelinapmp', 'Jorgelina PMP', 'celular'),
   },
 ];
 

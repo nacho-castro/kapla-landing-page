@@ -72,5 +72,30 @@ const organization = {
     </main>
     <Footer />
     <WhatsAppButton />
+    <script>
+      // Scroll reveal: elements marked data-reveal fade up once when they enter the viewport.
+      const items = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+      const showAll = () => items.forEach((item) => item.classList.add('is-visible'));
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        showAll();
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
+              const el = entry.target;
+              const siblings = Array.from(el.parentElement?.children ?? []).filter((c) => c.hasAttribute('data-reveal'));
+              // Stagger siblings that appear together; clear the delay afterwards so hover stays instant.
+              el.style.transitionDelay = `${Math.min(siblings.indexOf(el), 5) * 90}ms`;
+              el.classList.add('is-visible');
+              setTimeout(() => (el.style.transitionDelay = ''), 1200);
+              observer.unobserve(el);
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+        items.forEach((item) => observer.observe(item));
+      }
+    </script>
   </body>
 </html>

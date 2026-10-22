@@ -214,3 +214,10 @@
 - Fundador: texto del dueño cargado; la sección y su enlace del menú ya aparecen en producción. La foto se toma de `src/assets/founder.*` (ya cargada).
 - Pendiente: costo y plazo (FAQ). Se quitan de la lista de TODO-CONTENIDO: texto y foto del fundador, respuestas de tecnología y de después de la implementación, y el alcance de Mantenimiento.
 - Aclaración para el dueño: el pedido decía "el mes gratis" pero la respuesta dice "hasta 2 revisiones gratis". Usé la respuesta; si es un mes, hay que cambiar `afterImplementation`.
+
+## Capturas por pantalla, ícono de WhatsApp y fondos animados (2026-10-22)
+- Proyectos: las capturas nuevas son tomas de pantalla por sección (no páginas completas), así que la sección pasa de marco con scroll a **galería con selector**: botones por pantalla (Inicio, Funciones, Cómo funciona, Pantallas, Obras) con fundido entre capturas, marco de navegador para computadora y marco de teléfono para celular, y toggle Computadora/Celular. Archivos: `src/assets/projects/<id>-desktop-<pantalla>.jpg` y `<id>-celular-<pantalla>.jpg`; se detectan solos (`site.ts`). Se borraron las imágenes provisorias. El id de Jorgelina pasa a `jorgelinapmp` (coincide con los archivos). Sin JS se ve la primera captura de cada vista.
+- Ícono de WhatsApp: reemplazado por el logo conocido (burbuja con teléfono), relleno.
+- Fondos con movimiento (solo CSS, sin librerías): hero con luces que se desplazan lento, grilla de puntos y una red de "automatización" (líneas que fluyen y nodo central que pulsa); luces suaves en Proyectos, Proceso y Contacto. Animación de entrada del hero y aparición suave al hacer scroll (JS mínimo con IntersectionObserver). Tarjetas de Servicios se elevan al pasar el mouse. Todo se desactiva con `prefers-reduced-motion`.
+- Verificado: `astro check` 0 errores, build OK, capturas en 360 y 1280 px sin scroll horizontal. Lighthouse móvil 100/100/100/100, LCP 1,6 s, CLS 0, peso 161 KiB.
+- Quitar de TODO-CONTENIDO: capturas de proyectos (ya cargadas; si querés páginas completas, reemplazarlas).

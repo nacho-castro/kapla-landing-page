@@ -9,11 +9,11 @@ const { id, title } = sections.why;
 
 <Section id={id} tone="light" labelledBy={`${id}-title`}>
   <div class="grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16">
-    <div>
+    <div data-reveal>
       <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
       <p class="mt-4 text-xl font-semibold text-accent">{why.lead}</p>
     </div>
-    <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-muted">
+    <div data-reveal class="max-w-2xl space-y-5 text-lg leading-relaxed text-muted">
       {why.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       <a
         href={why.cta.href}

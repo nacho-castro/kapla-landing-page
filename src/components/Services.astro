@@ -10,13 +10,15 @@ const cta = heroCtas.primary;
 ---
 
 <Section id={id} tone="light" labelledBy={`${id}-title`}>
-  <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{title}</h2>
-  <p class="mt-4 max-w-2xl text-lg text-muted">{subtitle}</p>
+  <div data-reveal>
+    <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{title}</h2>
+    <p class="mt-4 max-w-2xl text-lg text-muted">{subtitle}</p>
+  </div>
   <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {
       services.map((service) => (
-        <li class="rounded-2xl bg-surface p-6">
-          <span class="inline-flex size-12 items-center justify-center rounded-xl bg-white text-accent">
+        <li data-reveal class="group rounded-2xl bg-surface p-6 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <span class="inline-flex size-12 items-center justify-center rounded-xl bg-white text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
             <Icon name={service.icon} />
           </span>
           <h3 class="mt-5 text-lg font-semibold text-ink">{service.title}</h3>
@@ -31,7 +33,7 @@ const cta = heroCtas.primary;
       ))
     }
   </ul>
-  <div class="mt-10">
+  <div data-reveal class="mt-10">
     <a
       href={cta.href}
       {...externalAttrs(cta)}

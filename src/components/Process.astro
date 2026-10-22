@@ -1,4 +1,5 @@
 ---
+import Glow from './Glow.astro';
 import Icon from './Icon.astro';
 import Section from './Section.astro';
 import { processSteps, sections } from '../data/site';
@@ -7,14 +8,17 @@ const { id, title } = sections.process;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`}>
-  <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
-  <p class="mt-4 max-w-2xl text-lg text-muted-dark">
-    Cuatro pasos claros, desde el primer diagnóstico hasta el mantenimiento.
-  </p>
+  <Glow slot="background" variant="a" />
+  <div data-reveal>
+    <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+    <p class="mt-4 max-w-2xl text-lg text-muted-dark">
+      Cuatro pasos claros, desde el primer diagnóstico hasta el mantenimiento.
+    </p>
+  </div>
   <ol class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
     {
       processSteps.map((step, index) => (
-        <li class="border-t border-line-dark pt-6">
+        <li data-reveal class="border-t border-line-dark pt-6">
           <div class="flex items-center gap-3 text-accent-light">
             <Icon name={step.icon} />
             <span class="text-sm font-semibold tabular-nums">

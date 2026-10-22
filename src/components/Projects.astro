@@ -1,22 +1,22 @@
 ---
 import { Image } from 'astro:assets';
+import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { projects, sections, type ProjectShot } from '../data/site';
+import { projects, sections } from '../data/site';
 
 const { id, title, subtitle } = sections.projects;
-
-const widths = [480, 768, 1152];
-const sizes = '(min-width: 1024px) 720px, (min-width: 768px) 90vw, 100vw';
-
-type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
+const views = ['desktop', 'mobile'] as const;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`}>
-  <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
-  <p class="mt-4 max-w-2xl text-lg text-muted-dark">{subtitle}</p>
+  <Glow slot="background" variant="b" />
+  <div data-reveal>
+    <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+    <p class="mt-4 max-w-2xl text-lg text-muted-dark">{subtitle}</p>
+  </div>
 
-  <div data-projects class="mt-10">
+  <div data-projects data-reveal class="mt-10">
     {/* Tabs are shown only with JavaScript (html.js); without it every project is listed one after another. */}
     <div data-tablist-wrap>
       <div role="tablist" aria-label="Proyectos" class="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
@@ -29,7 +29,7 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
               aria-controls={`panel-${p.id}`}
               aria-selected={i === 0 ? 'true' : 'false'}
               tabindex={i === 0 ? 0 : -1}
-              class="flex min-h-14 shrink-0 flex-col items-start justify-center rounded-2xl border border-white/15 px-5 py-2 text-left text-soft hover:border-white/40 aria-selected:border-soft aria-selected:bg-soft aria-selected:text-ink"
+              class="flex min-h-14 shrink-0 flex-col items-start justify-center rounded-2xl border border-white/15 px-5 py-2 text-left text-soft transition-colors hover:border-white/40 aria-selected:border-soft aria-selected:bg-soft aria-selected:text-ink"
             >
               <span class="font-semibold">{p.name}</span>
               <span class="text-sm opacity-80">{p.sector}</span>
@@ -42,10 +42,7 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
     <div class="mt-6 space-y-16">
       {
         projects.map((p, index) => {
-          const shots = [
-            p.desktop ? { kind: 'desktop', shot: p.desktop } : null,
-            p.mobile ? { kind: 'mobile', shot: p.mobile } : null,
-          ].filter((x): x is Shot => x !== null);
+          const available = views.filter((view) => p[view].length > 0);
           return (
             <div
               role="tabpanel"
@@ -80,7 +77,7 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
                   href={p.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="mt-6 inline-flex min-h-12 items-center justify-center rounded-full border border-soft/40 px-6 font-semibold text-soft hover:bg-white/10"
+                  class="mt-6 inline-flex min-h-12 items-center justify-center rounded-full border border-soft/40 px-6 font-semibold text-soft transition-colors hover:bg-white/10"
                 >
                   Ver en vivo
                   <span class="sr-only"> {p.name} (se abre en una pestaña nueva)</span>
@@ -88,50 +85,88 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
               </div>
 
               <div>
-                {shots.length === 2 && (
-                  <div data-device-toggle hidden class="mb-3 inline-flex rounded-full border border-white/15 p-1">
-                    {(['desktop', 'mobile'] as const).map((kind) => (
+                {available.length === 0 && <TodoContent tone="dark">Capturas de {p.name} (src/assets/projects/).</TodoContent>}
+                {available.length === 2 && (
+                  <div data-device-toggle class="mb-4 inline-flex rounded-full border border-white/15 p-1">
+                    {views.map((view) => (
                       <button
                         type="button"
-                        data-device={kind}
-                        aria-pressed={kind === 'desktop' ? 'true' : 'false'}
-                        class="min-h-10 rounded-full px-4 text-sm font-medium text-soft aria-pressed:bg-soft aria-pressed:text-ink"
+                        data-device={view}
+                        aria-pressed={view === 'desktop' ? 'true' : 'false'}
+                        class="min-h-10 rounded-full px-4 text-sm font-medium text-soft transition-colors aria-pressed:bg-soft aria-pressed:text-ink"
                       >
-                        {kind === 'desktop' ? 'Computadora' : 'Celular'}
+                        {view === 'desktop' ? 'Computadora' : 'Celular'}
                       </button>
                     ))}
                   </div>
                 )}
-                <div class="space-y-6">
-                  {shots.length === 0 && <TodoContent tone="dark">Captura de página completa de {p.name}.</TodoContent>}
-                  {shots.map(({ kind, shot }) => (
-                    <figure data-device-view={kind} class:list={[kind === 'mobile' && 'mx-auto max-w-sm']}>
-                      <div class="overflow-hidden rounded-xl border border-white/15 bg-navy shadow-lg">
-                        <div class="flex h-10 items-center gap-3 border-b border-white/10 bg-blue-deep/50 px-4">
-                          <span aria-hidden="true" class="flex gap-1.5">
-                            <span class="size-2.5 rounded-full bg-white/25" />
-                            <span class="size-2.5 rounded-full bg-white/25" />
-                            <span class="size-2.5 rounded-full bg-white/25" />
-                          </span>
-                          <span class="min-w-0 flex-1 truncate rounded-full bg-ink/60 px-3 py-0.5 text-center text-xs text-muted-dark">
-                            {p.domain}
-                          </span>
+
+                {available.map((view) => {
+                  const shots = p[view];
+                  const isMobile = view === 'mobile';
+                  return (
+                    <div data-device-view={view} class="space-y-4">
+                      {shots.length > 1 && (
+                        <div data-chips class="flex flex-wrap gap-2" role="group" aria-label="Pantallas">
+                          {shots.map((shot, i) => (
+                            <button
+                              type="button"
+                              data-chip={i}
+                              aria-pressed={i === 0 ? 'true' : 'false'}
+                              class="min-h-10 rounded-full border border-white/15 px-4 text-sm font-medium text-soft transition-colors hover:border-white/40 aria-pressed:border-accent-light aria-pressed:bg-accent-light aria-pressed:text-ink"
+                            >
+                              {shot.label}
+                            </button>
+                          ))}
                         </div>
-                        <div
-                          role="region"
-                          tabindex="0"
-                          aria-label={`Captura de la página de ${p.name}. Usá el dedo, el mouse o las flechas para recorrerla.`}
-                          class="h-[26rem] overflow-y-auto bg-white focus-visible:outline-offset-[-3px] md:h-[34rem]"
-                        >
-                          <Image src={shot.src} alt={shot.alt} widths={widths} sizes={sizes} class="block h-auto w-full" />
+                      )}
+
+                      {isMobile ? (
+                        <div class="mx-auto w-56 overflow-hidden rounded-[2.25rem] border-[6px] border-ink bg-ink shadow-2xl ring-1 ring-white/20 sm:w-64">
+                          <div class="grid">
+                            {shots.map((shot, i) => (
+                              <Image
+                                src={shot.src}
+                                alt={shot.alt}
+                                widths={[260, 520]}
+                                sizes="256px"
+                                data-shot
+                                data-active={i === 0 ? '' : undefined}
+                                class="aspect-[780/1688] h-full w-full object-cover object-top [grid-area:1/1]"
+                              />
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                      <figcaption class="mt-2 text-sm text-muted-dark">
-                        Deslizá dentro del marco para ver la página completa.
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
+                      ) : (
+                        <div class="overflow-hidden rounded-xl border border-white/15 bg-navy shadow-2xl">
+                          <div class="flex h-10 items-center gap-3 border-b border-white/10 bg-blue-deep/50 px-4">
+                            <span aria-hidden="true" class="flex gap-1.5">
+                              <span class="size-2.5 rounded-full bg-white/25" />
+                              <span class="size-2.5 rounded-full bg-white/25" />
+                              <span class="size-2.5 rounded-full bg-white/25" />
+                            </span>
+                            <span class="min-w-0 flex-1 truncate rounded-full bg-ink/60 px-3 py-0.5 text-center text-xs text-muted-dark">
+                              {p.domain}
+                            </span>
+                          </div>
+                          <div class="grid bg-white">
+                            {shots.map((shot, i) => (
+                              <Image
+                                src={shot.src}
+                                alt={shot.alt}
+                                widths={[480, 800]}
+                                sizes="(min-width: 1024px) 720px, (min-width: 768px) 90vw, 100vw"
+                                data-shot
+                                data-active={i === 0 ? '' : undefined}
+                                class="aspect-[8/5] h-full w-full object-cover object-top [grid-area:1/1]"
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           );
@@ -143,10 +178,9 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
 
 <script>
   document.querySelectorAll<HTMLElement>('[data-projects]').forEach((root) => {
-    const wrap = root.querySelector<HTMLElement>('[data-tablist-wrap]');
     const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
     const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-panel]'));
-    if (!wrap || tabs.length === 0) return;
+    if (tabs.length === 0) return;
 
     const select = (index: number, focus = false) => {
       tabs.forEach((tab, i) => {
@@ -175,18 +209,30 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
       });
     });
 
-    // Computer / phone toggle: only present when a project has both screenshots.
     panels.forEach((panel) => {
+      const views = Array.from(panel.querySelectorAll<HTMLElement>('[data-device-view]'));
+
+      // Screen selector inside each device view.
+      views.forEach((view) => {
+        const chips = Array.from(view.querySelectorAll<HTMLButtonElement>('[data-chip]'));
+        const shots = Array.from(view.querySelectorAll<HTMLElement>('[data-shot]'));
+        chips.forEach((chip, i) => {
+          chip.addEventListener('click', () => {
+            chips.forEach((c, j) => c.setAttribute('aria-pressed', String(i === j)));
+            shots.forEach((shot, j) => (j === i ? shot.setAttribute('data-active', '') : shot.removeAttribute('data-active')));
+          });
+        });
+      });
+
+      // Computer / phone toggle: only present when a project has both.
       const toggle = panel.querySelector<HTMLElement>('[data-device-toggle]');
       if (!toggle) return;
-      toggle.hidden = false;
       const buttons = Array.from(toggle.querySelectorAll<HTMLButtonElement>('[data-device]'));
-      const views = Array.from(panel.querySelectorAll<HTMLElement>('[data-device-view]'));
       const show = (kind: string) => {
-        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.device === kind)));
-        views.forEach((v) => (v.hidden = v.dataset.deviceView !== kind));
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset['device'] === kind)));
+        views.forEach((v) => (v.hidden = v.dataset['deviceView'] !== kind));
       };
-      buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.device ?? 'desktop')));
+      buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset['device'] ?? 'desktop')));
       show('desktop');
     });
   });

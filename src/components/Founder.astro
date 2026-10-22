@@ -11,7 +11,7 @@ const { id, title } = sections.founder;
   showFounder && (
     <Section id={id} tone="light" labelledBy={`${id}-title`}>
       <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{title}</h2>
-      <div class:list={['mt-10 grid gap-8 md:items-start md:gap-12', (founderPhoto || import.meta.env.DEV) && 'md:grid-cols-[14rem_1fr]']}>
+      <div data-reveal class:list={['mt-10 grid gap-8 md:items-start md:gap-12', (founderPhoto || import.meta.env.DEV) && 'md:grid-cols-[14rem_1fr]']}>
         {(founderPhoto || import.meta.env.DEV) && (<div>
           {founderPhoto ? (
             <Image
