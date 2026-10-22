@@ -1,4 +1,5 @@
 ---
+import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
 import { sampleTestimonials, sections, testimonials } from '../data/site';
@@ -11,11 +12,12 @@ const items = testimonials.length > 0 ? testimonials : isDev ? sampleTestimonial
 
 {
   items.length > 0 && (
-    <Section id={id} tone="surface" labelledBy={`${id}-title`}>
+    <Section id={id} tone="dark" labelledBy={`${id}-title`}>
+  <Glow slot="background" variant="a" />
       <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
       {testimonials.length === 0 && (
         <div class="mt-6">
-          <TodoContent>opiniones reales de clientes, con su permiso. Las tarjetas de abajo son de ejemplo.</TodoContent>
+          <TodoContent tone="dark">opiniones reales de clientes, con su permiso. Las tarjetas de abajo son de ejemplo.</TodoContent>
         </div>
       )}
       <div
@@ -27,10 +29,10 @@ const items = testimonials.length > 0 ? testimonials : isDev ? sampleTestimonial
         <ul class="flex snap-x snap-mandatory gap-6">
           {items.map((t) => (
             <li class="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
-              <figure class="flex h-full flex-col rounded-lg border border-line bg-white p-6">
+              <figure class="flex h-full flex-col rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
                 <svg
                   aria-hidden="true"
-                  class="h-6 w-6 text-brand"
+                  class="h-6 w-6 text-accent-light"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -44,9 +46,9 @@ const items = testimonials.length > 0 ? testimonials : isDev ? sampleTestimonial
                 <blockquote class="mt-4 flex-1 text-lg leading-relaxed">
                   <p>{t.quote}</p>
                 </blockquote>
-                <figcaption class="mt-6 border-t border-line pt-4">
+                <figcaption class="mt-6 border-t border-white/15 pt-4">
                   <p class="font-semibold">{t.name}</p>
-                  <p class="text-sm text-muted">{t.role}</p>
+                  <p class="text-sm text-muted-dark">{t.role}</p>
                 </figcaption>
               </figure>
             </li>

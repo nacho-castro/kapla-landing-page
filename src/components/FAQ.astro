@@ -1,4 +1,5 @@
 ---
+import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
 import { faq, sections, showFaq } from '../data/site';
@@ -22,22 +23,23 @@ const structuredData = {
 
 {
   showFaq && (
-    <Section id={id} tone="surface" labelledBy={`${id}-title`}>
+    <Section id={id} tone="dark" labelledBy={`${id}-title`}>
+  <Glow slot="background" variant="b" />
       <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
-      <div data-reveal class="mt-10 max-w-3xl divide-y divide-line border-y border-line">
+      <div data-reveal class="mt-10 max-w-3xl divide-y divide-white/15 border-y border-white/15">
         {items.map((item) => (
           <details class="group py-1">
             <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 text-lg font-semibold marker:content-none [&::-webkit-details-marker]:hidden">
               {item.question}
               <span
                 aria-hidden="true"
-                class="shrink-0 text-2xl leading-none text-accent transition-transform group-open:rotate-45 motion-reduce:transition-none"
+                class="shrink-0 text-2xl leading-none text-accent-light transition-transform group-open:rotate-45 motion-reduce:transition-none"
               >
                 +
               </span>
             </summary>
-            <div class="pb-4 text-lg leading-relaxed text-muted">
-              {item.answer !== null ? <p>{item.answer}</p> : <TodoContent>respuesta real a esta pregunta.</TodoContent>}
+            <div class="pb-4 text-lg leading-relaxed text-muted-dark">
+              {item.answer !== null ? <p>{item.answer}</p> : <TodoContent tone="dark">respuesta real a esta pregunta.</TodoContent>}
             </div>
           </details>
         ))}

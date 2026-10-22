@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
 import { founder, founderPhoto, sections, showFounder } from '../data/site';
@@ -9,8 +10,9 @@ const { id, title } = sections.founder;
 
 {
   showFounder && (
-    <Section id={id} tone="light" labelledBy={`${id}-title`}>
-      <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{title}</h2>
+    <Section id={id} tone="dark" labelledBy={`${id}-title`}>
+  <Glow slot="background" variant="a" />
+      <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
       <div data-reveal class:list={['mt-10 grid gap-8 md:items-start md:gap-12', (founderPhoto || import.meta.env.DEV) && 'md:grid-cols-[14rem_1fr]']}>
         {(founderPhoto || import.meta.env.DEV) && (<div>
           {founderPhoto ? (
@@ -22,17 +24,17 @@ const { id, title } = sections.founder;
               class="aspect-square w-40 rounded-2xl object-cover md:w-56"
             />
           ) : (
-            <TodoContent>foto de {founder.name} (src/assets/founder.jpg, cuadrada).</TodoContent>
+            <TodoContent tone="dark">foto de {founder.name} (src/assets/founder.jpg, cuadrada).</TodoContent>
           )}
         </div>)}
         <div class="max-w-2xl">
-          <p class="text-xl font-semibold text-ink">{founder.name}</p>
-          <p class="text-muted">{founder.role}</p>
-          <div class="mt-5 space-y-4 text-lg leading-relaxed text-muted">
+          <p class="text-xl font-semibold">{founder.name}</p>
+          <p class="text-muted-dark">{founder.role}</p>
+          <div class="mt-5 space-y-4 text-lg leading-relaxed text-muted-dark">
             {founder.bio.map((paragraph) => <p>{paragraph}</p>)}
             {/* TODO-CONTENIDO: founder bio in first person (see site.ts > founder). */}
             {founder.bio.length === 0 && (
-              <TodoContent>texto en primera persona sobre quién está detrás de KAPLA y por qué.</TodoContent>
+              <TodoContent tone="dark">texto en primera persona sobre quién está detrás de KAPLA y por qué.</TodoContent>
             )}
           </div>
         </div>

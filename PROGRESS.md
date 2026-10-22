@@ -246,3 +246,9 @@
 - Hero centrado horizontal y verticalmente (alto mínimo de pantalla). El grafo pasa a ser fondo centrado, con el nodo central grande abajo para que no tape el texto.
 - Corregido un error mío: al cargar, la página saltaba hasta Proyectos (`scrollIntoView` de la pestaña activa). Ahora solo se desplaza la fila de pestañas, y no al iniciar.
 - Quitado de TODO-CONTENIDO: logo definitivo. Falta aún el favicon con el logo completo si se prefiere (hoy usa el isotipo).
+
+## Todas las secciones sobre el mismo fondo azul (2026-10-22)
+- Servicios, Por qué, Fundador, FAQ y Opiniones pasan de fondo blanco/gris a `ink` con luces animadas, igual que el resto. Hero y Contacto pierden su degradé: fondo plano `ink`. Las luces se desvanecen arriba y abajo de cada sección, así se leen como un solo fondo continuo.
+- Textos y tarjetas adaptados (`muted-dark`, `accent-light`, tarjetas translúcidas con borde fino). Contraste dentro de la tabla ya documentada.
+- `/privacidad` conserva su fondo claro (es una página de lectura aparte).
+- Lighthouse móvil 100/100/100/100.

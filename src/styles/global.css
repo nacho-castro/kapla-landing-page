@@ -381,3 +381,8 @@
     animation: slide-prev 450ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
+
+/* Section glows fade out at the top and bottom so consecutive sections read as one continuous background. */
+.glow-fade {
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+}

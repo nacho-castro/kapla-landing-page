@@ -10,7 +10,7 @@ const { id, title } = sections.contact;
 const cta = { ...heroCtas.primary, label: contact.whatsappLabel };
 ---
 
-<Section id={id} tone="dark" labelledBy={`${id}-title`} class="bg-linear-to-b from-navy to-ink">
+<Section id={id} tone="dark" labelledBy={`${id}-title`}>
   <Glow slot="background" variant="b" />
   <div data-reveal class="max-w-2xl">
     <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-balance md:text-5xl">{title}</h2>

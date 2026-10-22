@@ -65,7 +65,7 @@ Menos secciones y más claras. No agregar nada fuera del alcance.
 
 ## Diseño visual
 Estilo: **minimalista, ordenado y profesional.**
-- Mucho espacio en blanco, jerarquía tipográfica clara, secciones que alternan fondo claro y oscuro.
+- Mucho espacio en blanco, jerarquía tipográfica clara. Todas las secciones van sobre el mismo fondo azul oscuro (`ink` con luces animadas); el dueño pidió no alternar con fondos blancos.
 - Paleta (tokens en el bloque `@theme` de `src/styles/global.css`, un solo lugar):
   - `ink #00072D` (fondos más oscuros), `navy #051650`, `blue-deep #0A2472`, `brand #123499`
   - `soft #DDE1F5` (lavanda claro: fondos claros y texto sobre oscuro)
