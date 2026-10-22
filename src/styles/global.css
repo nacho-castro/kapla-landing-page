@@ -35,7 +35,7 @@
 
   --font-sans: 'General Sans', ui-sans-serif, system-ui, sans-serif;
 
-  --spacing-nav: 4rem;
+  --spacing-nav: 6.5rem;
   --spacing-section: 6rem;
   --spacing-gutter: 1.25rem;
   --container-content: 72rem;
@@ -69,6 +69,30 @@
   font-style: normal;
   font-display: swap;
   unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026, U+20AC, U+2192;
+}
+
+/* Floating navbar surface: dark, translucent, always readable over any section. */
+@utility nav-pill {
+  background-color: color-mix(in srgb, var(--color-ink) 95%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-white) 14%, transparent);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-ink) 28%, transparent);
+  @supports (backdrop-filter: blur(1px)) {
+    background-color: color-mix(in srgb, var(--color-ink) 82%, transparent);
+    backdrop-filter: blur(14px);
+  }
+}
+
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-1.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav-drop {
+    animation: nav-drop 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 }
 
 @layer base {

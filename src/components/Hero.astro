@@ -1,28 +1,31 @@
 ---
+import Icon from './Icon.astro';
 import Section from './Section.astro';
 import { heroCtas, sections } from '../data/site';
 import { externalAttrs } from '../utils/links';
 
-const { id, title, subtitle } = sections.hero;
+const { id, title, subtitle, support } = sections.hero;
 const { primary, secondary } = heroCtas;
 ---
 
-<Section id={id} tone="light" labelledBy={`${id}-title`}>
-  <h1 id={`${id}-title`} class="max-w-4xl text-4xl font-bold tracking-tight text-balance text-brand md:text-5xl lg:text-6xl">
+<Section id={id} tone="dark" labelledBy={`${id}-title`} class="bg-linear-to-b from-ink to-navy pt-36! pb-20! md:pt-44! md:pb-28!">
+  <h1 id={`${id}-title`} class="max-w-4xl text-4xl font-semibold tracking-tight text-balance text-white md:text-6xl lg:text-7xl">
     {title}
   </h1>
-  {subtitle && <p class="mt-6 max-w-2xl text-xl text-muted md:text-2xl">{subtitle}</p>}
-  <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+  <p class="mt-4 max-w-2xl text-2xl font-medium text-accent-light md:text-3xl">{subtitle}</p>
+  <p class="mt-6 max-w-xl text-lg text-muted-dark">{support}</p>
+  <div class="mt-10 flex flex-col gap-3 sm:flex-row">
     <a
       href={primary.href}
       {...externalAttrs(primary)}
-      class="inline-flex min-h-12 items-center justify-center rounded-md bg-brand px-6 font-semibold text-white hover:bg-ink"
+      class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-whatsapp px-6 font-semibold text-ink hover:brightness-95"
     >
+      <Icon name="whatsapp" class="size-5" />
       {primary.label}
     </a>
     <a
       href={secondary.href}
-      class="inline-flex min-h-12 items-center justify-center rounded-md border border-brand px-6 font-semibold text-brand hover:bg-surface"
+      class="inline-flex min-h-12 items-center justify-center rounded-full border border-soft/40 px-6 font-semibold text-soft hover:bg-white/10"
     >
       {secondary.label}
     </a>

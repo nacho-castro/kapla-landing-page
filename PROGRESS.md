@@ -151,3 +151,22 @@
 
 ### Verificado
 - `npx astro check`: 0 errores. `npm run build`: OK.
+
+## Renovación — Pasos 2 y 3: Navbar y Hero (2026-10-22)
+
+### Hecho
+- `Navbar.astro`: píldora flotante oscura (ink semitransparente, blur, borde y sombra; fallback sin blur más opaco). Móvil: píldora con logo y hamburguesa, panel debajo con el mismo estilo. Escritorio: logo a la izquierda, píldora con Servicios/Proyectos/Fundador/FAQ al centro y "Auditoría gratis" a la derecha. Menú accesible (aria-expanded, aria-controls, Escape, cierra al elegir y al pasar a escritorio).
+- Animación de entrada `nav-drop` (600 ms, una vez, solo CSS, desactivada con reduced-motion).
+- Resaltado de sección activa con IntersectionObserver (JS mínimo): píldora clara que se desliza (transición suave, sin transición con reduced-motion) y `aria-current="true"`. Sin JS los enlaces funcionan igual.
+- `scroll-margin-top` de las secciones: 6,5 rem (`--spacing-nav`).
+- WhatsApp: `whatsappUrl` definido una sola vez en `site.ts` (con `?text=` codificado). Lo usan header, hero y Por qué. Se eliminó Calendly de `site.ts`. Pendiente: botón flotante y Contacto (paso 9).
+- Hero oscuro con degradé sutil `ink` a `navy`: H1 "Automatizamos tus sistemas.", subtítulo, línea de apoyo y botones (WhatsApp verde con texto `ink`, y "Ver trabajo").
+- Los pesos `font-bold`/`font-extrabold` pasan a `font-semibold` (solo se cargan 400, 500 y 600).
+
+### Verificado
+- `astro check` 0 errores, build OK. Capturas con Edge headless y emulación de dispositivo en 360, 768 y 1280 px: sin scroll horizontal (360: 360/360), menú móvil abierto OK, resaltado de "Proyectos" al hacer scroll OK.
+- La extensión de Chrome no estaba conectada; se usó Edge headless por DevTools.
+
+### Para aprobar
+- Línea de apoyo del hero (propuesta): "Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas." (`sections.hero.support` en `site.ts`).
+- Los enlaces Servicios, Fundador y FAQ apuntan a secciones que se crean en los pasos 4, 7 y 8.

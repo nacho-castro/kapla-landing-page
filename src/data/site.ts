@@ -16,9 +16,6 @@ export interface CtaLink {
   external?: boolean;
 }
 
-/** Booking page for the free audit. */
-const auditUrl = 'https://calendly.com/ignaciocastroplanas';
-
 export type SocialName = 'instagram' | 'linkedin' | 'tiktok';
 
 export interface SocialLink {
@@ -32,6 +29,8 @@ export interface SectionInfo {
   id: string;
   title: string;
   subtitle?: string;
+  /** Short supporting line (hero only). */
+  support?: string;
 }
 
 export const site = {
@@ -41,24 +40,30 @@ export const site = {
     'KAPLA diseña e implementa automatización de procesos e inteligencia artificial a medida para PyMEs.',
   email: 'kaplatech.ar@gmail.com' as string | null,
   // International format, digits only (used in https://wa.me/<number>).
-  whatsapp: '5491126944636' as string | null,
+  whatsapp: '5491126944636',
   // TODO-CONTENIDO: own share image (1200x630 PNG/JPG in public/, e.g. '/og-image.png'). Until then no og:image is emitted.
   ogImage: null as string | null,
   ogImageAlt: 'KAPLA: automatización de procesos e inteligencia artificial para PyMEs',
   locale: 'es_AR',
 };
 
+/** The only WhatsApp link of the site: every audit call to action uses it. */
+export const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+  'Hola, quiero una auditoría gratis para mi negocio.',
+)}`;
+
 export const navLinks: NavLink[] = [
-  { label: 'Trabajo', href: '/#trabajo' },
-  { label: 'Proceso', href: '/#proceso' },
-  { label: 'Contacto', href: '/#contacto' },
+  { label: 'Servicios', href: '/#servicios' },
+  { label: 'Proyectos', href: '/#proyectos' },
+  { label: 'Fundador', href: '/#fundador' },
+  { label: 'FAQ', href: '/#faq' },
 ];
 
-export const navCta: CtaLink = { label: 'Auditoría gratis', href: auditUrl, external: true };
+export const navCta: CtaLink = { label: 'Auditoría gratis', href: whatsappUrl, external: true };
 
 export const heroCtas = {
-  primary: { label: 'Quiero una auditoría', href: auditUrl, external: true },
-  secondary: { label: 'Ver trabajo', href: '/#trabajo' },
+  primary: { label: 'Quiero una auditoría', href: whatsappUrl, external: true },
+  secondary: { label: 'Ver trabajo', href: '/#proyectos' },
 } satisfies Record<string, CtaLink>;
 
 export const socialLinks: SocialLink[] = [
@@ -70,10 +75,12 @@ export const socialLinks: SocialLink[] = [
 export const sections = {
   hero: {
     id: 'inicio',
-    title: 'Automatizamos los procesos de tu PyME e implementamos inteligencia artificial a medida',
+    title: 'Automatizamos tus sistemas.',
     subtitle: 'Tu negocio, completamente ordenado.',
+    // Proposed copy, pending owner approval.
+    support: 'Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas.',
   },
-  work: { id: 'trabajo', title: 'Trabajo' },
+  work: { id: 'proyectos', title: 'Proyectos' },
   why: { id: 'por-que', title: 'Por qué KAPLA' },
   process: { id: 'proceso', title: 'Proceso' },
   testimonials: { id: 'opiniones', title: 'Lo que dicen nuestros clientes' },
@@ -115,6 +122,8 @@ export interface ProcessStep {
   icon: ProcessIcon;
   title: string;
   subtitle?: string;
+  /** Short supporting line (hero only). */
+  support?: string;
   text: string;
 }
 
