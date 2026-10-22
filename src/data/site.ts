@@ -7,6 +7,8 @@ export interface NavLink {
   label: string;
   /** Starts with '/#' so it also works from other pages (e.g. /privacidad). */
   href: `/#${string}`;
+  /** Other section ids that keep this link highlighted while they are on screen. */
+  also?: string[];
 }
 
 /** Call to action; external links open in a new tab. */
@@ -349,6 +351,7 @@ export const showFaq = isDev || faq.some((item) => item.answer !== null);
 export const navLinks: NavLink[] = [
   { label: 'Servicios', href: '/#servicios' },
   { label: 'Proyectos', href: '/#proyectos' },
-  ...(showFounder ? [{ label: 'Fundador', href: '/#fundador' } as const] : []),
+  // "Nosotros" covers Por qué KAPLA and the founder section.
+  { label: 'Nosotros', href: '/#por-que', also: ['fundador'] },
   ...(showFaq ? [{ label: 'FAQ', href: '/#faq' } as const] : []),
 ];

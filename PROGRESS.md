@@ -256,3 +256,6 @@
 ## Botones de auditoría en violeta (2026-10-22)
 - "Auditoría gratis" (navbar, escritorio y menú móvil) y "Quiero una auditoría" (hero) pasan a `violet #6C1ABA` (antes #9D00FF), hover `violet-deep #55148F`, texto blanco y borde fino claro. Contraste: blanco sobre `violet` 8,4:1; sobre `violet-deep` 11,2:1; `violet` sobre `ink` 2,3:1 (por eso el borde). Los demás botones de WhatsApp (Servicios, Por qué, Contacto, flotante) siguen en verde.
 - Hero: el título queda en dos líneas: "Automatizamos" fijo y, debajo, la frase completa rota junta ("tus sistemas.", "tus redes.", "tus consultas.", "tus procesos.", "tus tareas."). Frases en `sections.hero.titleWords` (`site.ts`).
+
+## Navbar: "Nosotros" en lugar de "Fundador" (2026-10-22)
+- El enlace del menú pasa a "Nosotros" y apunta a Por qué KAPLA (`#por-que`, "Somos KAPLA."). Sigue resaltado también mientras se ve la sección del fundador (`also` en `navLinks`). La sección Fundador se mueve justo después de Por qué para que "Nosotros" sea un bloque continuo; Proceso va después.

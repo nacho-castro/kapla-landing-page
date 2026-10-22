@@ -29,6 +29,7 @@ import { externalAttrs } from '../utils/links';
             <li class="relative">
               <a
                 href={link.href}
+                data-also={link.also?.join(' ')}
                 class="inline-flex min-h-10 items-center rounded-full px-4 text-sm font-medium text-soft transition-colors hover:text-white aria-[current=true]:text-ink motion-reduce:transition-none"
               >
                 {link.label}
@@ -66,6 +67,7 @@ import { externalAttrs } from '../utils/links';
             <li>
               <a
                 href={link.href}
+                data-also={link.also?.join(' ')}
                 class="flex min-h-11 items-center rounded-full px-4 text-base font-medium text-soft hover:text-white aria-[current=true]:bg-soft aria-[current=true]:text-ink"
               >
                 {link.label}
@@ -121,7 +123,12 @@ import { externalAttrs } from '../utils/links';
   const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('header nav a[href^="/#"]'));
   const indicator = document.getElementById('nav-indicator');
   const idOf = (link: HTMLAnchorElement) => link.getAttribute('href')?.slice(2) ?? '';
-  const navIds = new Set(links.map(idOf));
+  // Section id -> id of the link to highlight (a link can also cover other sections via data-also).
+  const owner = new Map<string, string>();
+  for (const link of links) {
+    owner.set(idOf(link), idOf(link));
+    for (const extra of (link.dataset['also'] ?? '').split(' ').filter(Boolean)) owner.set(extra, idOf(link));
+  }
   let currentId: string | null = null;
 
   const moveIndicator = () => {
@@ -153,7 +160,7 @@ import { externalAttrs } from '../utils/links';
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActive(navIds.has(entry.target.id) ? entry.target.id : null);
+          if (entry.isIntersecting) setActive(owner.get(entry.target.id) ?? null);
         }
       },
       { rootMargin: '-45% 0px -50% 0px' },
