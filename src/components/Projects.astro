@@ -5,16 +5,28 @@ import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
 import { getContent } from '../data/content';
 
+interface Props {
+  /** Own page: the title becomes the page's h1 and clears the floating navbar. */
+  page?: boolean;
+}
+
+const { page = false } = Astro.props;
 const c = getContent(Astro.currentLocale);
 const { id, title, subtitle } = c.sections.projects;
 const { projects, ui } = c;
 const views = ['desktop', 'mobile'] as const;
 ---
 
-<Section id={id} tone="dark" labelledBy={`${id}-title`}>
+<Section id={id} tone="dark" labelledBy={`${id}-title`} class={page ? 'pt-36!' : ''}>
   <Glow slot="background" variant="b" />
   <div data-reveal>
-    <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+    {
+      page ? (
+        <h1 id={`${id}-title`} class="text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
+      ) : (
+        <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+      )
+    }
     <p class="mt-4 max-w-2xl text-lg text-muted-dark">{subtitle}</p>
   </div>
 
@@ -247,7 +259,9 @@ const views = ['desktop', 'mobile'] as const;
       if (tab && tab.parentElement && started) tab.parentElement.scrollTo({ left: tab.offsetLeft - 16, behavior: 'smooth' });
       if (focus) tabs[index]?.focus();
     };
-    select(0);
+    // A link from the home strip (/proyectos#<id>) opens that project.
+    const wanted = tabs.findIndex((tab) => tab.id === `tab-${location.hash.slice(1)}`);
+    select(Math.max(wanted, 0));
     started = true;
 
     // Arrows (wrap around) and swipe on touch screens.

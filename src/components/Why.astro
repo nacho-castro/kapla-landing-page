@@ -5,16 +5,28 @@ import Section from './Section.astro';
 import { getContent } from '../data/content';
 import { externalAttrs } from '../utils/links';
 
+interface Props {
+  /** Own page: the title becomes the page's h1 and clears the floating navbar. */
+  page?: boolean;
+}
+
+const { page = false } = Astro.props;
 const c = getContent(Astro.currentLocale);
 const { id, title } = c.sections.why;
 const { why } = c;
 ---
 
-<Section id={id} tone="dark" labelledBy={`${id}-title`}>
+<Section id={id} tone="dark" labelledBy={`${id}-title`} class={page ? 'pt-36!' : ''}>
   <Glow slot="background" variant="b" />
   <div class="grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16">
     <div data-reveal>
-      <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+      {
+        page ? (
+          <h1 id={`${id}-title`} class="text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
+        ) : (
+          <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+        )
+      }
       <p class="mt-4 text-xl font-semibold text-accent-light">{why.lead}</p>
     </div>
     <div data-reveal class="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-dark">
@@ -22,7 +34,7 @@ const { why } = c;
       <a
         href={why.cta.href}
         {...externalAttrs(why.cta, c.ui.newTab)}
-        class="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/25 bg-violet px-6 font-semibold text-white hover:bg-violet-deep"
+        class="inline-flex min-h-12 items-center gap-2 rounded-full btn-primary px-6 font-semibold text-white"
       >
         <Icon name="whatsapp" class="size-5" />
         {why.cta.label}

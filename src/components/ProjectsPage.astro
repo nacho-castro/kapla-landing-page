@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Projects from './Projects.astro';
+import { getContent } from '../data/content';
+
+const { metaTitle, metaDescription } = getContent(Astro.currentLocale).pages.projects;
+---
+
+<BaseLayout page="projects" title={metaTitle} description={metaDescription}>
+  <Projects page />
+</BaseLayout>

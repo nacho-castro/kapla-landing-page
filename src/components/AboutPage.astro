@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Founder from './Founder.astro';
+import Why from './Why.astro';
+import { getContent } from '../data/content';
+
+const { metaTitle, metaDescription } = getContent(Astro.currentLocale).pages.about;
+---
+
+<BaseLayout page="about" title={metaTitle} description={metaDescription}>
+  <Why page />
+  <Founder />
+</BaseLayout>

@@ -14,6 +14,10 @@ const { alternates } = Astro.props;
 const c = getContent(Astro.currentLocale);
 const lang = langOf(Astro.currentLocale);
 const { nav, navCta, ui } = c;
+// Links to another page (no #hash) are marked current by the path; section links are handled by the script below.
+const trimSlash = (path: string) => path.replace(/\/+$/, '') || '/';
+const currentPath = trimSlash(Astro.url.pathname);
+const pageCurrent = (href: string) => (!href.includes('#') && trimSlash(href) === currentPath ? 'page' : undefined);
 ---
 
 <header class="nav-drop fixed inset-x-0 top-3 z-50 px-3 lg:top-4 lg:px-gutter" data-tone="dark">
@@ -40,8 +44,8 @@ const { nav, navCta, ui } = c;
             <li class="relative">
               <a
                 href={link.href}
-                data-also={link.also?.join(' ')}
-                class="inline-flex min-h-10 items-center rounded-full px-4 text-sm font-medium text-soft transition-colors hover:text-white aria-[current=true]:text-ink motion-reduce:transition-none"
+                aria-current={pageCurrent(link.href)}
+                class="inline-flex min-h-10 items-center rounded-full px-4 text-sm font-medium text-soft transition-colors hover:text-white aria-[current=true]:text-ink aria-[current=page]:text-ink motion-reduce:transition-none"
               >
                 {link.label}
               </a>
@@ -55,7 +59,7 @@ const { nav, navCta, ui } = c;
         <a
           href={navCta.href}
           {...externalAttrs(navCta, ui.newTab)}
-          class="inline-flex min-h-12 items-center rounded-full border border-white/25 bg-violet px-4 whitespace-nowrap xl:px-5 text-sm font-semibold text-white hover:bg-violet-deep"
+          class="inline-flex min-h-12 items-center rounded-full btn-primary px-4 whitespace-nowrap xl:px-5 text-sm font-semibold text-white"
         >
           {navCta.label}
         </a>
@@ -84,8 +88,8 @@ const { nav, navCta, ui } = c;
             <li>
               <a
                 href={link.href}
-                data-also={link.also?.join(' ')}
-                class="flex min-h-11 items-center rounded-full px-4 text-base font-medium text-soft hover:text-white aria-[current=true]:bg-soft aria-[current=true]:text-ink"
+                aria-current={pageCurrent(link.href)}
+                class="flex min-h-11 items-center rounded-full px-4 text-base font-medium text-soft hover:text-white aria-[current=true]:bg-soft aria-[current=true]:text-ink aria-[current=page]:bg-soft aria-[current=page]:text-ink"
               >
                 {link.label}
               </a>
@@ -96,7 +100,7 @@ const { nav, navCta, ui } = c;
           <a
             href={navCta.href}
             {...externalAttrs(navCta, ui.newTab)}
-            class="flex min-h-12 items-center justify-center rounded-full border border-white/25 bg-violet px-4 text-base font-semibold text-white hover:bg-violet-deep"
+            class="flex min-h-12 items-center justify-center rounded-full btn-primary px-4 text-base font-semibold text-white"
           >
             {navCta.label}
           </a>
@@ -140,18 +144,12 @@ const { nav, navCta, ui } = c;
   const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('header nav a[href*="#"]'));
   const indicator = document.getElementById('nav-indicator');
   const idOf = (link: HTMLAnchorElement) => link.getAttribute('href')?.split('#')[1] ?? '';
-  // Section id -> id of the link to highlight (a link can also cover other sections via data-also).
-  const owner = new Map<string, string>();
-  for (const link of links) {
-    owner.set(idOf(link), idOf(link));
-    for (const extra of (link.dataset['also'] ?? '').split(' ').filter(Boolean)) owner.set(extra, idOf(link));
-  }
   let currentId: string | null = null;
 
   const moveIndicator = () => {
     if (!indicator) return;
-    const active = links.find(
-      (link) => link.getAttribute('aria-current') === 'true' && link.offsetParent !== null && link.closest('#nav-links'),
+    const active = Array.from(document.querySelectorAll<HTMLAnchorElement>('#nav-links a[aria-current]')).find(
+      (link) => link.offsetParent !== null,
     );
     if (!active) {
       indicator.style.opacity = '0';
@@ -173,17 +171,20 @@ const { nav, navCta, ui } = c;
     moveIndicator();
   };
 
-  if (links.length > 0 && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) setActive(owner.get(entry.target.id) ?? null);
-        }
-      },
-      { rootMargin: '-45% 0px -50% 0px' },
-    );
-    document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
+  if ('IntersectionObserver' in window) {
+    if (links.length > 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          }
+        },
+        { rootMargin: '-45% 0px -50% 0px' },
+      );
+      document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
+    }
     window.addEventListener('resize', moveIndicator);
     document.fonts?.ready.then(moveIndicator);
   }
+  moveIndicator();
 </script>

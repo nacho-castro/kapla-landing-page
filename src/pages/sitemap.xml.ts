@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { pagePath } from '../data/content';
 
 // Every page with its alternate-language twin (hreflang).
-const pages = ['home', 'privacy'] as const;
+const pages = ['home', 'projects', 'about', 'privacy'] as const;
 
 export const GET: APIRoute = ({ site }) => {
   const abs = (path: string) => new URL(path, site).href;

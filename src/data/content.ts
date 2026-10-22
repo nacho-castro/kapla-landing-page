@@ -14,10 +14,17 @@ export function langOf(locale: string | undefined): Lang {
 }
 
 /** Path of a page in a language. Spanish is the default language (no prefix); English lives under /en. */
-export function pagePath(lang: Lang, page: 'home' | 'privacy', hash = ''): string {
-  const base = page === 'home' ? '/' : lang === 'es' ? '/privacidad' : '/privacy';
-  const prefixed = lang === 'es' ? base : `/en${base === '/' ? '/' : base}`;
-  return `${prefixed}${hash ? `#${hash}` : ''}`;
+export type PageName = 'home' | 'privacy' | 'projects' | 'about';
+
+const pagePaths: Record<PageName, Record<Lang, string>> = {
+  home: { es: '/', en: '/en/' },
+  privacy: { es: '/privacidad', en: '/en/privacy' },
+  projects: { es: '/proyectos', en: '/en/projects' },
+  about: { es: '/nosotros', en: '/en/about' },
+};
+
+export function pagePath(lang: Lang, page: PageName, hash = ''): string {
+  return `${pagePaths[page][lang]}${hash ? `#${hash}` : ''}`;
 }
 
 export interface Cta {
@@ -29,8 +36,6 @@ export interface Cta {
 export interface NavItem {
   label: string;
   href: string;
-  /** Other section ids that keep this link highlighted while they are on screen. */
-  also?: string[];
 }
 
 export interface PrivacyContent {
@@ -58,6 +63,9 @@ export interface Content {
     socialLabel: string;
     emailTodo: string;
     projectsTabs: string;
+    viewProjects: string;
+    openProject: (name: string) => string;
+    projectsStrip: string;
     projectCounter: (current: string, total: number) => string;
     projectHint: string;
     prevProject: string;
@@ -95,6 +103,7 @@ export interface Content {
   founder: { name: string; role: string; bio: string[] };
   faq: { question: string; answer: string | null }[];
   contact: { intro: string; whatsappLabel: string; emailLabel: string };
+  pages: Record<'projects' | 'about', { metaTitle: string; metaDescription: string }>;
   privacy: PrivacyContent;
   showFounder: boolean;
   showFaq: boolean;
@@ -180,6 +189,9 @@ const es: Content = {
     socialLabel: 'Redes sociales',
     emailTodo: 'email de contacto.',
     projectsTabs: 'Proyectos',
+    viewProjects: 'Ver proyectos',
+    openProject: (name) => `Ver el proyecto ${name}`,
+    projectsStrip: 'Proyectos destacados (deslizá para ver más)',
     projectCounter: (current, total) => `Proyecto ${current} de ${total}`,
     projectHint: ' · deslizá o usá las flechas',
     prevProject: 'Proyecto anterior',
@@ -195,9 +207,9 @@ const es: Content = {
   whatsappMessage: 'Hola, quiero una auditoría gratis para mi negocio.',
   nav: [
     { label: 'Servicios', href: pagePath('es', 'home', 'servicios') },
-    { label: 'Proyectos', href: pagePath('es', 'home', 'proyectos') },
-    // "Nosotros" covers Por qué KAPLA and the founder section.
-    { label: 'Nosotros', href: pagePath('es', 'home', 'por-que'), also: ['fundador'] },
+    { label: 'Proyectos', href: pagePath('es', 'projects') },
+    // "Nosotros" is its own page: Por qué KAPLA and the founder.
+    { label: 'Nosotros', href: pagePath('es', 'about') },
     { label: 'FAQ', href: pagePath('es', 'home', 'faq') },
   ],
   navCta: { label: 'Auditoría gratis', href: esWhatsapp, external: true },
@@ -302,6 +314,16 @@ const es: Content = {
     whatsappLabel: 'Escribinos por WhatsApp',
     emailLabel: 'O escribinos por email',
   },
+  pages: {
+    projects: {
+      metaTitle: 'Proyectos | KAPLA',
+      metaDescription: 'Sistemas y sitios web que KAPLA ya diseñó y puso en marcha. Mirá cómo se ven y cómo funcionan.',
+    },
+    about: {
+      metaTitle: 'Nosotros | KAPLA',
+      metaDescription: 'Quiénes somos en KAPLA y cómo ayudamos a las PyMEs a automatizar su trabajo con inteligencia artificial.',
+    },
+  },
   privacy: {
     metaTitle: 'Aviso de privacidad | KAPLA',
     metaDescription: 'Cómo KAPLA usa los datos que nos compartís al escribirnos.',
@@ -394,6 +416,9 @@ const en: Content = {
     socialLabel: 'Social media',
     emailTodo: 'contact email.',
     projectsTabs: 'Projects',
+    viewProjects: 'View projects',
+    openProject: (name) => `View the ${name} project`,
+    projectsStrip: 'Featured projects (swipe to see more)',
     projectCounter: (current, total) => `Project ${current} of ${total}`,
     projectHint: ' · swipe or use the arrows',
     prevProject: 'Previous project',
@@ -409,8 +434,8 @@ const en: Content = {
   whatsappMessage: "Hi, I'd like a free audit for my business.",
   nav: [
     { label: 'Services', href: pagePath('en', 'home', 'servicios') },
-    { label: 'Projects', href: pagePath('en', 'home', 'proyectos') },
-    { label: 'About us', href: pagePath('en', 'home', 'por-que'), also: ['fundador'] },
+    { label: 'Projects', href: pagePath('en', 'projects') },
+    { label: 'About us', href: pagePath('en', 'about') },
     { label: 'FAQ', href: pagePath('en', 'home', 'faq') },
   ],
   navCta: { label: 'Free audit', href: enWhatsapp, external: true },
@@ -512,6 +537,16 @@ const en: Content = {
     intro: 'Message us on WhatsApp, tell us how you work today and we will see where to start.',
     whatsappLabel: 'Message us on WhatsApp',
     emailLabel: 'Or email us',
+  },
+  pages: {
+    projects: {
+      metaTitle: 'Projects | KAPLA',
+      metaDescription: 'Systems and websites KAPLA has already designed and launched. See how they look and how they work.',
+    },
+    about: {
+      metaTitle: 'About us | KAPLA',
+      metaDescription: 'Who we are at KAPLA and how we help small businesses automate their work with artificial intelligence.',
+    },
   },
   privacy: {
     metaTitle: 'Privacy notice | KAPLA',

@@ -1,0 +1,68 @@
+---
+// Home teaser: title, a sliding strip of project cards and one button. Each card opens that project on /proyectos.
+import { Image } from 'astro:assets';
+import Glow from './Glow.astro';
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import { getContent, langOf, pagePath } from '../data/content';
+
+const c = getContent(Astro.currentLocale);
+const lang = langOf(Astro.currentLocale);
+const { id, title, subtitle } = c.sections.projects;
+const { projects, ui } = c;
+const projectsPage = pagePath(lang, 'projects');
+---
+
+<Section id={id} tone="dark" labelledBy={`${id}-title`}>
+  <Glow slot="background" variant="b" />
+  <div data-reveal class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <div>
+      <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+      <p class="mt-4 max-w-2xl text-lg text-muted-dark">{subtitle}</p>
+    </div>
+    <a
+      href={projectsPage}
+      class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 self-start rounded-full border border-soft/40 px-6 font-semibold text-soft transition-colors hover:bg-white/10 md:self-auto"
+    >
+      {ui.viewProjects}
+      <Icon name="arrow" class="size-5" />
+    </a>
+  </div>
+
+  <ul
+    data-reveal
+    aria-label={ui.projectsStrip}
+    class="mt-10 -mx-gutter flex snap-x snap-mandatory gap-4 overflow-x-auto px-gutter pb-4 [scrollbar-width:thin]"
+  >
+    {
+      projects.map((p) => {
+        const shot = p.desktop[0];
+        return (
+          <li class="w-72 shrink-0 snap-start sm:w-80">
+            <a
+              href={`${projectsPage}#${p.id}`}
+              aria-label={ui.openProject(p.name)}
+              class="group block overflow-hidden rounded-2xl bg-white/5 ring-1 ring-accent-light/20 transition duration-300 hover:-translate-y-1 hover:bg-white/10 hover:ring-accent-light/50"
+            >
+              <div class="aspect-[8/5] overflow-hidden bg-navy">
+                {shot && (
+                  <Image
+                    src={shot.src}
+                    alt=""
+                    widths={[320, 640]}
+                    sizes="(min-width: 640px) 320px, 288px"
+                    class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
+              </div>
+              <div class="p-5">
+                <p class="text-lg font-semibold">{p.name}</p>
+                <p class="mt-1 text-muted-dark">{p.sector}</p>
+              </div>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Section>

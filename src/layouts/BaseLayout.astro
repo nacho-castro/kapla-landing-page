@@ -3,14 +3,14 @@ import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Navbar from '../components/Navbar.astro';
-import { getContent, languages, pagePath } from '../data/content';
+import { getContent, languages, pagePath, type PageName } from '../data/content';
 import { site, socialLinks } from '../data/site';
 
 interface Props {
   title?: string;
   description?: string;
   /** Which page this is, so the language switch and hreflang point to its twin in the other language. */
-  page?: 'home' | 'privacy';
+  page?: PageName;
 }
 
 // Absolute URLs come from `site` in astro.config.mjs.

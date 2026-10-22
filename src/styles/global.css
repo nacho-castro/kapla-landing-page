@@ -15,6 +15,7 @@
  *   muted-dark  on ink       9.2:1   on navy      8.0:1
  *   lilac       on ink       5.9:1   on navy 5.1:1 (rotating hero phrase)
  *   white       on violet    8.4:1   white on violet-deep 11.2:1 (audit buttons in navbar and hero)
+ *   white       on btn-primary lightest stop #8a3be0  5.6:1 (all WhatsApp action buttons)
  *   ink         on whatsapp  9.9:1   (white on whatsapp is 2.0:1 -> never)
  *   brand       on ink       1.9:1   -> never use brand as text on dark
  */
@@ -75,6 +76,38 @@
   font-style: normal;
   font-display: swap;
   unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026, U+20AC, U+2192;
+}
+
+/* Primary action button: same violet, glossy and glowing so it stands out on the dark background. */
+@utility btn-primary {
+  position: relative;
+  color: var(--color-white);
+  border: 1px solid color-mix(in srgb, var(--color-white) 45%, transparent);
+  background-image: linear-gradient(180deg, #8a3be0 0%, var(--color-violet) 55%, var(--color-violet-deep) 100%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-white) 55%, transparent),
+    inset 0 -6px 12px color-mix(in srgb, var(--color-ink) 25%, transparent),
+    0 0 18px color-mix(in srgb, #8a3be0 70%, transparent),
+    0 6px 28px color-mix(in srgb, var(--color-violet) 65%, transparent);
+  text-shadow: 0 1px 2px color-mix(in srgb, var(--color-ink) 45%, transparent);
+  transition:
+    box-shadow 250ms ease,
+    filter 250ms ease,
+    transform 250ms ease;
+  &:hover {
+    filter: brightness(1.12) saturate(1.1);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--color-white) 65%, transparent),
+      inset 0 -6px 12px color-mix(in srgb, var(--color-ink) 20%, transparent),
+      0 0 28px color-mix(in srgb, #a465f0 85%, transparent),
+      0 8px 38px color-mix(in srgb, var(--color-violet) 80%, transparent);
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 /* Floating navbar surface: dark, translucent, always readable over any section. */
@@ -392,4 +425,21 @@
 /* Section glows fade out at the top and bottom so consecutive sections read as one continuous background. */
 .glow-fade {
   mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+}
+
+/* Section separation: a glowing hairline between sections and a slightly lighter band on every other one. */
+main > section + section::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-accent-light) 55%, transparent) 50%,
+    transparent
+  );
+}
+main > section:nth-of-type(even) {
+  background-color: color-mix(in srgb, var(--color-navy) 55%, var(--color-ink));
 }

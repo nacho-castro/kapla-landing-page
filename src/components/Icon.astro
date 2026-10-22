@@ -2,7 +2,7 @@
 // Inline SVG icons with a uniform 24px grid and stroke style. Decorative by default.
 import type { ProcessIcon, ServiceIcon } from '../data/site';
 
-export type IconName = 'menu' | 'close' | 'instagram' | 'linkedin' | 'tiktok' | 'whatsapp' | ProcessIcon | ServiceIcon;
+export type IconName = 'menu' | 'close' | 'arrow' | 'instagram' | 'linkedin' | 'tiktok' | 'whatsapp' | ProcessIcon | ServiceIcon;
 
 interface Props {
   name: IconName;
@@ -26,6 +26,7 @@ const { name, class: className = 'size-6' } = Astro.props;
 >
   {name === 'menu' && <path d="M4 7h16M4 12h16M4 17h16" />}
   {name === 'close' && <path d="M6 6l12 12M18 6L6 18" />}
+  {name === 'arrow' && <path d="M5 12h14M13 6l6 6-6 6" />}
   {
     name === 'instagram' && (
       <>
