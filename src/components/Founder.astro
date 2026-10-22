@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { founder, founderPhoto, sections, showFounder } from '../data/site';
+
+const { id, title } = sections.founder;
+---
+
+{
+  showFounder && (
+    <Section id={id} tone="light" labelledBy={`${id}-title`}>
+      <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{title}</h2>
+      <div class="mt-10 grid gap-8 md:grid-cols-[14rem_1fr] md:items-start md:gap-12">
+        <div>
+          {founderPhoto ? (
+            <Image
+              src={founderPhoto}
+              alt={`${founder.name}, ${founder.role} de KAPLA`}
+              width={448}
+              height={448}
+              class="aspect-square w-40 rounded-2xl object-cover md:w-56"
+            />
+          ) : (
+            <TodoContent>foto de {founder.name} (src/assets/founder.jpg, cuadrada).</TodoContent>
+          )}
+        </div>
+        <div class="max-w-2xl">
+          <p class="text-xl font-semibold text-ink">{founder.name}</p>
+          <p class="text-muted">{founder.role}</p>
+          <div class="mt-5 space-y-4 text-lg leading-relaxed text-muted">
+            {founder.bio.map((paragraph) => <p>{paragraph}</p>)}
+            {/* TODO-CONTENIDO: founder bio in first person (see site.ts > founder). */}
+            {founder.bio.length === 0 && (
+              <TodoContent>texto en primera persona sobre quién está detrás de KAPLA y por qué.</TodoContent>
+            )}
+          </div>
+        </div>
+      </div>
+    </Section>
+  )
+}

@@ -3,12 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
 
 // TODO-CONTENIDO: have this notice reviewed by a lawyer before launch.
-const updated = '2 de octubre de 2026';
+const updated = '22 de octubre de 2026';
 ---
 
 <BaseLayout
   title={`Aviso de privacidad | ${site.name}`}
-  description={`Cómo ${site.name} usa los datos que dejás en el formulario de contacto.`}
+  description={`Cómo ${site.name} usa los datos que nos compartís al escribirnos.`}
 >
   <article class="mx-auto max-w-2xl px-gutter py-section">
     <h1 class="text-3xl font-semibold tracking-tight text-brand md:text-4xl">Aviso de privacidad</h1>
@@ -17,7 +17,7 @@ const updated = '2 de octubre de 2026';
     <div class="mt-10 space-y-8 text-lg leading-relaxed text-muted [&_h2]:mb-2 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink">
       <section>
         <h2>Qué datos pedimos</h2>
-        <p>En el formulario de contacto: tu nombre, tu email y, si querés, un mensaje.</p>
+        <p>Este sitio no tiene formularios y no recibe datos tuyos. Solo tenemos los que vos nos compartís cuando nos escribís por WhatsApp o por email: tu nombre, tu número o tu email, y lo que nos cuentes.</p>
       </section>
       <section>
         <h2>Para qué los usamos</h2>
@@ -29,8 +29,8 @@ const updated = '2 de octubre de 2026';
       <section>
         <h2>Quién los recibe</h2>
         <p>
-          Los mensajes del formulario se envían a través de Formspree, un servicio que nos los reenvía
-          por email. Si nos escribís por WhatsApp, aplica además la política de privacidad de WhatsApp.
+          Solo nosotros. Si nos escribís por WhatsApp, además aplica la política de privacidad de
+          WhatsApp; si nos escribís por email, la de tu proveedor de correo.
         </p>
       </section>
       <section>

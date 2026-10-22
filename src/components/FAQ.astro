@@ -1,0 +1,48 @@
+---
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { faq, sections, showFaq } from '../data/site';
+
+const { id, title } = sections.faq;
+const isDev = import.meta.env.DEV;
+// Production shows only questions with a real answer; development also shows the pending ones.
+const items = faq.filter((item) => isDev || item.answer !== null);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq
+    .filter((item) => item.answer !== null)
+    .map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+};
+---
+
+{
+  showFaq && (
+    <Section id={id} tone="surface" labelledBy={`${id}-title`}>
+      <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+      <div class="mt-10 max-w-3xl divide-y divide-line border-y border-line">
+        {items.map((item) => (
+          <details class="group py-1">
+            <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 text-lg font-semibold marker:content-none [&::-webkit-details-marker]:hidden">
+              {item.question}
+              <span
+                aria-hidden="true"
+                class="shrink-0 text-2xl leading-none text-accent transition-transform group-open:rotate-45 motion-reduce:transition-none"
+              >
+                +
+              </span>
+            </summary>
+            <div class="pb-4 text-lg leading-relaxed text-muted">
+              {item.answer !== null ? <p>{item.answer}</p> : <TodoContent>respuesta real a esta pregunta.</TodoContent>}
+            </div>
+          </details>
+        ))}
+      </div>
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    </Section>
+  )
+}

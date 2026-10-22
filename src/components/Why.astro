@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import Section from './Section.astro';
 import { sections, why } from '../data/site';
 import { externalAttrs } from '../utils/links';
@@ -10,15 +11,16 @@ const { id, title } = sections.why;
   <div class="grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16">
     <div>
       <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
-      <p class="mt-4 text-xl font-semibold text-brand">{why.lead}</p>
+      <p class="mt-4 text-xl font-semibold text-accent">{why.lead}</p>
     </div>
     <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-muted">
       {why.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       <a
         href={why.cta.href}
         {...externalAttrs(why.cta)}
-        class="inline-flex min-h-11 items-center rounded-md bg-brand px-5 font-semibold text-white hover:bg-ink"
+        class="inline-flex min-h-12 items-center gap-2 rounded-full bg-whatsapp px-6 font-semibold text-ink hover:brightness-95"
       >
+        <Icon name="whatsapp" class="size-5" />
         {why.cta.label}
       </a>
     </div>

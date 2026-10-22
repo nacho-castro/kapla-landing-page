@@ -1,6 +1,4 @@
-interface ImportMetaEnv {
-  readonly PUBLIC_FORMSPREE_ID?: string;
-}
+interface ImportMetaEnv {}
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;

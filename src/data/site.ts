@@ -50,13 +50,6 @@ export const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURICompo
   'Hola, quiero una auditoría gratis para mi negocio.',
 )}`;
 
-export const navLinks: NavLink[] = [
-  { label: 'Servicios', href: '/#servicios' },
-  { label: 'Proyectos', href: '/#proyectos' },
-  { label: 'Fundador', href: '/#fundador' },
-  { label: 'FAQ', href: '/#faq' },
-];
-
 export const navCta: CtaLink = { label: 'Auditoría gratis', href: whatsappUrl, external: true };
 
 export const heroCtas = {
@@ -83,25 +76,17 @@ export const sections = {
   why: { id: 'por-que', title: 'Por qué KAPLA' },
   process: { id: 'proceso', title: 'Proceso' },
   testimonials: { id: 'opiniones', title: 'Lo que dicen nuestros clientes' },
-  contact: { id: 'contacto', title: 'Contacto' },
+  founder: { id: 'fundador', title: 'Fundador' },
+  faq: { id: 'faq', title: 'Preguntas frecuentes' },
+  contact: { id: 'contacto', title: 'Pedí tu auditoría gratis' },
 } satisfies Record<string, SectionInfo>;
 
 export const privacyUrl = '/privacidad';
 
-/** Formspree form id: public by design (set PUBLIC_FORMSPREE_ID, see .env.example). */
-// Accepts the bare id or the full endpoint URL (https://formspree.io/f/<id>).
-const rawFormspree = (import.meta.env.PUBLIC_FORMSPREE_ID ?? '').trim();
-export const formspreeId: string | null =
-  rawFormspree.split('/').filter(Boolean).pop()?.replace(/[^A-Za-z0-9]/g, '') || null;
-
 export const contact = {
-  intro: 'Contanos en pocas líneas qué querés mejorar en tu negocio. Te respondemos por email.',
+  intro: 'Escribinos por WhatsApp, contanos cómo trabajás hoy y vemos por dónde empezar.',
   whatsappLabel: 'Escribinos por WhatsApp',
-  submitLabel: 'Enviar',
-  sendingLabel: 'Enviando...',
-  successMessage: 'Gracias, recibimos tu mensaje. Te respondemos pronto.',
-  errorMessage: 'No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.',
-  privacyNote: 'Usamos tus datos solo para responder tu consulta.',
+  emailLabel: 'O escribinos por email',
 };
 
 export const why = {
@@ -271,4 +256,57 @@ export const sampleTestimonials: Testimonial[] = [
   { name: 'Nombre Apellido, Empresa', role: 'Rubro o profesión', quote: 'Comentario de ejemplo un poco más largo, para ver cómo se acomoda la tarjeta cuando el texto ocupa varias líneas en el celular.' },
   { name: 'Nombre Apellido', role: 'Rubro o profesión', quote: 'Comentario de ejemplo corto.' },
   { name: 'Nombre Apellido, Empresa', role: 'Rubro o profesión', quote: 'Comentario de ejemplo. Con cuatro o más opiniones la fila se desliza hacia el costado.' },
+];
+
+export interface Founder {
+  name: string;
+  role: string;
+  /** First-person paragraphs. While empty, the section and its nav link are hidden in production. */
+  bio: string[];
+}
+
+// TODO-CONTENIDO: founder text in first person (who is behind KAPLA and why) and photo.
+// Photo: drop `founder.png|jpg|webp` in src/assets/ (square, at least 640 px).
+export const founder: Founder = {
+  name: 'Ignacio Castro',
+  role: 'Founder',
+  bio: [],
+};
+
+const founderFiles = import.meta.glob<{ default: ImageMetadata }>('../assets/founder.{png,jpg,jpeg,webp}', {
+  eager: true,
+});
+export const founderPhoto: ImageMetadata | null = Object.values(founderFiles)[0]?.default ?? null;
+
+export interface FaqItem {
+  question: string;
+  /** null while the real answer is pending: hidden in production, shown as a note in development. */
+  answer: string | null;
+}
+
+// TODO-CONTENIDO: answers marked null. Never invent prices or timelines.
+export const faq: FaqItem[] = [
+  {
+    question: '¿Qué es la auditoría?',
+    answer: 'Revisamos cómo trabaja hoy tu equipo y detectamos qué tareas consumen más tiempo o generan errores.',
+  },
+  { question: '¿Necesito saber de tecnología?', answer: null },
+  {
+    question: '¿Se conecta con las herramientas que ya uso?',
+    answer: 'Lo conectamos con lo que ya usás, sin frenar tu operación.',
+  },
+  { question: '¿Cuánto cuesta?', answer: null },
+  { question: '¿Cuánto tarda?', answer: null },
+  { question: '¿Qué pasa después de la implementación?', answer: null },
+];
+
+const isDev = import.meta.env.DEV;
+export const showFounder = isDev || founder.bio.length > 0;
+export const showFaq = isDev || faq.some((item) => item.answer !== null);
+
+export const navLinks: NavLink[] = [
+  { label: 'Servicios', href: '/#servicios' },
+  { label: 'Proyectos', href: '/#proyectos' },
+  ...(showFounder ? [{ label: 'Fundador', href: '/#fundador' } as const] : []),
+  ...(showFaq ? [{ label: 'FAQ', href: '/#faq' } as const] : []),
 ];
