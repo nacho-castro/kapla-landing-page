@@ -29,9 +29,7 @@ Buscá `TODO-CONTENIDO` en el código para ver todos. Resumen:
 | Línea de apoyo del hero | `src/data/site.ts` > `sections.hero.support` | Aprobar o cambiar el texto propuesto. |
 | Textos de Servicios | `src/data/site.ts` > `services` | Aprobar o cambiar las descripciones propuestas. |
 | Meta description | `src/data/site.ts` > `site.description` | Aprobar o cambiar el texto propuesto. |
-| Imagen para compartir | `public/` y `site.ogImage` en `site.ts` | Imagen de 1200x630 px; poner la ruta, por ejemplo `'/og-image.png'`. |
 | Logo | `src/components/Logo.astro` | Hoy es el texto "KAPLA". |
-| Favicon | `public/favicon.svg` | Reemplazar por el definitivo. |
 | Opiniones de clientes | `src/data/site.ts` > `testimonials` | Solo opiniones reales y con permiso. Mientras esté vacío, la sección no aparece. |
 | Alcance del Mantenimiento | `src/data/site.ts` > `processSteps` | Confirmar qué incluye. |
 | Revisión legal | `src/pages/privacidad.astro` | Que un abogado revise el aviso de privacidad. |
@@ -81,7 +79,7 @@ Hoy el sitio **no necesita ninguna**. Si en el futuro se suma alguna, se documen
 - [ ] Textos pendientes resueltos (sección 3).
 - [ ] Se ve bien en el celular (menú, pestañas de proyectos, FAQ).
 - [ ] Lighthouse móvil de 95 o más.
-- [ ] Imagen para compartir cargada. Probá el enlace en WhatsApp y LinkedIn.
+- [ ] Probá el enlace en WhatsApp y LinkedIn: tiene que verse la imagen de KAPLA (`public/og-image.png`). Si cambiás la imagen, WhatsApp puede tardar en actualizarla.
 - [ ] Aviso de privacidad revisado.
 - [ ] Verificaste la licencia de General Sans en https://www.fontshare.com/terms.
 

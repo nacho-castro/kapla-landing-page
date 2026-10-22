@@ -41,9 +41,9 @@ export const site = {
   email: 'kaplatech.ar@gmail.com' as string | null,
   // International format, digits only (used in https://wa.me/<number>).
   whatsapp: '5491126944636',
-  // TODO-CONTENIDO: own share image (1200x630 PNG/JPG in public/, e.g. '/og-image.png'). Until then no og:image is emitted.
-  ogImage: null as string | null,
-  ogImageAlt: 'KAPLA: automatizamos tus sistemas y ordenamos tu negocio',
+  // Share preview (1200x630, in public/): wordmark on the brand gradient.
+  ogImage: '/og-image.png' as string | null,
+  ogImageAlt: 'Logo de KAPLA sobre fondo azul oscuro',
   locale: 'es_AR',
 };
 

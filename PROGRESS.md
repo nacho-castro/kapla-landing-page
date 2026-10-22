@@ -227,3 +227,10 @@
 - Logos de proyectos junto al nombre (pestaña y título del panel), dentro de un cuadro oscuro para que funcione el logo blanco de Jorgelina. Se usan `miclase-logo-512.png` y `logo_jpmp_blanco.png` (`logo` en `site.ts`). `miclase-logo-120.png` queda sin usar.
 - Grafo del hero: los nodos "vuelan" a su lugar al cargar y son atraídos por el mouse (o el dedo al tocar); las líneas los siguen y vuelven con efecto resorte. Un solo `requestAnimationFrame` que se detiene cuando todo está quieto. Sin movimiento con `prefers-reduced-motion`.
 - Verificado: `astro check` 0 errores, build OK, Lighthouse móvil 100/100/100/100 (LCP 1,7 s, CLS 0). Prueba del grafo con Edge y movimiento emulado: los nodos se desplazan hacia el puntero y vuelven.
+
+## Imagen para compartir y favicon con el isotipo de KAPLA (2026-10-22)
+- `public/og-image.png` (1200x630): logo blanco sobre degradé `ink`/`navy` con luces azules. Conectada en `site.ogImage` (se emiten `og:image` y `twitter:card` grande).
+- Favicon: `favicon-48.png` y `apple-touch-icon.png` (180 px) generados desde `kapla-icon-1024.png`; se reemplazó `favicon.svg`.
+- Los logos fuente quedan en `src/assets/` (`kapla-dark-bg.png`, `kapla-light-bg.png`, `kapla-icon-1024.png`).
+- Pendiente: el logo del navbar y del footer sigue siendo el texto "KAPLA" (`Logo.astro`). Se puede reemplazar por el logo real cuando lo indiques.
+- Quitados de TODO-CONTENIDO: imagen para compartir y favicon.
