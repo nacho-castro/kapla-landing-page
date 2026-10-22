@@ -103,19 +103,6 @@
 - Datos en `testimonials` de `site.ts`. Mientras esté vacío, la sección **no aparece en producción**; en desarrollo muestra tarjetas de ejemplo marcadas como pendientes.
 - Verificado: `astro check` 0 errores, build OK sin la sección, capturas en 360 y 1280 px.
 
-## TODO-CONTENIDO (datos que faltan)
-| Dónde | Qué falta |
-|---|---|
-| `src/data/site.ts` | Meta description final |
-| `src/data/site.ts` + `public/` | Imagen para compartir (Open Graph, 1200x630) |
-| `src/components/Logo.astro` | Logo definitivo (hoy es texto "KAPLA") |
-| `public/favicon.svg` | Favicon definitivo |
-| `src/components/Work.astro` | Caso MiClase: descripción, capturas, enlace, estado |
-| `src/data/site.ts` | Alcance del paso Mantenimiento |
-| `.env` / Vercel | `PUBLIC_FORMSPREE_ID` (id del formulario de Formspree) |
-| `src/pages/privacidad.astro` | Revisión legal del aviso de privacidad |
-| `src/data/site.ts` (`testimonials`) | Opiniones reales de clientes (nombre/empresa, rubro/profesión, comentario), con permiso |
-
 ## Renovación — Pasos 0 y 1 (2026-10-22)
 
 ### Decisiones del dueño
@@ -170,3 +157,48 @@
 ### Para aprobar
 - Línea de apoyo del hero (propuesta): "Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas." (`sections.hero.support` en `site.ts`).
 - Los enlaces Servicios, Fundador y FAQ apuntan a secciones que se crean en los pasos 4, 7 y 8.
+
+## Renovación — Pasos 4 a 10 (2026-10-22)
+
+### Hecho
+- Servicios (`Services.astro`, `#servicios`): 4 tarjetas con ícono SVG inline, sin precios, un CTA a WhatsApp. Datos en `services` (`site.ts`).
+- Proyectos (`Projects.astro`, `#proyectos`, reemplaza a Work): pestañas con roles ARIA y flechas/Home/End; marco tipo navegador con alto fijo y scroll propio (región con `tabindex=0`, `aria-label`, foco visible; el scroll encadena a la página al llegar al final); sin iframes; sin JS se listan apilados; toggle Computadora/Celular solo si hay ambas capturas. Datos en `projects` (`site.ts`); las capturas se detectan por nombre en `src/assets/projects/<id>-desktop|mobile.*`.
+- Por qué KAPLA: estilos nuevos y CTA a WhatsApp. Proceso sin cambios (ya usa los tokens).
+- Fundador (`#fundador`) y FAQ (`#faq`, `<details>`, sin JS). Los datos pendientes no se muestran en producción: Fundador y su enlace del menú aparecen solo cuando `founder.bio` tenga texto; la FAQ muestra solo las preguntas con respuesta real (2 de 6) y emite JSON-LD `FAQPage` solo con esas.
+- Contacto solo WhatsApp: título, línea, botón verde grande y email. Eliminados el formulario, el JS de envío, el honeypot, Formspree, `PUBLIC_FORMSPREE_ID` (`.env.example` y `env.d.ts`) y todo Calendly. Botón flotante usa el mismo `whatsappUrl`. `/privacidad` actualizada (sin formulario).
+- SEO: meta description nueva (propuesta), datos estructurados `Organization` en `BaseLayout`. El sitemap lista páginas (`/` y `/privacidad`): los sitemaps no admiten anclas (#), por eso no se agregan.
+- Seguridad: CSP como `<meta>` generada por Astro con hashes de los scripts inline (`security.csp` en `astro.config.mjs`), sin `formspree.io` ni orígenes externos (`default-src 'self'`, `form-action 'none'`). `vercel.json` con `frame-ancestors 'none'`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, HSTS, `Permissions-Policy` y caché larga para `/fonts` y `/_astro`.
+- `SETUP.md` escrito (sin Formspree; con WhatsApp y capturas).
+
+### Verificado
+- `astro check` 0 errores, build OK, sin textos "Pendiente", Calendly ni Formspree en `dist/` ni en `src/`.
+- Lighthouse móvil (build servido con `astro preview`): Rendimiento 100, Accesibilidad 100, Buenas prácticas 100, SEO 100. LCP 1,4 s, CLS 0, TBT 0 ms, peso total 104 KiB.
+- Capturas en 360, 768 y 1280 px (Edge headless con emulación): sin scroll horizontal (scrollWidth igual al ancho).
+- Pendiente: probar con un celular real y con lectores de pantalla.
+
+## TODO-CONTENIDO (datos que faltan)
+| Dónde | Qué falta |
+|---|---|
+| `src/assets/projects/` | Capturas de página completa de MiClase y Jorgelina PMP (hoy hay imágenes provisorias, no son de página completa). Opcional: `-mobile` |
+| `src/data/site.ts` (`founder.bio`) | Texto en primera persona del fundador (nombre y cargo ya cargados: Ignacio Castro, Founder) |
+| `src/assets/founder.jpg` | Foto del fundador |
+| `src/data/site.ts` (`faq`) | Respuestas reales: tecnología, costo, plazos, después de la implementación (hoy `null`, no se muestran) |
+| `src/data/site.ts` (`services`) | Alcance exacto de la gestión de redes; aprobar los textos propuestos |
+| `src/data/site.ts` (`sections.hero.support`) | Aprobar la línea de apoyo |
+| `src/data/site.ts` (`site.description`) | Aprobar la meta description propuesta |
+| `src/data/site.ts` + `public/` | Imagen para compartir (Open Graph, 1200x630) |
+| `src/components/Logo.astro` | Logo definitivo (hoy es texto "KAPLA") |
+| `public/favicon.svg` | Favicon definitivo |
+| `src/data/site.ts` (`processSteps`) | Alcance del paso Mantenimiento |
+| `src/pages/privacidad.astro` | Revisión legal del aviso de privacidad |
+| `src/data/site.ts` (`testimonials`) | Opiniones reales de clientes, con permiso (la sección no aparece hasta que haya) |
+
+## Decisiones [SUPUESTO] a confirmar
+- `soft` queda en `#DDE1F5`; `accent` `#2A3FFF`; `accent-light` `#8F9BFF`.
+- General Sans: licencia de Fontshare sin verificar (la página requiere JS). Revisarla antes de publicar. Sin subset propio: se usan los archivos web de Fontshare (~23 KB c/u).
+- Header: Proceso y Por qué KAPLA no están en el menú. El enlace Fundador aparece solo cuando hay texto del fundador.
+- Sin precios visibles; se consulta por WhatsApp.
+- `/privacidad` se conserva simplificada.
+- Se mantiene la sección Opiniones (oculta mientras no haya opiniones reales).
+- CSP vía `<meta>` (Astro) más cabeceras en `vercel.json`; HSTS con `preload`.
+- Si usás otro hosting que no sea Vercel, `vercel.json` hay que traducirlo a ese hosting.

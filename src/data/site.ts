@@ -33,15 +33,15 @@ export interface SectionInfo {
 
 export const site = {
   name: 'KAPLA',
-  // TODO-CONTENIDO: final meta description (step 5, SEO).
+  // Proposed copy, pending owner approval.
   description:
-    'KAPLA diseña e implementa automatización de procesos e inteligencia artificial a medida para PyMEs.',
+    'KAPLA organiza y automatiza el negocio de tu PyME: inteligencia artificial, páginas web, CRMs y gestión de redes. Pedí una auditoría gratis.',
   email: 'kaplatech.ar@gmail.com' as string | null,
   // International format, digits only (used in https://wa.me/<number>).
   whatsapp: '5491126944636',
   // TODO-CONTENIDO: own share image (1200x630 PNG/JPG in public/, e.g. '/og-image.png'). Until then no og:image is emitted.
   ogImage: null as string | null,
-  ogImageAlt: 'KAPLA: automatización de procesos e inteligencia artificial para PyMEs',
+  ogImageAlt: 'KAPLA: automatizamos tus sistemas y ordenamos tu negocio',
   locale: 'es_AR',
 };
 
