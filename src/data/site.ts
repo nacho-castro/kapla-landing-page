@@ -31,6 +31,9 @@ export interface SectionInfo {
   subtitle?: string;
   /** Short supporting line (hero only). */
   support?: string;
+  /** Hero only: fixed lead of the title and the rotating words that complete it. */
+  titleLead?: string;
+  titleWords?: string[];
 }
 
 export const site = {
@@ -69,6 +72,9 @@ export const sections = {
   hero: {
     id: 'inicio',
     title: 'Automatizamos tus sistemas.',
+    /** Fixed part of the title and the words that rotate after it (the first one must match `title`). */
+    titleLead: 'Automatizamos tus',
+    titleWords: ['sistemas', 'redes', 'consultas', 'procesos', 'tareas'],
     subtitle: 'Tu negocio, completamente ordenado.',
     // TODO-CONTENIDO: owner approval of this proposed supporting line.
     support: 'Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas.',

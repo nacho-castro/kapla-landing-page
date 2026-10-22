@@ -234,3 +234,9 @@
 - Los logos fuente quedan en `src/assets/` (`kapla-dark-bg.png`, `kapla-light-bg.png`, `kapla-icon-1024.png`).
 - Pendiente: el logo del navbar y del footer sigue siendo el texto "KAPLA" (`Logo.astro`). Se puede reemplazar por el logo real cuando lo indiques.
 - Quitados de TODO-CONTENIDO: imagen para compartir y favicon.
+
+## Título rotativo y navegación de Proyectos (2026-10-22)
+- Hero: "Automatizamos tus [sistemas | redes | consultas | procesos | tareas]." La última palabra rota cada 2,4 s (solo CSS: sube con desenfoque, en azul claro con brillo). Lector de pantalla y visitantes sin movimiento ven el título fijo "Automatizamos tus sistemas." (`sections.hero.titleWords` en `site.ts`). "ordenado" del subtítulo se agranda y achica suave.
+- Proyectos: contador "Proyecto 1 de 2" con flechas anterior/siguiente (dan la vuelta), swipe horizontal en pantallas táctiles y transición de deslizamiento entre proyectos. Se muestran solo si hay más de un proyecto y con JS.
+- Para videos en el futuro: cada captura vive dentro de un marco (navegador o teléfono); reemplazar la imagen por un `<video muted loop playsinline>` local es compatible con la CSP actual (`default-src 'self'`). Cuando estén listos hay que sumar un campo `video` en `site.ts` y mantener el peso bajo.
+- Verificado: `astro check` 0 errores, build OK. Lighthouse móvil: ver mensaje final.
