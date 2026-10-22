@@ -1,0 +1,34 @@
+---
+// Language switch: links to the same page in the other language (no JavaScript).
+import Flag from './Flag.astro';
+import { languages, type Lang } from '../data/content';
+
+interface Props {
+  lang: Lang;
+  alternates: Record<Lang, string>;
+  label: string;
+  class?: string;
+}
+
+const { lang, alternates, label, class: className = '' } = Astro.props;
+const order: Lang[] = ['es', 'en'];
+---
+
+<div role="group" aria-label={label} class:list={['inline-flex items-center gap-1 rounded-full border border-white/15 p-1', className]}>
+  {
+    order.map((code) => (
+      <a
+        href={alternates[code]}
+        lang={languages[code].htmlLang}
+        hreflang={languages[code].htmlLang}
+        aria-current={code === lang ? 'true' : undefined}
+        title={languages[code].name}
+        class="inline-flex min-h-10 items-center gap-1.5 rounded-full px-2.5 text-xs font-semibold text-soft transition-colors hover:text-white aria-[current=true]:bg-soft aria-[current=true]:text-ink motion-reduce:transition-none"
+      >
+        <Flag code={code} class="h-3.5 w-5 shrink-0" />
+        <span class="hidden sm:inline">{languages[code].code}</span>
+        <span class="sr-only">{languages[code].name}</span>
+      </a>
+    ))
+  }
+</div>

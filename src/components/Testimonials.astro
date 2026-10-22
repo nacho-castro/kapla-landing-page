@@ -2,9 +2,11 @@
 import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { sampleTestimonials, sections, testimonials } from '../data/site';
+import { getContent } from '../data/content';
+import { sampleTestimonials, testimonials } from '../data/site';
 
-const { id, title } = sections.testimonials;
+const c = getContent(Astro.currentLocale);
+const { id, title } = c.sections.testimonials;
 const isDev = import.meta.env.DEV;
 // Real testimonials only; dev shows placeholders so the layout can be reviewed.
 const items = testimonials.length > 0 ? testimonials : isDev ? sampleTestimonials : [];
@@ -23,7 +25,7 @@ const items = testimonials.length > 0 ? testimonials : isDev ? sampleTestimonial
       <div
         class="-mx-gutter mt-10 overflow-x-auto px-gutter pb-4 [scrollbar-width:thin]"
         role="region"
-        aria-label="Opiniones de clientes (deslizá para ver más)"
+        aria-label={c.ui.testimonialsRegion}
         tabindex="0"
       >
         <ul class="flex snap-x snap-mandatory gap-6">

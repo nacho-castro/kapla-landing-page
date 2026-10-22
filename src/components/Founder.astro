@@ -3,9 +3,12 @@ import { Image } from 'astro:assets';
 import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { founder, founderPhoto, sections, showFounder } from '../data/site';
+import { getContent } from '../data/content';
+import { founderPhoto } from '../data/site';
 
-const { id, title } = sections.founder;
+const c = getContent(Astro.currentLocale);
+const { id, title } = c.sections.founder;
+const { founder, showFounder } = c;
 ---
 
 {
@@ -18,7 +21,7 @@ const { id, title } = sections.founder;
           {founderPhoto ? (
             <Image
               src={founderPhoto}
-              alt={`${founder.name}, ${founder.role} de KAPLA`}
+              alt={c.ui.founderAlt(founder.name, founder.role)}
               width={448}
               height={448}
               class="aspect-square w-40 rounded-2xl object-cover md:w-56"

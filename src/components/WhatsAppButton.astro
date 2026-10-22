@@ -1,14 +1,16 @@
 ---
 // Small floating WhatsApp link, available on every page.
 import Icon from './Icon.astro';
-import { whatsappUrl } from '../data/site';
+import { getContent } from '../data/content';
+
+const c = getContent(Astro.currentLocale);
 ---
 
 <a
-  href={whatsappUrl}
+  href={c.navCta.href}
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="Escribinos por WhatsApp (se abre en una pestaña nueva)"
+  aria-label={`${c.ui.whatsappFloat} (${c.ui.newTab})`}
   class="fixed right-4 bottom-4 z-40 inline-flex size-14 items-center justify-center rounded-full bg-whatsapp text-ink shadow-md hover:brightness-95 md:right-6 md:bottom-6"
 >
   <Icon name="whatsapp" class="size-7" />

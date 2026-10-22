@@ -2,10 +2,12 @@
 import Icon from './Icon.astro';
 import Glow from './Glow.astro';
 import Section from './Section.astro';
-import { sections, why } from '../data/site';
+import { getContent } from '../data/content';
 import { externalAttrs } from '../utils/links';
 
-const { id, title } = sections.why;
+const c = getContent(Astro.currentLocale);
+const { id, title } = c.sections.why;
+const { why } = c;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`}>
@@ -19,7 +21,7 @@ const { id, title } = sections.why;
       {why.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       <a
         href={why.cta.href}
-        {...externalAttrs(why.cta)}
+        {...externalAttrs(why.cta, c.ui.newTab)}
         class="inline-flex min-h-12 items-center gap-2 rounded-full bg-whatsapp px-6 font-semibold text-ink hover:brightness-95"
       >
         <Icon name="whatsapp" class="size-5" />

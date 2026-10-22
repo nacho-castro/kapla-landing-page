@@ -259,3 +259,12 @@
 
 ## Navbar: "Nosotros" en lugar de "Fundador" (2026-10-22)
 - El enlace del menú pasa a "Nosotros" y apunta a Por qué KAPLA (`#por-que`, "Somos KAPLA."). Sigue resaltado también mientras se ve la sección del fundador (`also` en `navLinks`). La sección Fundador se mueve justo después de Por qué para que "Nosotros" sea un bloque continuo; Proceso va después.
+
+## Selector de idioma: español e inglés (2026-10-22)
+- Sitio bilingüe: español en `/` y `/privacidad`, inglés en `/en/` y `/en/privacy/` (rutas de Astro i18n, estático, sin JS). Cada página tiene `hreflang` (es, en, x-default), canónica propia y `og:locale`; el sitemap lista las 4 páginas con sus equivalentes.
+- Contenido traducido en `src/data/content.ts` (bloques `es` y `en` con la misma forma: textos de secciones, servicios, proyectos, FAQ, privacidad, mensajes de accesibilidad y mensaje precargado de WhatsApp en inglés). Datos neutros (contacto, enlaces, archivos de proyectos) en `src/data/site.ts`. Los componentes toman el idioma con `getContent(Astro.currentLocale)`; `HomePage.astro` y `PrivacyPage.astro` evitan duplicar páginas.
+- Selector: dos botones con bandera de España y de EE.UU. (SVG inline) y código ES/EN; el activo se resalta. Enlaza a la misma página en el otro idioma. En el navbar, junto al botón de auditoría (escritorio) o junto a la hamburguesa (celular). El menú de escritorio pasa de 768 px a 1024 px para que todo entre; por debajo se usa el menú desplegable.
+- Textos del inglés escritos por mí (voz simple y directa), incluida la traducción del aviso de privacidad: conviene que los revises, igual que la revisión legal pendiente.
+- Las capturas de los proyectos siguen mostrando los sitios en español (son sus pantallas reales).
+- Los textos que solo se ven en desarrollo (marcas de pendiente) siguen en español.
+- Verificado: `astro check` 0 errores, build OK (4 páginas), Lighthouse móvil 100/100/100/100 en las 4 páginas, capturas en 360 y 1280 px.

@@ -2,15 +2,14 @@
 import HeroBackground from './HeroBackground.astro';
 import Icon from './Icon.astro';
 import Section from './Section.astro';
-import { heroCtas, sections } from '../data/site';
+import { getContent } from '../data/content';
 import { externalAttrs } from '../utils/links';
 
-const { id, title, subtitle, support, titleLead, titleWords } = sections.hero;
-const words: string[] = titleWords;
+const c = getContent(Astro.currentLocale);
+const { title, subtitle, support, titleLead, titleWords: words, highlight, primary, secondary } = c.hero;
+const id = 'inicio';
 // The highlighted word of the subtitle breathes (grows and shrinks slightly).
-const highlight = 'ordenado';
 const [subtitleBefore = '', subtitleAfter = ''] = subtitle.split(highlight);
-const { primary, secondary } = heroCtas;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`} class="flex min-h-svh items-center pt-28! pb-16! md:pt-32! md:pb-20! [&>div]:w-full">
@@ -33,7 +32,7 @@ const { primary, secondary } = heroCtas;
   <div class="hero-in hero-in-4 mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
     <a
       href={primary.href}
-      {...externalAttrs(primary)}
+      {...externalAttrs(primary, c.ui.newTab)}
       class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 bg-violet px-6 font-semibold text-white hover:bg-violet-deep"
     >
       <Icon name="whatsapp" class="size-5" />

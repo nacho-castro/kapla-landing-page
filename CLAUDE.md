@@ -27,7 +27,7 @@ Menos secciones y más claras. No agregar nada fuera del alcance.
 - Íconos de interfaz: **SVG inline** (estilo de trazo uniforme). Íconos de redes (Instagram, LinkedIn, TikTok): SVG inline.
 - Imágenes: formatos modernos (WebP/AVIF), con `width` y `height`, `loading="lazy"` excepto la del hero. Usar el componente de imágenes de Astro.
 - Hosting: Vercel (o Cloudflare Pages / Netlify). Sitio estático.
-- Contacto: **solo WhatsApp** (enlace único `wa.me` con mensaje precargado, definido una vez en `src/data/site.ts`). No hay formulario ni servicio de formularios.
+- Contacto: **solo WhatsApp** (enlace único `wa.me` con mensaje precargado, definido una vez por idioma en `src/data/content.ts`). No hay formulario ni servicio de formularios.
 
 ## Comandos
 - Instalar: `npm install`
@@ -39,7 +39,7 @@ Menos secciones y más claras. No agregar nada fuera del alcance.
 ## Idioma y tono
 - Español, tono **cercano y directo, con voseo argentino** ("Escribinos", "Probá") [DECISIÓN].
 - Frases cortas, sin jerga técnica, sin promesas exageradas ni superlativos vacíos.
-- Texto del código y commits en inglés. `<html lang="es">`.
+- Texto del código y commits en inglés. El sitio tiene **dos idiomas**: español (`/`, `<html lang="es">`, voseo) e inglés (`/en/`). Todo el texto traducible está en `src/data/content.ts` (bloques `es` y `en`, siempre sincronizados); los datos neutros en `src/data/site.ts`. Selector de idioma con banderas de España y EE.UU. en el navbar.
 - **Sin emojis** en ningún lado: ni en la página, ni en el código, ni en los commits.
 
 ## Estructura de la página (una sola página con anclas)
@@ -104,7 +104,7 @@ Estilo: **minimalista, ordenado y profesional.**
 - Nunca ejecutar comandos destructivos (`rm -rf`, `git push --force`, etc.) sin mi confirmación.
 
 ## Fuera de alcance
-Blog, CMS, múltiples idiomas, login, carrito o pagos, chatbot, animaciones pesadas,
+Blog, CMS, login, carrito o pagos, chatbot, animaciones pesadas,
 banners de cookies, panel de administración, formulario de contacto, Calendly, precios visibles.
 
 ## Convenciones de código

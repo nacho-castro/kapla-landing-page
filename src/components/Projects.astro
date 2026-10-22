@@ -3,9 +3,11 @@ import { Image } from 'astro:assets';
 import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { projects, sections } from '../data/site';
+import { getContent } from '../data/content';
 
-const { id, title, subtitle } = sections.projects;
+const c = getContent(Astro.currentLocale);
+const { id, title, subtitle } = c.sections.projects;
+const { projects, ui } = c;
 const views = ['desktop', 'mobile'] as const;
 ---
 
@@ -19,7 +21,7 @@ const views = ['desktop', 'mobile'] as const;
   <div data-projects data-reveal class="mt-10">
     {/* Tabs are shown only with JavaScript (html.js); without it every project is listed one after another. */}
     <div data-tablist-wrap>
-      <div role="tablist" aria-label="Proyectos" class="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+      <div role="tablist" aria-label={ui.projectsTabs} class="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
         {
           projects.map((p, i) => (
             <button
@@ -52,14 +54,14 @@ const views = ['desktop', 'mobile'] as const;
       projects.length > 1 && (
         <div data-controls class="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-4">
           <p class="text-sm text-muted-dark" aria-live="polite">
-            Proyecto <span data-counter class="font-semibold text-white">1</span> de {projects.length}
-            <span class="hidden sm:inline"> · deslizá o usá las flechas</span>
+            {ui.projectCounter('\u0000', projects.length).split('\u0000')[0]}<span data-counter class="font-semibold text-white">1</span>{ui.projectCounter('\u0000', projects.length).split('\u0000')[1]}
+            <span class="hidden sm:inline">{ui.projectHint}</span>
           </p>
           <div class="flex gap-2">
             <button
               type="button"
               data-prev
-              aria-label="Proyecto anterior"
+              aria-label={ui.prevProject}
               class="inline-flex size-12 items-center justify-center rounded-full border border-white/25 text-soft transition-colors hover:bg-white/10"
             >
               <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" /></svg>
@@ -67,7 +69,7 @@ const views = ['desktop', 'mobile'] as const;
             <button
               type="button"
               data-next
-              aria-label="Proyecto siguiente"
+              aria-label={ui.nextProject}
               class="inline-flex size-12 items-center justify-center rounded-full bg-soft text-ink transition-transform hover:scale-105"
             >
               <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" /></svg>
@@ -122,8 +124,8 @@ const views = ['desktop', 'mobile'] as const;
                   rel="noopener noreferrer"
                   class="mt-6 inline-flex min-h-12 items-center justify-center rounded-full border border-soft/40 px-6 font-semibold text-soft transition-colors hover:bg-white/10"
                 >
-                  Ver en vivo
-                  <span class="sr-only"> {p.name} (se abre en una pestaña nueva)</span>
+                  {ui.viewLive}
+                  <span class="sr-only"> {p.name} ({ui.newTab})</span>
                 </a>
               </div>
 
@@ -138,7 +140,7 @@ const views = ['desktop', 'mobile'] as const;
                         aria-pressed={view === 'desktop' ? 'true' : 'false'}
                         class="min-h-10 rounded-full px-4 text-sm font-medium text-soft transition-colors aria-pressed:bg-soft aria-pressed:text-ink"
                       >
-                        {view === 'desktop' ? 'Computadora' : 'Celular'}
+                        {view === 'desktop' ? ui.deviceDesktop : ui.deviceMobile}
                       </button>
                     ))}
                   </div>
@@ -150,7 +152,7 @@ const views = ['desktop', 'mobile'] as const;
                   return (
                     <div data-device-view={view} class="space-y-4">
                       {shots.length > 1 && (
-                        <div data-chips class="flex flex-wrap gap-2" role="group" aria-label="Pantallas">
+                        <div data-chips class="flex flex-wrap gap-2" role="group" aria-label={ui.screensGroup}>
                           {shots.map((shot, i) => (
                             <button
                               type="button"

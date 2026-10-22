@@ -3,11 +3,13 @@ import Icon from './Icon.astro';
 import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { heroCtas, sections, services } from '../data/site';
+import { getContent } from '../data/content';
 import { externalAttrs } from '../utils/links';
 
-const { id, title, subtitle } = sections.services;
-const cta = heroCtas.primary;
+const c = getContent(Astro.currentLocale);
+const { id, title, subtitle } = c.sections.services;
+const { services } = c;
+const cta = c.hero.primary;
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`}>
@@ -38,7 +40,7 @@ const cta = heroCtas.primary;
   <div data-reveal class="mt-10">
     <a
       href={cta.href}
-      {...externalAttrs(cta)}
+      {...externalAttrs(cta, c.ui.newTab)}
       class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-whatsapp px-6 font-semibold text-ink hover:brightness-95"
     >
       <Icon name="whatsapp" class="size-5" />

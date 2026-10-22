@@ -2,9 +2,11 @@
 import Glow from './Glow.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { faq, sections, showFaq } from '../data/site';
+import { getContent } from '../data/content';
 
-const { id, title } = sections.faq;
+const c = getContent(Astro.currentLocale);
+const { id, title } = c.sections.faq;
+const { faq, showFaq } = c;
 const isDev = import.meta.env.DEV;
 // Production shows only questions with a real answer; development also shows the pending ones.
 const items = faq.filter((item) => isDev || item.answer !== null);

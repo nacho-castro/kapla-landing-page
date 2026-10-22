@@ -3,11 +3,14 @@ import Glow from './Glow.astro';
 import Icon from './Icon.astro';
 import Section from './Section.astro';
 import TodoContent from './TodoContent.astro';
-import { contact, heroCtas, sections, site } from '../data/site';
+import { getContent } from '../data/content';
+import { site } from '../data/site';
 import { externalAttrs } from '../utils/links';
 
-const { id, title } = sections.contact;
-const cta = { ...heroCtas.primary, label: contact.whatsappLabel };
+const c = getContent(Astro.currentLocale);
+const { id, title } = c.sections.contact;
+const { contact } = c;
+const cta = { ...c.hero.primary, label: contact.whatsappLabel };
 ---
 
 <Section id={id} tone="dark" labelledBy={`${id}-title`}>
@@ -17,7 +20,7 @@ const cta = { ...heroCtas.primary, label: contact.whatsappLabel };
     <p class="mt-4 text-lg text-muted-dark">{contact.intro}</p>
     <a
       href={cta.href}
-      {...externalAttrs(cta)}
+      {...externalAttrs(cta, c.ui.newTab)}
       class="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-8 text-lg font-semibold text-ink hover:brightness-95 sm:w-auto"
     >
       <Icon name="whatsapp" class="size-6" />
@@ -33,7 +36,7 @@ const cta = { ...heroCtas.primary, label: contact.whatsappLabel };
             {contact.emailLabel}: {site.email}
           </a>
         ) : (
-          <TodoContent tone="dark">email de contacto.</TodoContent>
+          <TodoContent tone="dark">{c.ui.emailTodo}</TodoContent>
         )
       }
     </p>

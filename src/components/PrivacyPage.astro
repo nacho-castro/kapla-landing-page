@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getContent, pagePath } from '../data/content';
+import { site } from '../data/site';
+
+// TODO-CONTENIDO: have this notice reviewed by a lawyer before launch (both languages).
+const c = getContent(Astro.currentLocale);
+const p = c.privacy;
+---
+
+<BaseLayout page="privacy" title={p.metaTitle} description={p.metaDescription}>
+  <article class="mx-auto max-w-2xl px-gutter py-section pt-36">
+    <h1 class="text-3xl font-semibold tracking-tight text-brand md:text-4xl">{p.title}</h1>
+    <p class="mt-2 text-sm text-muted">{p.updatedLabel}: {p.updated}</p>
+
+    <div class="mt-10 space-y-8 text-lg leading-relaxed text-muted [&_h2]:mb-2 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink">
+      {
+        p.sections.map((section) => (
+          <section>
+            <h2>{section.heading}</h2>
+            {section.paragraphs.map((text, index) => (
+              <p class:list={[index > 0 && 'mt-4']}>
+                {text}
+                {section.email && index === 0 && (
+                  <>
+                    {' '}
+                    <a href={`mailto:${site.email}`} class="text-brand underline underline-offset-4">{site.email}</a>.
+                  </>
+                )}
+              </p>
+            ))}
+          </section>
+        ))
+      }
+    </div>
+
+    <p class="mt-12">
+      <a href={pagePath(c.lang, 'home')} class="font-semibold text-brand underline underline-offset-4 hover:text-ink">{p.back}</a>
+    </p>
+  </article>
+</BaseLayout>

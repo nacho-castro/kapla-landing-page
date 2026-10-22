@@ -1,0 +1,31 @@
+---
+// Small inline SVG flags (Spain and United States). Decorative: the language name is always in the text.
+interface Props {
+  code: 'es' | 'en';
+  class?: string;
+}
+
+const { code, class: className = 'h-4 w-6' } = Astro.props;
+// 13 stripes of the US flag: red on even positions.
+const stripes = Array.from({ length: 7 }, (_, i) => i * 2);
+---
+
+<svg class:list={[className, 'overflow-hidden rounded-[3px]']} viewBox="0 0 24 16" aria-hidden="true" focusable="false">
+  <g>
+    {
+      code === 'es' ? (
+        <>
+          <rect width="24" height="16" fill="#C60B1E" />
+          <rect y="4" width="24" height="8" fill="#FFC400" />
+        </>
+      ) : (
+        <>
+          <rect width="24" height="16" fill="#FFFFFF" />
+          {stripes.map((i) => <rect y={(i * 16) / 13} width="24" height={16 / 13} fill="#B22234" />)}
+          <rect width="10.4" height="8.6" fill="#3C3B6E" />
+          {[2, 5, 8].flatMap((x) => [1.8, 4.3, 6.8].map((y) => <circle cx={x} cy={y} r="0.55" fill="#FFFFFF" />))}
+        </>
+      )
+    }
+  </g>
+</svg>

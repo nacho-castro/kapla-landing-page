@@ -22,19 +22,21 @@ Buscá `TODO-CONTENIDO` en el código para ver todos. Resumen:
 | Qué | Dónde | Qué hacer |
 |---|---|---|
 | Capturas de proyectos | `src/assets/projects/` | Reemplazar `miclase-desktop.png` y `jorgelina-pmp-desktop.png` por capturas de **página completa** (mismo nombre). Opcional: sumar `miclase-mobile.png` y `jorgelina-pmp-mobile.png` y aparece el botón Computadora/Celular. |
-| Texto del fundador | `src/data/site.ts` > `founder.bio` | Escribir 2 o 3 párrafos en primera persona. Mientras esté vacío, la sección Fundador y su enlace del menú no aparecen. |
+| Texto del fundador | `src/data/content.ts` > `founder.bio` | Escribir 2 o 3 párrafos en primera persona. Mientras esté vacío, la sección Fundador y su enlace del menú no aparecen. |
 | Foto del fundador | `src/assets/founder.jpg` | Foto cuadrada, de al menos 640 px (jpg, png o webp). |
-| Respuestas de FAQ | `src/data/site.ts` > `faq` | Reemplazar los `answer: null` por la respuesta real. No poner precios ni plazos si no son reales. |
-| Alcance de la gestión de redes | `src/data/site.ts` > `services` | Definir qué incluye (plataformas, frecuencia). |
-| Línea de apoyo del hero | `src/data/site.ts` > `sections.hero.support` | Aprobar o cambiar el texto propuesto. |
-| Textos de Servicios | `src/data/site.ts` > `services` | Aprobar o cambiar las descripciones propuestas. |
-| Meta description | `src/data/site.ts` > `site.description` | Aprobar o cambiar el texto propuesto. |
+| Respuestas de FAQ | `src/data/content.ts` > `faq` | Reemplazar los `answer: null` por la respuesta real. No poner precios ni plazos si no son reales. |
+| Alcance de la gestión de redes | `src/data/content.ts` > `services` | Definir qué incluye (plataformas, frecuencia). |
+| Línea de apoyo del hero | `src/data/content.ts` > `hero.support` | Aprobar o cambiar el texto propuesto. |
+| Textos de Servicios | `src/data/content.ts` > `services` | Aprobar o cambiar las descripciones propuestas. |
+| Meta description | `src/data/content.ts` > `meta.description` | Aprobar o cambiar el texto propuesto. |
 | Logo | `src/components/Logo.astro` | Hoy es el texto "KAPLA". |
 | Opiniones de clientes | `src/data/site.ts` > `testimonials` | Solo opiniones reales y con permiso. Mientras esté vacío, la sección no aparece. |
-| Alcance del Mantenimiento | `src/data/site.ts` > `processSteps` | Confirmar qué incluye. |
+| Alcance del Mantenimiento | `src/data/content.ts` > `process.steps` | Confirmar qué incluye. |
 | Revisión legal | `src/pages/privacidad.astro` | Que un abogado revise el aviso de privacidad. |
 
-Para agregar un proyecto nuevo: sumá un bloque en `projects` (`src/data/site.ts`) y la captura en `src/assets/projects/<id>-desktop.png`. No hay que tocar componentes.
+Para agregar un proyecto nuevo: sumá un bloque en `projectBase` (`src/data/site.ts`), sus textos en español e inglés en `projects` (`src/data/content.ts`) y las capturas en `src/assets/projects/` con el nombre `<id>-desktop-<pantalla>.jpg` y `<id>-celular-<pantalla>.jpg`. No hay que tocar componentes.
+
+**Idiomas:** el sitio está en español (`/`) y en inglés (`/en/`). Todo el texto vive en `src/data/content.ts`, con un bloque `es` y otro `en`: al cambiar un texto, cambialo en los dos. El selector de idioma (banderas de España y EE.UU.) está en el menú y lleva a la misma página en el otro idioma. Las pendientes de la tabla de arriba valen para ambos idiomas.
 
 ## 4. WhatsApp (contacto)
 
