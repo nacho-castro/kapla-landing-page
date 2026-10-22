@@ -1,7 +1,5 @@
 // Editable site content. Components read from here; change text and links in this file.
 import type { ImageMetadata } from 'astro';
-import miclaseImage from '../assets/miclase-mockup.png';
-import jorgelinaImage from '../assets/jorgelinapmp-web.png';
 
 export interface NavLink {
   label: string;
@@ -81,7 +79,7 @@ export const sections = {
     support: 'Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas.',
   },
   services: { id: 'servicios', title: 'Servicios', subtitle: 'Cuatro formas de ordenar y automatizar tu negocio.' },
-  work: { id: 'proyectos', title: 'Proyectos' },
+  projects: { id: 'proyectos', title: 'Proyectos', subtitle: 'Sistemas y sitios que ya están funcionando.' },
   why: { id: 'por-que', title: 'Por qué KAPLA' },
   process: { id: 'proceso', title: 'Proceso' },
   testimonials: { id: 'opiniones', title: 'Lo que dicen nuestros clientes' },
@@ -187,47 +185,70 @@ export const processSteps: ProcessStep[] = [
   },
 ];
 
-export interface WorkCase {
-  name: string;
-  /** Honest status label, e.g. 'En desarrollo'. */
-  status?: string;
-  tagline: string;
-  description?: string;
-  features: string[];
-  link?: CtaLink;
-  /** Screenshot shown in the work section; clicking it opens `link`. */
-  image?: { src: ImageMetadata; alt: string };
+export interface ProjectShot {
+  src: ImageMetadata;
+  alt: string;
 }
 
-export const featuredCase: WorkCase = {
-  name: 'MiClase',
-  status: 'En producción',
-  tagline: 'Gestor completo para profesores particulares.',
-  description:
-    'Alumnos, calendario, asistencia y cobros en un solo lugar. Para profesores de idiomas, música, arte, matemática y más.',
-  features: [
-    'Alumnos organizados por grupo',
-    'Clases únicas o recurrentes, en vista semanal o mensual',
-    'Asistencia y pagos: sabé quién te debe',
-    'Funciona desde el celular, con acceso por Google o email',
-  ],
-  link: { label: 'Ver sitio', href: 'https://miclase.net.ar/', external: true },
-  image: {
-    src: miclaseImage,
-    alt: 'Pantalla de inicio de MiClase en el celular: clases del día, cobrado del mes y deudas.',
-  },
-};
+export interface Project {
+  id: string;
+  name: string;
+  /** Industry or kind of project, shown in the tab. */
+  sector: string;
+  /** Honest status label, e.g. 'En producción'. */
+  status?: string;
+  description: string;
+  features: string[];
+  url: string;
+  /** Domain shown in the browser frame. */
+  domain: string;
+  /** Full-page screenshots. Drop files named `<id>-desktop` / `<id>-mobile` in src/assets/projects/. */
+  desktop?: ProjectShot | undefined;
+  mobile?: ProjectShot | undefined;
+}
 
-export const otherCases: WorkCase[] = [
+const shotFiles = import.meta.glob<{ default: ImageMetadata }>('../assets/projects/*.{png,jpg,jpeg,webp}', {
+  eager: true,
+});
+
+function shot(id: string, kind: 'desktop' | 'mobile', alt: string): ProjectShot | undefined {
+  const pattern = new RegExp(`/${id}-${kind}\\.(png|jpe?g|webp)$`);
+  const match = Object.entries(shotFiles).find(([path]) => pattern.test(path));
+  return match ? { src: match[1].default, alt } : undefined;
+}
+
+// TODO-CONTENIDO: replace the files in src/assets/projects/ with full-page screenshots
+// (desktop, and optionally `-mobile`). The current desktop files are provisional, not full-page.
+// To add a project, add an entry here: no component changes needed.
+export const projects: Project[] = [
   {
+    id: 'miclase',
+    name: 'MiClase',
+    sector: 'Gestor para profesores particulares',
+    status: 'En producción',
+    description:
+      'Alumnos, calendario, asistencia y cobros en un solo lugar. Para profesores de idiomas, música, arte, matemática y más.',
+    features: [
+      'Alumnos organizados por grupo',
+      'Clases únicas o recurrentes, en vista semanal o mensual',
+      'Asistencia y pagos: sabé quién te debe',
+      'Funciona desde el celular, con acceso por Google o email',
+    ],
+    url: 'https://miclase.net.ar/',
+    domain: 'miclase.net.ar',
+    desktop: shot('miclase', 'desktop', 'Página de MiClase: qué es, para quién y cómo se usa.'),
+    mobile: shot('miclase', 'mobile', 'Página de MiClase en el celular.'),
+  },
+  {
+    id: 'jorgelina-pmp',
     name: 'Jorgelina PMP',
-    tagline: 'Sitio web de artista.',
+    sector: 'Sitio web de artista',
+    description: 'Sitio web para mostrar obras y presentar a la artista.',
     features: [],
-    link: { label: 'Ver sitio', href: 'https://jorgelinapmp.com.ar/', external: true },
-    image: {
-      src: jorgelinaImage,
-      alt: 'Página de inicio del sitio de Jorgelina PMP: menú, obras en el banner y retrato de la artista.',
-    },
+    url: 'https://jorgelinapmp.com.ar/',
+    domain: 'jorgelinapmp.com.ar',
+    desktop: shot('jorgelina-pmp', 'desktop', 'Página de Jorgelina PMP: obras y retrato de la artista.'),
+    mobile: shot('jorgelina-pmp', 'mobile', 'Sitio de Jorgelina PMP en el celular.'),
   },
 ];
 

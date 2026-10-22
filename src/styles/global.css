@@ -77,7 +77,7 @@
   border: 1px solid color-mix(in srgb, var(--color-white) 14%, transparent);
   box-shadow: 0 8px 24px color-mix(in srgb, var(--color-ink) 28%, transparent);
   @supports (backdrop-filter: blur(1px)) {
-    background-color: color-mix(in srgb, var(--color-ink) 82%, transparent);
+    background-color: color-mix(in srgb, var(--color-ink) 90%, transparent);
     backdrop-filter: blur(14px);
   }
 }
