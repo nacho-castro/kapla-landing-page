@@ -11,8 +11,8 @@ const { id, title } = sections.founder;
   showFounder && (
     <Section id={id} tone="light" labelledBy={`${id}-title`}>
       <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{title}</h2>
-      <div class="mt-10 grid gap-8 md:grid-cols-[14rem_1fr] md:items-start md:gap-12">
-        <div>
+      <div class:list={['mt-10 grid gap-8 md:items-start md:gap-12', (founderPhoto || import.meta.env.DEV) && 'md:grid-cols-[14rem_1fr]']}>
+        {(founderPhoto || import.meta.env.DEV) && (<div>
           {founderPhoto ? (
             <Image
               src={founderPhoto}
@@ -24,7 +24,7 @@ const { id, title } = sections.founder;
           ) : (
             <TodoContent>foto de {founder.name} (src/assets/founder.jpg, cuadrada).</TodoContent>
           )}
-        </div>
+        </div>)}
         <div class="max-w-2xl">
           <p class="text-xl font-semibold text-ink">{founder.name}</p>
           <p class="text-muted">{founder.role}</p>

@@ -135,6 +135,9 @@ export const services: Service[] = [
   },
 ];
 
+/** After-sales policy: one text shared by the Mantenimiento step and the FAQ so they always match. */
+const afterImplementation = 'Hasta 2 revisiones gratis. Después, cualquier consulta extra tiene un costo.';
+
 export type ProcessIcon = 'audit' | 'design' | 'build' | 'maintain';
 
 export interface ProcessStep {
@@ -165,8 +168,7 @@ export const processSteps: ProcessStep[] = [
   {
     icon: 'maintain',
     title: 'Mantenimiento',
-    // TODO-CONTENIDO: confirm maintenance scope (included period, paid plan, etc.).
-    text: 'Revisamos que todo siga funcionando bien y hacemos los ajustes que hagan falta.',
+    text: afterImplementation,
   },
 ];
 
@@ -265,12 +267,14 @@ export interface Founder {
   bio: string[];
 }
 
-// TODO-CONTENIDO: founder text in first person (who is behind KAPLA and why) and photo.
+// TODO-CONTENIDO: photo (and optionally a longer text: who is behind KAPLA and why).
 // Photo: drop `founder.png|jpg|webp` in src/assets/ (square, at least 640 px).
 export const founder: Founder = {
   name: 'Ignacio Castro',
   role: 'Founder',
-  bio: [],
+  bio: [
+    'Soy Ignacio, ingeniero de software. Automatizo procesos y sumo inteligencia artificial a PyMEs para que pierdan menos tiempo en tareas repetitivas.',
+  ],
 };
 
 const founderFiles = import.meta.glob<{ default: ImageMetadata }>('../assets/founder.{png,jpg,jpeg,webp}', {
@@ -284,20 +288,26 @@ export interface FaqItem {
   answer: string | null;
 }
 
-// TODO-CONTENIDO: answers marked null. Never invent prices or timelines.
+// TODO-CONTENIDO: price and timing answers (null). Never invent prices or timelines.
 export const faq: FaqItem[] = [
   {
     question: '¿Qué es la auditoría?',
     answer: 'Revisamos cómo trabaja hoy tu equipo y detectamos qué tareas consumen más tiempo o generan errores.',
   },
-  { question: '¿Necesito saber de tecnología?', answer: null },
+  {
+    question: '¿Necesito saber de tecnología?',
+    answer: 'No. Solo tenés que contarnos tu problema y nosotros lo resolvemos.',
+  },
   {
     question: '¿Se conecta con las herramientas que ya uso?',
-    answer: 'Lo conectamos con lo que ya usás, sin frenar tu operación.',
+    answer: 'Sí. Lo conectamos con lo que ya usás, sin frenar tu operación.',
+  },
+  {
+    question: '¿Qué pasa después de la implementación?',
+    answer: afterImplementation,
   },
   { question: '¿Cuánto cuesta?', answer: null },
   { question: '¿Cuánto tarda?', answer: null },
-  { question: '¿Qué pasa después de la implementación?', answer: null },
 ];
 
 const isDev = import.meta.env.DEV;

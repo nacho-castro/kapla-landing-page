@@ -207,3 +207,10 @@
 - Sin hallazgos críticos ni altos. Corregido: foco visible dentro del marco de capturas; CLS de las pestañas (clase `js`/`no-js` en `<html>`, paneles secundarios ya ocultos desde el servidor); `<title>` descriptivo de la home; marcadores `TODO-CONTENIDO:` unificados; "PyMEs de cualquier rubro" suavizado a "PyMEs"; indicador del navbar se recalcula al cargar la fuente; `aria-label` del botón de menú; HSTS sin `preload`; caché de fuentes de 30 días.
 - Lighthouse móvil tras las correcciones: 100 / 100 / 100 / 100, CLS 0, LCP 1,4 s.
 - Pendiente (aceptado): redirección www a dominio sin www en el hosting; `og:image`; `apple-touch-icon` (falta el logo definitivo); sin JS no hay menú móvil.
+
+## FAQ y Fundador con textos del dueño (2026-10-22)
+- FAQ: 4 respuestas reales (auditoría, tecnología, herramientas, después de la implementación) y 2 pendientes (costo, plazo), que no se muestran en producción. `FAQPage` incluye solo las 4 publicadas.
+- Mantenimiento (Proceso) y la FAQ usan el mismo texto, definido una sola vez en `site.ts` (`afterImplementation`): "Hasta 2 revisiones gratis. Después, cualquier consulta extra tiene un costo."
+- Fundador: texto del dueño cargado; la sección y su enlace del menú ya aparecen en producción. La foto se toma de `src/assets/founder.*` (ya cargada).
+- Pendiente: costo y plazo (FAQ). Se quitan de la lista de TODO-CONTENIDO: texto y foto del fundador, respuestas de tecnología y de después de la implementación, y el alcance de Mantenimiento.
+- Aclaración para el dueño: el pedido decía "el mes gratis" pero la respuesta dice "hasta 2 revisiones gratis". Usé la respuesta; si es un mes, hay que cambiar `afterImplementation`.
