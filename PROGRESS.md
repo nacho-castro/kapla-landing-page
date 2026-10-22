@@ -268,3 +268,4 @@
 - Las capturas de los proyectos siguen mostrando los sitios en español (son sus pantallas reales).
 - Los textos que solo se ven en desarrollo (marcas de pendiente) siguen en español.
 - Verificado: `astro check` 0 errores, build OK (4 páginas), Lighthouse móvil 100/100/100/100 en las 4 páginas, capturas en 360 y 1280 px.
+- Frase rotativa del hero ("tus sistemas", "tus redes"…) en `lilac #AF70EB` (token nuevo; brillo violeta detrás). Contraste sobre `ink` 5,9:1 y sobre `navy` 5,1:1.

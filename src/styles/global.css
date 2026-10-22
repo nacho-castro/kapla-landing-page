@@ -13,6 +13,7 @@
  *   soft        on ink      15.1:1   on navy     13.1:1
  *   accent-light on ink      7.8:1   on navy      6.7:1
  *   muted-dark  on ink       9.2:1   on navy      8.0:1
+ *   lilac       on ink       5.9:1   on navy 5.1:1 (rotating hero phrase)
  *   white       on violet    8.4:1   white on violet-deep 11.2:1 (audit buttons in navbar and hero)
  *   ink         on whatsapp  9.9:1   (white on whatsapp is 2.0:1 -> never)
  *   brand       on ink       1.9:1   -> never use brand as text on dark
@@ -25,6 +26,7 @@
   --color-brand: #123499;
   --color-accent: #2a3fff;
   --color-accent-light: #8f9bff;
+  --color-lilac: #af70eb;
   --color-violet: #6c1aba;
   --color-violet-deep: #55148f;
   --color-soft: #dde1f5;
@@ -306,8 +308,8 @@
   grid-area: 1 / 1;
   text-align: center;
   opacity: 0;
-  color: var(--color-accent-light);
-  text-shadow: 0 0 32px color-mix(in srgb, var(--color-accent) 65%, transparent);
+  color: var(--color-lilac);
+  text-shadow: 0 0 32px color-mix(in srgb, var(--color-violet) 80%, transparent);
 }
 .rotator-word:first-child {
   opacity: 1;
