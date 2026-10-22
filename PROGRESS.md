@@ -202,3 +202,8 @@
 - Se mantiene la sección Opiniones (oculta mientras no haya opiniones reales).
 - CSP vía `<meta>` (Astro) más cabeceras en `vercel.json`; HSTS con `preload`.
 - Si usás otro hosting que no sea Vercel, `vercel.json` hay que traducirlo a ese hosting.
+
+### Revisión web-reviewer (2026-10-22) y correcciones
+- Sin hallazgos críticos ni altos. Corregido: foco visible dentro del marco de capturas; CLS de las pestañas (clase `js`/`no-js` en `<html>`, paneles secundarios ya ocultos desde el servidor); `<title>` descriptivo de la home; marcadores `TODO-CONTENIDO:` unificados; "PyMEs de cualquier rubro" suavizado a "PyMEs"; indicador del navbar se recalcula al cargar la fuente; `aria-label` del botón de menú; HSTS sin `preload`; caché de fuentes de 30 días.
+- Lighthouse móvil tras las correcciones: 100 / 100 / 100 / 100, CLS 0, LCP 1,4 s.
+- Pendiente (aceptado): redirección www a dominio sin www en el hosting; `og:image`; `apple-touch-icon` (falta el logo definitivo); sin JS no hay menú móvil.

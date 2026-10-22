@@ -17,8 +17,8 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
   <p class="mt-4 max-w-2xl text-lg text-muted-dark">{subtitle}</p>
 
   <div data-projects class="mt-10">
-    {/* Tabs are shown only with JavaScript; without it every project is listed one after another. */}
-    <div data-tablist-wrap hidden>
+    {/* Tabs are shown only with JavaScript (html.js); without it every project is listed one after another. */}
+    <div data-tablist-wrap>
       <div role="tablist" aria-label="Proyectos" class="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
         {
           projects.map((p, i) => (
@@ -41,7 +41,7 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
 
     <div class="mt-6 space-y-16">
       {
-        projects.map((p) => {
+        projects.map((p, index) => {
           const shots = [
             p.desktop ? { kind: 'desktop', shot: p.desktop } : null,
             p.mobile ? { kind: 'mobile', shot: p.mobile } : null,
@@ -52,6 +52,7 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
               id={`panel-${p.id}`}
               aria-labelledby={`tab-${p.id}`}
               data-panel
+              hidden={index > 0}
               class="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start"
             >
               <div>
@@ -120,7 +121,7 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
                           role="region"
                           tabindex="0"
                           aria-label={`Captura de la página de ${p.name}. Usá el dedo, el mouse o las flechas para recorrerla.`}
-                          class="h-[26rem] overflow-y-auto bg-white md:h-[34rem]"
+                          class="h-[26rem] overflow-y-auto bg-white focus-visible:outline-offset-[-3px] md:h-[34rem]"
                         >
                           <Image src={shot.src} alt={shot.alt} widths={widths} sizes={sizes} class="block h-auto w-full" />
                         </div>
@@ -146,7 +147,6 @@ type Shot = { kind: 'desktop' | 'mobile'; shot: ProjectShot };
     const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
     const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-panel]'));
     if (!wrap || tabs.length === 0) return;
-    wrap.hidden = false;
 
     const select = (index: number, focus = false) => {
       tabs.forEach((tab, i) => {

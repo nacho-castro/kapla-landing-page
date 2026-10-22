@@ -95,6 +95,14 @@
   }
 }
 
+/* Without JavaScript the project tabs are hidden and every project panel is listed. */
+.no-js [data-tablist-wrap] {
+  display: none;
+}
+.no-js [data-panel][hidden] {
+  display: grid;
+}
+
 @layer base {
   html {
     font-family: var(--font-sans);

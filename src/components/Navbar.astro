@@ -52,7 +52,7 @@ import { externalAttrs } from '../utils/links';
         class="group inline-flex size-11 items-center justify-center rounded-full text-white md:hidden"
         aria-expanded="false"
         aria-controls="mobile-menu"
-        aria-label="Menú"
+        aria-label="Abrir o cerrar el menú"
       >
         <Icon name="menu" class="size-6 group-aria-expanded:hidden" />
         <Icon name="close" class="hidden size-6 group-aria-expanded:block" />
@@ -160,5 +160,6 @@ import { externalAttrs } from '../utils/links';
     );
     document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
     window.addEventListener('resize', moveIndicator);
+    document.fonts?.ready.then(moveIndicator);
   }
 </script>

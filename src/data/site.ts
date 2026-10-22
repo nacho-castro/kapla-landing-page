@@ -33,7 +33,7 @@ export interface SectionInfo {
 
 export const site = {
   name: 'KAPLA',
-  // Proposed copy, pending owner approval.
+  // TODO-CONTENIDO: owner approval of this proposed meta description.
   description:
     'KAPLA organiza y automatiza el negocio de tu PyME: inteligencia artificial, páginas web, CRMs y gestión de redes. Pedí una auditoría gratis.',
   email: 'kaplatech.ar@gmail.com' as string | null,
@@ -68,7 +68,7 @@ export const sections = {
     id: 'inicio',
     title: 'Automatizamos tus sistemas.',
     subtitle: 'Tu negocio, completamente ordenado.',
-    // Proposed copy, pending owner approval.
+    // TODO-CONTENIDO: owner approval of this proposed supporting line.
     support: 'Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas.',
   },
   services: { id: 'servicios', title: 'Servicios', subtitle: 'Cuatro formas de ordenar y automatizar tu negocio.' },
@@ -94,7 +94,7 @@ export const why = {
   paragraphs: [
     'Diseñamos e implementamos sistemas de automatización de procesos e inteligencia artificial a medida para pequeñas y medianas empresas.',
     'Te ayudamos a cambiar la forma en que trabaja tu equipo: automatizamos lo repetitivo, ordenamos lo complejo y liberamos tiempo para que te enfoques en crecer.',
-    'Trabajamos con PyMEs de cualquier rubro. Cada solución se diseña para los desafíos específicos de tu negocio.',
+    'Trabajamos con PyMEs. Cada solución se diseña para los desafíos específicos de tu negocio.',
     'El objetivo: menos tareas repetitivas, menos errores y más tiempo para tu negocio.',
   ],
   cta: heroCtas.primary satisfies CtaLink,
@@ -110,7 +110,7 @@ export interface Service {
   todo?: string;
 }
 
-// Proposed copy, pending owner approval. No prices: they are discussed on WhatsApp.
+// TODO-CONTENIDO: owner approval of these proposed texts. No prices: they are discussed on WhatsApp.
 export const services: Service[] = [
   {
     icon: 'ai',
