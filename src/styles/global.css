@@ -4,33 +4,71 @@
  * Design tokens: the single source of truth for colors, type and spacing.
  * The default Tailwind palette is removed so only these colors can be used.
  *
- * Contrast (WCAG 2.x, text):
- *   brand       on white   15.5:1  (and white on brand)
- *   ink         on white   19.5:1
- *   muted       on white    6.2:1  / on surface 5.7:1
- *   brand-light on ink      7.7:1
- *   muted-dark  on ink      8.0:1
- *   brand       on ink      1.3:1  -> never use brand on dark backgrounds
+ * Contrast (WCAG 2.x, text; AA needs 4.5:1, large text 3:1):
+ *   ink         on white    19.7:1   ink on soft       15.1:1
+ *   brand       on white    10.6:1   white on brand    10.6:1
+ *   white       on accent    6.5:1   accent on white    6.5:1
+ *   accent      on soft      5.0:1   white on blue-deep 13.9:1
+ *   muted       on white     7.3:1   on surface 6.7:1   on soft 5.7:1
+ *   soft        on ink      15.1:1   on navy     13.1:1
+ *   accent-light on ink      7.8:1   on navy      6.7:1
+ *   muted-dark  on ink       9.2:1   on navy      8.0:1
+ *   ink         on whatsapp  9.9:1   (white on whatsapp is 2.0:1 -> never)
+ *   brand       on ink       1.9:1   -> never use brand as text on dark
  */
 @theme {
   --color-*: initial;
-  --color-brand: #001178;
-  --color-brand-light: #8c9bff;
-  --color-ink: #0b0b0f;
+  --color-ink: #00072d;
+  --color-navy: #051650;
+  --color-blue-deep: #0a2472;
+  --color-brand: #123499;
+  --color-accent: #2a3fff;
+  --color-accent-light: #8f9bff;
+  --color-soft: #dde1f5;
   --color-white: #ffffff;
-  --color-surface: #f4f5f9;
-  --color-line: #e4e6ee;
-  --color-line-dark: #26262e;
-  --color-muted: #5b6170;
-  --color-muted-dark: #a1a6b3;
+  --color-surface: #f2f4fc;
+  --color-line: #d5daee;
+  --color-line-dark: #1b2a5e;
+  --color-muted: #4a5578;
+  --color-muted-dark: #a9b0d6;
   --color-whatsapp: #25d366;
 
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'General Sans', ui-sans-serif, system-ui, sans-serif;
 
   --spacing-nav: 4rem;
   --spacing-section: 6rem;
   --spacing-gutter: 1.25rem;
   --container-content: 72rem;
+}
+
+/* General Sans Regular (Fontshare), self-hosted. */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026, U+20AC, U+2192;
+}
+
+/* General Sans Medium (Fontshare), self-hosted. */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026, U+20AC, U+2192;
+}
+
+/* General Sans Semibold (Fontshare), self-hosted. */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026, U+20AC, U+2192;
 }
 
 @layer base {
@@ -59,6 +97,6 @@
   }
 
   [data-tone='dark'] {
-    --focus-ring: var(--color-brand-light);
+    --focus-ring: var(--color-accent-light);
   }
 }

@@ -115,3 +115,39 @@
 | `.env` / Vercel | `PUBLIC_FORMSPREE_ID` (id del formulario de Formspree) |
 | `src/pages/privacidad.astro` | Revisión legal del aviso de privacidad |
 | `src/data/site.ts` (`testimonials`) | Opiniones reales de clientes (nombre/empresa, rubro/profesión, comentario), con permiso |
+
+## Renovación — Pasos 0 y 1 (2026-10-22)
+
+### Decisiones del dueño
+- MiClase tiene usuarios reales: estado "En producción".
+- Fundador: Ignacio Castro, Founder.
+- Paleta aprobada: `accent #2A3FFF` y `accent-light #8F9BFF`.
+
+### Hecho
+- Paso 0: CLAUDE.md actualizado (navbar píldora, contacto solo WhatsApp, secciones nuevas, paleta y tipografía; sin formulario, Calendly ni Formspree).
+- Paso 1: tokens nuevos en `@theme` de `src/styles/global.css` (`ink`, `navy`, `blue-deep`, `brand`, `accent`, `accent-light`, `soft`, `muted`, `muted-dark`, `whatsapp`, más `surface`, `line`, `line-dark`). `brand-light` pasa a `accent-light`.
+- Tipografía General Sans autoalojada en `public/fonts/` (400, 500, 600; woff2 de Fontshare, ~23 KB c/u, `unicode-range` latin). Precarga del peso 400. Se quitó `@fontsource-variable/inter`.
+- `soft`: `#DDE1F5`. Se mantuvo el valor sugerido porque da 15,1:1 con `ink` y 13,1:1 con `navy`.
+
+### Contraste de los tokens (WCAG AA texto normal: 4,5:1)
+| Texto / fondo | Contraste |
+|---|---|
+| `ink` sobre blanco / sobre `soft` | 19,7:1 / 15,1:1 |
+| `brand` sobre blanco (y blanco sobre `brand`) | 10,6:1 |
+| blanco sobre `accent` (y `accent` sobre blanco) | 6,5:1 |
+| `accent` sobre `soft` | 5,0:1 |
+| blanco sobre `blue-deep` | 13,9:1 |
+| `muted` sobre blanco / `surface` / `soft` | 7,3:1 / 6,7:1 / 5,7:1 |
+| `soft` sobre `ink` / `navy` | 15,1:1 / 13,1:1 |
+| `accent-light` sobre `ink` / `navy` | 7,8:1 / 6,7:1 |
+| `muted-dark` sobre `ink` / `navy` | 9,2:1 / 8,0:1 |
+| `ink` sobre `whatsapp` | 9,9:1 |
+| blanco sobre `whatsapp` | 2,0:1 — **no usar** (texto de botón WhatsApp en `ink`) |
+| `brand` sobre `ink` | 1,9:1 — **no usar** como texto sobre oscuro |
+
+### Licencia de la fuente
+- General Sans es de Fontshare (Indian Type Foundry, licencia "Free Font License"). No pude leer el texto de la licencia desde la web (la página se carga con JS). Verificala vos en https://www.fontshare.com/terms antes de publicar; según mi conocimiento permite uso comercial y autoalojado, pero no está confirmado.
+- No se pudo hacer subset propio (falta una herramienta); se usan los archivos web de Fontshare tal cual.
+
+### Verificado
+- `npx astro check`: 0 errores. `npm run build`: OK.

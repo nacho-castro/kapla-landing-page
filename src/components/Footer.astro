@@ -17,7 +17,7 @@ const pendingSocials = socialLinks.filter((social) => social.href === null);
       <Logo />
       {
         site.email ? (
-          <a href={`mailto:${site.email}`} class="text-sm text-muted-dark hover:text-brand-light">
+          <a href={`mailto:${site.email}`} class="text-sm text-muted-dark hover:text-accent-light">
             {site.email}
           </a>
         ) : (
@@ -39,7 +39,7 @@ const pendingSocials = socialLinks.filter((social) => social.href === null);
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${social.label} (se abre en una pestaña nueva)`}
-                  class="inline-flex size-11 items-center justify-center rounded-md text-muted-dark hover:text-brand-light"
+                  class="inline-flex size-11 items-center justify-center rounded-md text-muted-dark hover:text-accent-light"
                 >
                   <Icon name={social.name} />
                 </a>
@@ -68,7 +68,7 @@ const pendingSocials = socialLinks.filter((social) => social.href === null);
         )
       }
       <p class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-dark">
-        <a href={privacyUrl} class="underline underline-offset-4 hover:text-brand-light">
+        <a href={privacyUrl} class="underline underline-offset-4 hover:text-accent-light">
           Aviso de privacidad
         </a>
         <span>&copy; {year} {site.name}</span>

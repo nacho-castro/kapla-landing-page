@@ -15,7 +15,7 @@ const c = featuredCase;
       <div class="flex flex-wrap items-center gap-3">
         <h3 class="text-2xl font-bold">{c.name}</h3>
         {c.status && (
-          <span class="rounded-full border border-brand-light px-3 py-0.5 text-xs font-semibold text-brand-light">
+          <span class="rounded-full border border-accent-light px-3 py-0.5 text-xs font-semibold text-accent-light">
             {c.status}
           </span>
         )}
@@ -25,7 +25,7 @@ const c = featuredCase;
       <ul class="mt-5 space-y-2 text-muted-dark">
         {c.features.map((f) => (
           <li class="flex gap-2">
-            <span aria-hidden="true" class="text-brand-light">-</span>
+            <span aria-hidden="true" class="text-accent-light">-</span>
             {f}
           </li>
         ))}
@@ -33,7 +33,7 @@ const c = featuredCase;
       {c.link && (
         <a
           href={c.link.href}
-          class="mt-6 inline-block font-semibold text-brand-light underline underline-offset-4"
+          class="mt-6 inline-block font-semibold text-accent-light underline underline-offset-4"
           {...(c.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         >
           {c.link.label}
@@ -65,7 +65,7 @@ const c = featuredCase;
             {o.link && (
               <a
                 href={o.link.href}
-                class="mt-4 inline-block font-semibold text-brand-light underline underline-offset-4"
+                class="mt-4 inline-block font-semibold text-accent-light underline underline-offset-4"
                 {...(o.link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 {o.link.label}
