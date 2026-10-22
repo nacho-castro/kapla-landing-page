@@ -80,6 +80,7 @@ export const sections = {
     // Proposed copy, pending owner approval.
     support: 'Inteligencia artificial, páginas web, CRMs y redes sociales, para que tu negocio funcione sin tareas repetitivas.',
   },
+  services: { id: 'servicios', title: 'Servicios', subtitle: 'Cuatro formas de ordenar y automatizar tu negocio.' },
   work: { id: 'proyectos', title: 'Proyectos' },
   why: { id: 'por-que', title: 'Por qué KAPLA' },
   process: { id: 'proceso', title: 'Proceso' },
@@ -115,6 +116,41 @@ export const why = {
   ],
   cta: heroCtas.primary satisfies CtaLink,
 };
+
+export type ServiceIcon = 'ai' | 'web' | 'crm' | 'social';
+
+export interface Service {
+  icon: ServiceIcon;
+  title: string;
+  text: string;
+  /** Dev-only note shown while some detail is pending. */
+  todo?: string;
+}
+
+// Proposed copy, pending owner approval. No prices: they are discussed on WhatsApp.
+export const services: Service[] = [
+  {
+    icon: 'ai',
+    title: 'Automatización con IA',
+    text: 'Dejamos que la inteligencia artificial se ocupe de lo repetitivo: responder consultas, ordenar datos y armar informes.',
+  },
+  {
+    icon: 'web',
+    title: 'Páginas web',
+    text: 'Sitios claros y rápidos que explican qué hacés y hacen fácil que te contacten.',
+  },
+  {
+    icon: 'crm',
+    title: 'CRM a medida',
+    text: 'Un sistema para seguir a tus clientes y consultas en un solo lugar, armado según cómo trabajás.',
+  },
+  {
+    icon: 'social',
+    title: 'Gestión de redes',
+    text: 'Nos encargamos de gestionar y publicar tus redes. No grabamos ni producimos el contenido.',
+    todo: 'Alcance exacto de la gestión de redes (qué incluye, frecuencia, plataformas).',
+  },
+];
 
 export type ProcessIcon = 'audit' | 'design' | 'build' | 'maintain';
 

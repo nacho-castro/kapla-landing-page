@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import TodoContent from './TodoContent.astro';
+import { heroCtas, sections, services } from '../data/site';
+import { externalAttrs } from '../utils/links';
+
+const { id, title, subtitle } = sections.services;
+const cta = heroCtas.primary;
+---
+
+<Section id={id} tone="light" labelledBy={`${id}-title`}>
+  <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{title}</h2>
+  <p class="mt-4 max-w-2xl text-lg text-muted">{subtitle}</p>
+  <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      services.map((service) => (
+        <li class="rounded-2xl bg-surface p-6">
+          <span class="inline-flex size-12 items-center justify-center rounded-xl bg-white text-accent">
+            <Icon name={service.icon} />
+          </span>
+          <h3 class="mt-5 text-lg font-semibold text-ink">{service.title}</h3>
+          <p class="mt-2 text-muted">{service.text}</p>
+          {service.todo && (
+            <div class="mt-3">
+              {/* TODO-CONTENIDO: exact scope of social media management. */}
+              <TodoContent>{service.todo}</TodoContent>
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+  <div class="mt-10">
+    <a
+      href={cta.href}
+      {...externalAttrs(cta)}
+      class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-whatsapp px-6 font-semibold text-ink hover:brightness-95"
+    >
+      <Icon name="whatsapp" class="size-5" />
+      {cta.label}
+    </a>
+  </div>
+</Section>
