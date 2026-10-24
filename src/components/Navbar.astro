@@ -55,7 +55,7 @@ const pageCurrent = (href: string) => (!href.includes('#') && trimSlash(href) ==
       </ul>
 
       <div class="hidden items-center gap-2 lg:flex lg:justify-self-end">
-        <LanguageSwitch lang={lang} alternates={alternates} label={ui.languageLabel} codeFrom="xl" />
+        <LanguageSwitch lang={lang} alternates={alternates} label={ui.languageLabel} />
         <a
           href={navCta.href}
           {...externalAttrs(navCta, ui.newTab)}
