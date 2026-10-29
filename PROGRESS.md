@@ -277,3 +277,6 @@
 - Home keeps a Proyectos teaser (`ProjectsPreview`): title, "Ver proyectos" button and a sliding strip of cards that open `/proyectos#<id>`.
 - Primary buttons (all WhatsApp actions) use `btn-primary`: same violet, glossy gradient with glow. White on its lightest stop (#8a3be0) is 5.6:1.
 - Sections are separated by a glowing hairline and a lighter band on every other one.
+
+## Lilac icon hover (2026-10-29)
+- Servicios y Proceso: al pasar el mouse por una tarjeta o paso, el contenedor del ícono pasa a `lilac #AF70EB` con el ícono en `ink` (antes `accent` con ícono blanco). Proceso gana el mismo contenedor de ícono que Servicios. Textos sin cambios. Contraste `ink` sobre `lilac` 5,9:1.

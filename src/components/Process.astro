@@ -19,9 +19,11 @@ const { id, title } = c.sections.process;
   <ol class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
     {
       c.process.steps.map((step, index) => (
-        <li data-reveal class="border-t border-line-dark pt-6">
+        <li data-reveal class="group border-t border-line-dark pt-6">
           <div class="flex items-center gap-3 text-accent-light">
-            <Icon name={step.icon} />
+            <span class="inline-flex size-12 items-center justify-center rounded-xl bg-white/10 transition-colors duration-300 group-hover:bg-lilac group-hover:text-ink">
+              <Icon name={step.icon} />
+            </span>
             <span class="text-sm font-semibold tabular-nums">
               {String(index + 1).padStart(2, '0')}
             </span>
